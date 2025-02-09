@@ -128,8 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469536765}
-  - component: {fileID: 469536763}
-  - component: {fileID: 469536768}
+  - component: {fileID: 469536771}
+  - component: {fileID: 469536770}
   - component: {fileID: 469536764}
   - component: {fileID: 469536766}
   - component: {fileID: 469536767}
@@ -141,20 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &469536763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469536762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 423200cdce229b8409d473401a8f259a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jugador: {fileID: 1653159713}
-  velocidad: 4
 --- !u!212 &469536764
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -233,7 +219,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469536762}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -251,7 +237,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &469536767
 Animator:
   serializedVersion: 7
@@ -274,19 +260,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &469536768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469536762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb9cf1d7604015e4dbbe15d92042c366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "da\xF1o": 50
 --- !u!61 &469536769
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -317,7 +290,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -333,6 +306,34 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6388196, y: 1.0069221}
   m_EdgeRadius: 0
+--- !u!114 &469536770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469536762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0afb89cc1812447b805a2d0f7f3bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "da\xF1o": 50
+  tiempoEntreAtaques: 1.5
+--- !u!114 &469536771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469536762}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6da1b962abc3bf469c95105b159e014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jugador: {fileID: 1653159713}
+  velocidad: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +567,7 @@ GameObject:
   - component: {fileID: 1653159714}
   - component: {fileID: 1653159716}
   - component: {fileID: 1653159717}
+  - component: {fileID: 1653159719}
   - component: {fileID: 1653159711}
   - component: {fileID: 1653159712}
   - component: {fileID: 1653159715}
@@ -780,6 +782,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.60902035, y: 0.99554133}
   m_EdgeRadius: 0
+--- !u!114 &1653159719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653159710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86a4ad5b960e67459e0df93421a56be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabricadosDeArmas:
+  - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
+  - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
+  distanciaArmas: 1.5
+  numeroDeArmas: 6
 --- !u!1 &2098860680
 GameObject:
   m_ObjectHideFlags: 0
