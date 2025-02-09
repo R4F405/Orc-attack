@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wall_fountain_top_0: 6762072919336631701
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

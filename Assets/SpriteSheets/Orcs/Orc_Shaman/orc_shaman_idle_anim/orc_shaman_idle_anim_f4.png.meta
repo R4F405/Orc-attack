@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      orc_shaman_idle_anim_f4_0: 9132859746675688021
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

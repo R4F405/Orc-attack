@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mini_carpet_yellow_0: 1402047093835337346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wall_fountain_basin_blue_anim_f3_0: 1128931386463376304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

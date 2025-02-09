@@ -7,14 +7,15 @@ public class OrcWarriorMovement : MonoBehaviour
 
     private bool estaMirandoDerecha = true;
 
+    //Se llama 50/s
     void FixedUpdate()
     {
         IASeguimiento();
     }
 
+    //Se llama tras cada frame
     void Update()
     {
-
         bool estaJugadorDerecha = transform.position.x < jugador.transform.position.x; //Obtiene si esta el jugador en el lado derecho
         Girar(estaJugadorDerecha);
     }

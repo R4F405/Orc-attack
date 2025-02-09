@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Orc_Masked_0: -4092960259082440673
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
