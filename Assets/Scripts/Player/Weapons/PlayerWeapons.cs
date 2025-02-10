@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    public GameObject[] prefabricadosDeArmas; // Array de prefabricados de armas
+ public GameObject[] prefabricadosDeArmas; // Array de prefabricados de armas
     public float distanciaHorizontal = 1.5f; // Distancia horizontal entre las armas
     public float distanciaVertical = 1.5f; // Distancia vertical entre las armas
     public int numeroDeArmas = 6; // Número total de armas que el jugador puede tener
