@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6674889541086748812}
-  - component: {fileID: 7169909178432739665}
   - component: {fileID: -3008960930214560592}
+  - component: {fileID: 7169909178432739665}
   - component: {fileID: 1945891555347806644}
   m_Layer: 0
   m_Name: machete_prefab
@@ -34,6 +34,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3008960930214560592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401330653836557154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  danio: 20
+  alcance: 2
+  capaEnemigos:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &7169909178432739665
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,19 +106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3008960930214560592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8401330653836557154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  danio: 20
 --- !u!61 &1945891555347806644
 BoxCollider2D:
   m_ObjectHideFlags: 0

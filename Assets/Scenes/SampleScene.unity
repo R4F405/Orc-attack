@@ -315,6 +315,75 @@ Transform:
   - {fileID: 2098860681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1474175861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 835747888833057900, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_Name
+      value: Enemy Orc Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 835747888833057900, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 856226486689384016, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: jugador
+      value: 
+      objectReference: {fileID: 1653159713}
+    - target: {fileID: 856226486689384016, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.4138803
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.7016234
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996999280535016197, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
 --- !u!1 &1653159710
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,15 +624,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
-  - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
-  - {fileID: 2434994715305800693, guid: ddacab3b69907ef4bb44d3868304b26a, type: 3}
-  - {fileID: 1754110628231209729, guid: 1f0c63b04219b004587fd2afbfe530d7, type: 3}
-  - {fileID: 3342311069874076743, guid: c8b9dc343a42ed74ba962ea80544ce61, type: 3}
+  - {fileID: 2469734866425781752, guid: b003e3a3ddfe49e4bbaa6c6a29613ab8, type: 3}
   - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
-  distanciaHorizontal: 1.5
-  distanciaVertical: 1.5
-  numeroDeArmas: 6
+  - {fileID: 8401330653836557154, guid: 167308418b989164a8049dd3bda9be52, type: 3}
+  - {fileID: 2469734866425781752, guid: b003e3a3ddfe49e4bbaa6c6a29613ab8, type: 3}
+  - {fileID: 3798194697597539420, guid: dea75c69166a77c45b4b01f96d614344, type: 3}
+  distanciaHorizontal: 1
+  distanciaVertical: 1
+  numeroDeArmas: 5
 --- !u!1 &2098860680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11906,3 +11974,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 956899240}
   - {fileID: 1653159713}
+  - {fileID: 1474175861}

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2785055688233616816}
-  - component: {fileID: 3910885074905866705}
   - component: {fileID: -5970812216966064424}
+  - component: {fileID: 3910885074905866705}
   - component: {fileID: 4843708430451728284}
   m_Layer: 0
   m_Name: espada_gigante_prefab
@@ -34,6 +34,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5970812216966064424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5822253365656401349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  danio: 20
+  alcance: 2
+  capaEnemigos:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &3910885074905866705
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,19 +106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5970812216966064424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5822253365656401349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  danio: 20
 --- !u!61 &4843708430451728284
 BoxCollider2D:
   m_ObjectHideFlags: 0
