@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6053892171484661830}
   m_Layer: 0
   m_Name: JugadorPrefab
-  m_TagString: Player
+  m_TagString: Jugador
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   - {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 5
+  numeroDeArmas: 4
 --- !u!50 &3795201694991534311
 Rigidbody2D:
   serializedVersion: 5

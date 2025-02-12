@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OrcWarriorMovement : MonoBehaviour
+public class MovimientoEnemigos : MonoBehaviour
 {
     private GameObject jugador;
     public float velocidad = 2f;

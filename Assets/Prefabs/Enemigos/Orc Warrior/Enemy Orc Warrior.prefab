@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6da1b962abc3bf469c95105b159e014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jugador: {fileID: 1802820728355739433, guid: 9383ab9e52ea31840a4e419d7999c3b8, type: 3}
   velocidad: 3
 --- !u!114 &3767431107755210518
 MonoBehaviour:
@@ -64,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0afb89cc1812447b805a2d0f7f3bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1o": 50
+  "da\xF1o": 60
   tiempoEntreAtaques: 1.5
 --- !u!114 &-2573238889286742868
 MonoBehaviour:

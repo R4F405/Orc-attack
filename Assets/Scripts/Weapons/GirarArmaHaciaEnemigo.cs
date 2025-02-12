@@ -5,8 +5,16 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
     public float rangoDeteccion = 5f; // Rango para detectar al enemigo más cercano
     public LayerMask capaEnemigos; // Capa de los enemigos
 
+    private Quaternion rotacionInicial; // Guarda la rotación inicial
+    private Vector3 escalaInicial; // Guarda la escala inicial
 
-     private void Update()
+    private void Start()
+    {
+        rotacionInicial = transform.rotation; // Guardamos la rotación inicial
+        escalaInicial = transform.localScale; // Guardamos la escala inicial
+    }
+
+    private void Update()
     {
         GirarHaciaEnemigo();
     }
@@ -15,7 +23,22 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
     {
         Collider2D[] enemigosDetectados = Physics2D.OverlapCircleAll(transform.position, rangoDeteccion, capaEnemigos);
 
-        if (enemigosDetectados.Length == 0) return;
+        if (enemigosDetectados.Length == 0) 
+        {
+            // Si no hay enemigos, restauramos la posición inicial
+            // Comparamos la posición de la arma con la posición del jugador
+            if (transform.position.x < GameObject.FindWithTag("Jugador").transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f); // Mira a la izquierda
+                transform.localScale = new Vector3(1, -1, 1); // Escala negativa para voltear horizontalmente
+            }
+            else
+            {
+                transform.rotation = rotacionInicial;
+                transform.localScale = escalaInicial;
+            }
+            return;
+        }
 
         Transform enemigoMasCercano = null;
         float distanciaMinima = Mathf.Infinity;
@@ -48,5 +71,5 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1); // Mantiene normal
             }
         }
-    }   
+    }
 }

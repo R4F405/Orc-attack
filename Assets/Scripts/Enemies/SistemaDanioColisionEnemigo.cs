@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemiesDamageSystemColision : MonoBehaviour
+public class SistemaDanioColisionEnemigo : MonoBehaviour
 {
     public float daño = 10f;
     public float tiempoEntreAtaques = 1.5f; 
