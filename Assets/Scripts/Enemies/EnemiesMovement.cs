@@ -2,32 +2,46 @@ using UnityEngine;
 
 public class OrcWarriorMovement : MonoBehaviour
 {
-    public Transform jugador;
+    private GameObject jugador;
     public float velocidad = 2f;
 
     private bool estaMirandoDerecha = true;
 
-    //Se llama 50/s
-    void FixedUpdate()
+    private void Start()
     {
-        IASeguimiento();
+        jugador = GameObject.FindGameObjectWithTag("Jugador"); // Buscar al jugador automáticamente por su tag
+
+        // Verificar si se encontró el jugador para evitar errores
+        if (jugador == null)
+        {
+            Debug.LogError("No se encontró un GameObject con la etiqueta 'Player'.");
+        }
     }
 
-    //Se llama tras cada frame
+    void FixedUpdate()
+    {
+        if (jugador != null)
+        {
+            IASeguimiento();
+        }
+    }
+
     void Update()
     {
-        bool estaJugadorDerecha = transform.position.x < jugador.transform.position.x; //Obtiene si esta el jugador en el lado derecho
-        Girar(estaJugadorDerecha);
+        if (jugador != null)
+        {
+            bool estaJugadorDerecha = transform.position.x < jugador.transform.position.x;
+            Girar(estaJugadorDerecha);
+        }
     }
 
     private void IASeguimiento()
     {
-        transform.position = Vector2.MoveTowards(transform.position, jugador.position, velocidad * Time.deltaTime); //Seguimiento al jugador
+        transform.position = Vector2.MoveTowards(transform.position, jugador.transform.position, velocidad * Time.deltaTime);
     }
 
     private void Girar(bool estaJugadorDerecha)
     {
-        //Gira el enemigo  segun la posicion del jugador
         if ((estaMirandoDerecha && !estaJugadorDerecha) || (!estaMirandoDerecha && estaJugadorDerecha))
         {
             estaMirandoDerecha = !estaMirandoDerecha;

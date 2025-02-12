@@ -10,7 +10,7 @@ public class EnemiesDamageSystemColision : MonoBehaviour
     // Funcion que se ejecuta mientras el jugador está dentro del collider del enemigo
     private void OnTriggerStay2D(Collider2D col) 
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Jugador"))
         {
             Health saludJugador = col.GetComponent<Health>();
             if (saludJugador != null && Time.time >= proximoAtaque) // Verifica el cooldown
