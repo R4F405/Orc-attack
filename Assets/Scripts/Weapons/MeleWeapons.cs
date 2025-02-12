@@ -6,6 +6,13 @@ public class MeleWeapons : MonoBehaviour
     public float alcance = 2f; // Alcance del arma, en unidades de distancia
     public LayerMask capaEnemigos; // Capa de los enemigos (asegúrate de que los enemigos estén en esta capa)
     
+    private Animator animador;
+
+    private void Start()
+    {
+        animador = GetComponent<Animator>(); // Obtener el Animator del arma
+    }
+
     private void Update()
     {
         // Detectar enemigos dentro del alcance del arma
@@ -24,14 +31,14 @@ public class MeleWeapons : MonoBehaviour
             if (salud != null)
             {
                 salud.RecibirDaño(danio);
+
+                if (animador != null)
+                {
+                    animador.SetTrigger("Atacar");
+                    Debug.Log("Si realiza el trigger");
+                }
             }
         }
     }
 
-    // Para visualizar el alcance del arma en el editor de Unity
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, alcance);
-    }
 }
