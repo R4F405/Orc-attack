@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7390109825159355550}
-  - component: {fileID: 9023728044339944393}
+  - component: {fileID: -911010950883041245}
   - component: {fileID: 2994583999435506763}
   - component: {fileID: 4087160587914859691}
   - component: {fileID: 4091030505422079902}
@@ -39,7 +39,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9023728044339944393
+--- !u!114 &-911010950883041245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
+  - {fileID: 9107510053700692656, guid: fe31629b042b3d94fa48b2efe781974b, type: 3}
   - {fileID: 2434994715305800693, guid: ddacab3b69907ef4bb44d3868304b26a, type: 3}
   - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
   - {fileID: 8401330653836557154, guid: 167308418b989164a8049dd3bda9be52, type: 3}
