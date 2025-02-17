@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    private LayerMask capaEnemigos; 
+    private LayerMask capaEnemigos;
     private int danio;
     private Transform objetivo;
     private Rigidbody2D rb;
-    private float velocidad; // Ahora la velocidad se configura desde ArmasDistancia
-
+    private float velocidad;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Destruir la bala después de 5 segundos si no impacta con nada
+        
+        // Destruir la bala después de x segundos si no impacta con nada
         Destroy(gameObject, 3f);
+
+        // Ignorar colisión entre balas
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Balas"), LayerMask.NameToLayer("Balas"));
     }
 
     public void ConfigurarBala(int nuevoDaño, float nuevaVelocidad, LayerMask nuevaCapaEnemigos, Collider2D colliderJugador, Transform enemigo)

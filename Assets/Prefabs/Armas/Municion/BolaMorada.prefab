@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1223848658890061990}
   - component: {fileID: 5740879827130647951}
   - component: {fileID: -8708230166482269371}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BolaMorada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +165,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123f644b54840bf498665652c1ee8fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capaEnemigos:
-    serializedVersion: 2
-    m_Bits: 64
