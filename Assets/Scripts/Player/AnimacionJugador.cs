@@ -3,8 +3,8 @@ using UnityEngine;
 public class AnimacionJugador : MonoBehaviour
 {
 
-    MovimientoJugador playerMovement; // Referencia al script PlayerMovement para obtener la direccion
-    Animator animator;
+    private MovimientoJugador playerMovement; // Referencia al script PlayerMovement para obtener la direccion
+    private Animator animator;
 
     //Se llama al empezar
     void Start()

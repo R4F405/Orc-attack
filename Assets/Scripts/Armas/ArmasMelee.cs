@@ -30,7 +30,7 @@ public class ArmasMelee : MonoBehaviour
 
         foreach (Collider2D enemigo in enemigosEnRango)
         {
-            Vida salud = enemigo.GetComponent<Vida>();
+            VidaEnemigo salud = enemigo.GetComponent<VidaEnemigo>();
             if (salud != null)
             {
                 salud.RecibirDaño(danio);

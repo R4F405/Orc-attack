@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Vida : MonoBehaviour
+public class VidaEnemigo : MonoBehaviour
 {
-   public float saludMaxima = 100f;
+    public float saludMaxima = 100f;
     private float saludActual;
 
     private void Start()
@@ -28,5 +28,10 @@ public class Vida : MonoBehaviour
     public float ObtenerSalud()
     {
         return saludActual;
+    }
+
+     public float ObtenerSaludMaxima()
+    {
+        return saludMaxima;
     }
 }

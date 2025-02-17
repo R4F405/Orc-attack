@@ -48,7 +48,7 @@ public class Bala : MonoBehaviour
     {
         if (((1 << otro.gameObject.layer) & capaEnemigos) != 0)
         {
-            Vida salud = otro.GetComponent<Vida>();
+            VidaEnemigo salud = otro.GetComponent<VidaEnemigo>();
             if (salud != null)
             {
                 salud.RecibirDaño(danio);

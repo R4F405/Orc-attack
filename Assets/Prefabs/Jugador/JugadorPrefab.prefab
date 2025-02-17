@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 7390109825159355550}
   - component: {fileID: -911010950883041245}
   - component: {fileID: 2994583999435506763}
-  - component: {fileID: 4087160587914859691}
+  - component: {fileID: 2196742061034363765}
   - component: {fileID: 4091030505422079902}
   - component: {fileID: 3795201694991534311}
   - component: {fileID: 8842358968005702366}
   - component: {fileID: 2207734615782242476}
   - component: {fileID: 6053892171484661830}
+  - component: {fileID: 7285963752105881765}
   m_Layer: 0
   m_Name: JugadorPrefab
   m_TagString: Jugador
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f02ba19205c66488b744c7e467b215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4087160587914859691
+--- !u!114 &2196742061034363765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,10 +74,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1802820728355739433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c351f827dcd304faee478a2ec1865e, type: 3}
+  m_Script: {fileID: 11500000, guid: bbe72faceb82ce34fa020ea1b11897a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saludMaxima: 100
+  saludMaxima: 3
 --- !u!114 &4091030505422079902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ MonoBehaviour:
   - {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 4
+  numeroDeArmas: 0
 --- !u!50 &3795201694991534311
 Rigidbody2D:
   serializedVersion: 5
@@ -248,3 +249,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.60902035, y: 0.99554133}
   m_EdgeRadius: 0
+--- !u!114 &7285963752105881765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802820728355739433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364d84251cfd78b42bffccbb55354593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaJugador: {fileID: 0}
+  corazones: []
+  corazonEntero: {fileID: -1218823883695198015, guid: 0b73d48fc3691494ab569841bc3ccee0, type: 3}
+  corazonMedio: {fileID: 6948363335905235593, guid: d475dda19d6c25647b03b49dce85d5d5, type: 3}
+  corazonVacio: {fileID: -511133062249068954, guid: 93f5eda59eb18804c9058509e9071351, type: 3}

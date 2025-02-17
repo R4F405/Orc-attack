@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SistemaDanioColisionEnemigo : MonoBehaviour
 {
-    public float daño = 10f;
+    public float daño = 1f;
     public float tiempoEntreAtaques = 1.5f; 
 
     private float proximoAtaque = 0f; 
@@ -12,7 +12,7 @@ public class SistemaDanioColisionEnemigo : MonoBehaviour
     {
         if (col.CompareTag("Jugador"))
         {
-            Vida saludJugador = col.GetComponent<Vida>();
+            VidaJugador saludJugador = col.GetComponent<VidaJugador>();
             if (saludJugador != null && Time.time >= proximoAtaque) // Verifica el cooldown
             {
                 saludJugador.RecibirDaño(daño);
