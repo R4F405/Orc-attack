@@ -13,11 +13,12 @@ GameObject:
   - component: {fileID: 2994583999435506763}
   - component: {fileID: 2196742061034363765}
   - component: {fileID: 4091030505422079902}
+  - component: {fileID: 7285963752105881765}
+  - component: {fileID: -639148711076508535}
   - component: {fileID: 3795201694991534311}
   - component: {fileID: 8842358968005702366}
   - component: {fileID: 2207734615782242476}
   - component: {fileID: 6053892171484661830}
-  - component: {fileID: 7285963752105881765}
   m_Layer: 0
   m_Name: JugadorPrefab
   m_TagString: Jugador
@@ -91,14 +92,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 9107510053700692656, guid: fe31629b042b3d94fa48b2efe781974b, type: 3}
+  - {fileID: 3342311069874076743, guid: c8b9dc343a42ed74ba962ea80544ce61, type: 3}
   - {fileID: 2434994715305800693, guid: ddacab3b69907ef4bb44d3868304b26a, type: 3}
   - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
   - {fileID: 8401330653836557154, guid: 167308418b989164a8049dd3bda9be52, type: 3}
   - {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 0
+  numeroDeArmas: 5
+--- !u!114 &7285963752105881765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802820728355739433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364d84251cfd78b42bffccbb55354593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  corazonEntero: {fileID: -1218823883695198015, guid: 0b73d48fc3691494ab569841bc3ccee0, type: 3}
+  corazonMedio: {fileID: 6948363335905235593, guid: d475dda19d6c25647b03b49dce85d5d5, type: 3}
+  corazonVacio: {fileID: -511133062249068954, guid: 93f5eda59eb18804c9058509e9071351, type: 3}
+--- !u!114 &-639148711076508535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802820728355739433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9a9bc5bc33b074ab896005e9b9a062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &3795201694991534311
 Rigidbody2D:
   serializedVersion: 5
@@ -249,20 +277,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.60902035, y: 0.99554133}
   m_EdgeRadius: 0
---- !u!114 &7285963752105881765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802820728355739433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 364d84251cfd78b42bffccbb55354593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vidaJugador: {fileID: 0}
-  corazones: []
-  corazonEntero: {fileID: -1218823883695198015, guid: 0b73d48fc3691494ab569841bc3ccee0, type: 3}
-  corazonMedio: {fileID: 6948363335905235593, guid: d475dda19d6c25647b03b49dce85d5d5, type: 3}
-  corazonVacio: {fileID: -511133062249068954, guid: 93f5eda59eb18804c9058509e9071351, type: 3}

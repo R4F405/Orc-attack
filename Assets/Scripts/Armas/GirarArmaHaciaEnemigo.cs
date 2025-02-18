@@ -2,20 +2,28 @@ using UnityEngine;
 
 public class GirarArmaHaciaEnemigo : MonoBehaviour
 {
-    public float rangoDeteccion = 5f; // Rango para detectar al enemigo más cercano
-    public LayerMask capaEnemigos; // Capa de los enemigos
+    public float rangoDeteccion = 5f;
+    public LayerMask capaEnemigos;
 
-    private Quaternion rotacionInicial; // Guarda la rotación inicial
-    private Vector3 escalaInicial; // Guarda la escala inicial
+    private Quaternion rotacionInicial;
+    private Vector3 escalaInicial;
+    private Animator animador;
 
     private void Start()
     {
-        rotacionInicial = transform.rotation; // Guardamos la rotación inicial
-        escalaInicial = transform.localScale; // Guardamos la escala inicial
+        rotacionInicial = transform.rotation;
+        escalaInicial = transform.localScale;
+        animador = GetComponent<Animator>(); // Obtener el Animator del arma
     }
 
     private void Update()
     {
+        // Si la animación de ataque está activa, no giramos el arma
+        if (animador != null && animador.GetCurrentAnimatorStateInfo(0).IsName("Atacar"))
+        {
+            return;
+        }
+
         GirarHaciaEnemigo();
     }
 
@@ -25,12 +33,10 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
 
         if (enemigosDetectados.Length == 0) 
         {
-            // Si no hay enemigos, restauramos la posición inicial
-            // Comparamos la posición de la arma con la posición del jugador
             if (transform.position.x < GameObject.FindWithTag("Jugador").transform.position.x)
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, 180f); // Mira a la izquierda
-                transform.localScale = new Vector3(1, -1, 1); // Escala negativa para voltear horizontalmente
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+                transform.localScale = new Vector3(1, -1, 1);
             }
             else
             {
@@ -58,17 +64,15 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
             Vector2 direccion = (enemigoMasCercano.position - transform.position).normalized;
             float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
 
-            // Aplicamos rotación
             transform.rotation = Quaternion.Euler(0f, 0f, angulo);
 
-            // Si el enemigo está a la izquierda, volteamos el sprite horizontalmente
             if (enemigoMasCercano.position.x < transform.position.x)
             {
-                transform.localScale = new Vector3(1, -1, 1); // Invierte en eje Y
+                transform.localScale = new Vector3(1, -1, 1);
             }
             else
             {
-                transform.localScale = new Vector3(1, 1, 1); // Mantiene normal
+                transform.localScale = new Vector3(1, 1, 1);
             }
         }
     }
