@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class InventarioJugador : MonoBehaviour
 {
-    private int objetosRecolectados = 0; // Contador de objetos
+    private int calaverasRecolectadas = 0; // Contador de calaveras
 
     private void Update()
     {
-        RecogerObjetosCercanos();
+        RecogerCalaverasCercanas();
     }
 
-    private void RecogerObjetosCercanos()
+    private void RecogerCalaverasCercanas()
     {
-        Collider2D[] objetos = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("ObjetoDropeado"));
+        // Detecta las calaveras dentro del rango de recolección
+        Collider2D[] objetos = Physics2D.OverlapCircleAll(transform.position, 2f, LayerMask.GetMask("Calavera"));
 
         foreach (Collider2D objeto in objetos)
         {
@@ -23,9 +24,14 @@ public class InventarioJugador : MonoBehaviour
         }
     }
 
-    public void AgregarObjeto(int cantidad)
+    public void AgregarCalavera(int cantidad)
     {
-        objetosRecolectados += cantidad;
-        Debug.Log("Objetos recogidos: " + objetosRecolectados);
+        calaverasRecolectadas += cantidad;
+        Debug.Log("Calaveras recogidas: " + calaverasRecolectadas);
+    }
+
+    public int ObtenerCantidadCalaveras()
+    {
+        return calaverasRecolectadas;
     }
 }

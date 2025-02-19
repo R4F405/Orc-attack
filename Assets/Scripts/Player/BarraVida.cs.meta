@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 364d84251cfd78b42bffccbb55354593
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - prefabCorazon: {fileID: 3886134092503437487, guid: 1eee06df20ed903488db3723147b1029, type: 3}
+  - panelVida: {instanceID: 0}
+  - corazonEntero: {instanceID: 0}
+  - corazonMedio: {instanceID: 0}
+  - corazonVacio: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SistemaDanioColisionEnemigo : MonoBehaviour
 {
-    public float daño = 1f;
+    public int daño = 1;
     public float tiempoEntreAtaques = 1.5f; 
 
     private float proximoAtaque = 0f; 

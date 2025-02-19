@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objetoSoltar: {fileID: 3134560189099413736, guid: 7208b7bf07554074eacc8cb3a418a17a, type: 3}
-  capaObjeto: ObjetoDropeado
+  capaObjeto: Calavera
 --- !u!212 &4147718083406967480
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -2,24 +2,30 @@ using UnityEngine;
 
 public class VidaJugador : MonoBehaviour
 {
-    public float saludMaxima = 6;
+    public int saludMaxima = 6;
 
-    private new Rigidbody2D rigidbody2D; 
     private MovimientoJugador movimientoJugador; 
-    private float saludActual;
+    private int saludActual;
     private Animator animator;
 
+    public void AumentarSaludMaxima(int cantidad)
+    {
+        saludMaxima += cantidad;
+        if (saludActual > saludMaxima)
+        {
+            saludActual = saludMaxima;  // Ajusta la salud actual si supera la nueva máxima
+        }
+    }
 
     private void Start()
     {
         saludActual = saludMaxima; // Inicia con la salud máxima
 
-        rigidbody2D = GetComponent<Rigidbody2D>(); 
         movimientoJugador = GetComponent<MovimientoJugador>();
         animator = GetComponent<Animator>(); //Se obtiene el componente 
     }
 
-    public void RecibirDaño(float cantidad)
+    public void RecibirDaño(int cantidad)
     {
         saludActual -= cantidad;
         if (saludActual <= 0f)
@@ -33,12 +39,6 @@ public class VidaJugador : MonoBehaviour
 
         animator.SetBool("muerto", true);
 
-        // Deshabilita el Rigidbody2D y el script de movimiento para detener el movimiento
-        if (rigidbody2D != null)
-        {
-            rigidbody2D.linearVelocity = Vector2.zero; // Detiene cualquier movimiento actual
-        }
-
         if (movimientoJugador != null)
         {
             movimientoJugador.enabled = false; // Desactiva el script de movimiento
@@ -47,12 +47,12 @@ public class VidaJugador : MonoBehaviour
         // Aquí puedes agregar animaciones o efectos al morir si lo deseas
     }
 
-    public float ObtenerSalud()
+    public int ObtenerSalud()
     {
         return saludActual;
     }
 
-     public float ObtenerSaludMaxima()
+     public int ObtenerSaludMaxima()
     {
         return saludMaxima;
     }

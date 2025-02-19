@@ -4,12 +4,12 @@ public class VidaEnemigo : MonoBehaviour
 {
     public float saludMaxima = 100f;
     private float saludActual;
-    private DropObjetoEnemigo dropObjeto; // Referencia al script DropObjeto
+    private DropCalaveras dropObjeto; // Referencia al script DropObjeto
 
     private void Start()
     {
         saludActual = saludMaxima;
-        dropObjeto = GetComponent<DropObjetoEnemigo>(); // Obtener el script DropObjeto si está presente
+        dropObjeto = GetComponent<DropCalaveras>(); // Obtener el script DropObjeto si está presente
     }
 
     public void RecibirDaño(float cantidad)
