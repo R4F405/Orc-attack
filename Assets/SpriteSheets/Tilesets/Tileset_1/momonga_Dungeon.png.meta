@@ -1,0 +1,1833 @@
+fileFormatVersion: 2
+guid: faceead829d827e4bbccdbb81784a83e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1635904953752961436
+    second: momonga_Dungeon_0
+  - first:
+      213: -612774163590085992
+    second: momonga_Dungeon_1
+  - first:
+      213: -6230835990620198461
+    second: momonga_Dungeon_2
+  - first:
+      213: -5579888102307320037
+    second: momonga_Dungeon_3
+  - first:
+      213: 5560012137279842015
+    second: momonga_Dungeon_4
+  - first:
+      213: -1813242163614649347
+    second: momonga_Dungeon_5
+  - first:
+      213: -3704967498686379498
+    second: momonga_Dungeon_6
+  - first:
+      213: 1195765778861372344
+    second: momonga_Dungeon_7
+  - first:
+      213: -2694375881544165901
+    second: momonga_Dungeon_8
+  - first:
+      213: -2172077542636240602
+    second: momonga_Dungeon_9
+  - first:
+      213: 1734096197835735740
+    second: momonga_Dungeon_10
+  - first:
+      213: 7711390011267118183
+    second: momonga_Dungeon_11
+  - first:
+      213: 4143512336247707232
+    second: momonga_Dungeon_12
+  - first:
+      213: 652500850370928275
+    second: momonga_Dungeon_13
+  - first:
+      213: 8592941225231024076
+    second: momonga_Dungeon_14
+  - first:
+      213: -6005364613987120665
+    second: momonga_Dungeon_15
+  - first:
+      213: -917561999692173266
+    second: momonga_Dungeon_16
+  - first:
+      213: 3494395009541514215
+    second: momonga_Dungeon_17
+  - first:
+      213: 3178770494848686696
+    second: momonga_Dungeon_18
+  - first:
+      213: 845893044648962833
+    second: momonga_Dungeon_19
+  - first:
+      213: 3823505406959497808
+    second: momonga_Dungeon_20
+  - first:
+      213: -5919938358861848927
+    second: momonga_Dungeon_21
+  - first:
+      213: 3400505154229825426
+    second: momonga_Dungeon_22
+  - first:
+      213: 431312195025279742
+    second: momonga_Dungeon_23
+  - first:
+      213: -1663861600441877645
+    second: momonga_Dungeon_24
+  - first:
+      213: 2301739707643308761
+    second: momonga_Dungeon_25
+  - first:
+      213: -8439094724625148625
+    second: momonga_Dungeon_26
+  - first:
+      213: -1886878460941027255
+    second: momonga_Dungeon_27
+  - first:
+      213: -610017975372313500
+    second: momonga_Dungeon_28
+  - first:
+      213: -1171201416703097036
+    second: momonga_Dungeon_29
+  - first:
+      213: -780437699758681160
+    second: momonga_Dungeon_30
+  - first:
+      213: 5650045900657424983
+    second: momonga_Dungeon_31
+  - first:
+      213: -8534239703278541225
+    second: momonga_Dungeon_32
+  - first:
+      213: -1778995394586271231
+    second: momonga_Dungeon_33
+  - first:
+      213: -1194395702949094075
+    second: momonga_Dungeon_34
+  - first:
+      213: 2080759569347119904
+    second: momonga_Dungeon_35
+  - first:
+      213: -5425623948941133607
+    second: momonga_Dungeon_36
+  - first:
+      213: 2490985868480212486
+    second: momonga_Dungeon_37
+  - first:
+      213: -5560608081904742702
+    second: momonga_Dungeon_38
+  - first:
+      213: -1007722536850160962
+    second: momonga_Dungeon_39
+  - first:
+      213: -2538661847498003622
+    second: momonga_Dungeon_40
+  - first:
+      213: 4901093837964744266
+    second: momonga_Dungeon_41
+  - first:
+      213: -3578780477075422641
+    second: momonga_Dungeon_42
+  - first:
+      213: -5624162519095243249
+    second: momonga_Dungeon_43
+  - first:
+      213: 8212861987051068593
+    second: momonga_Dungeon_44
+  - first:
+      213: 6099557482488170342
+    second: momonga_Dungeon_45
+  - first:
+      213: 4231506487630506068
+    second: momonga_Dungeon_46
+  - first:
+      213: 5223570454357723983
+    second: momonga_Dungeon_47
+  - first:
+      213: -3147701158041109175
+    second: momonga_Dungeon_48
+  - first:
+      213: 3865208472570544675
+    second: momonga_Dungeon_49
+  - first:
+      213: -8871249872823922093
+    second: momonga_Dungeon_50
+  - first:
+      213: -7851731329313786973
+    second: momonga_Dungeon_51
+  - first:
+      213: -8901362646670387609
+    second: momonga_Dungeon_52
+  - first:
+      213: -7130819182982699642
+    second: momonga_Dungeon_53
+  - first:
+      213: 7733886124396825037
+    second: momonga_Dungeon_54
+  - first:
+      213: 5623370990784668052
+    second: momonga_Dungeon_55
+  - first:
+      213: -7758948421534788187
+    second: momonga_Dungeon_56
+  - first:
+      213: -2179584072239862569
+    second: momonga_Dungeon_57
+  - first:
+      213: 8261797728504904149
+    second: momonga_Dungeon_58
+  - first:
+      213: 5974886839663274301
+    second: momonga_Dungeon_59
+  - first:
+      213: 3281625990977024618
+    second: momonga_Dungeon_60
+  - first:
+      213: -2709024203214079068
+    second: momonga_Dungeon_61
+  - first:
+      213: -282088589701503591
+    second: momonga_Dungeon_62
+  - first:
+      213: 6744377384291566503
+    second: momonga_Dungeon_63
+  - first:
+      213: -551317892561294759
+    second: momonga_Dungeon_64
+  - first:
+      213: -5851142248225909776
+    second: momonga_Dungeon_65
+  - first:
+      213: -1016432504762349815
+    second: momonga_Dungeon_66
+  - first:
+      213: 8536399145932301604
+    second: momonga_Dungeon_67
+  - first:
+      213: -7572690698953468359
+    second: momonga_Dungeon_68
+  - first:
+      213: 9069632457481528348
+    second: momonga_Dungeon_69
+  - first:
+      213: 2336767350496303036
+    second: momonga_Dungeon_70
+  - first:
+      213: 1403139820871551446
+    second: momonga_Dungeon_71
+  - first:
+      213: -4559799546985314518
+    second: momonga_Dungeon_72
+  - first:
+      213: -4197574065995228336
+    second: momonga_Dungeon_73
+  - first:
+      213: 6316118959309240542
+    second: momonga_Dungeon_74
+  - first:
+      213: 383441153272985063
+    second: momonga_Dungeon_75
+  - first:
+      213: 7369978326167799720
+    second: momonga_Dungeon_76
+  - first:
+      213: -8750250964456063360
+    second: momonga_Dungeon_77
+  - first:
+      213: -4965945196655241957
+    second: momonga_Dungeon_78
+  - first:
+      213: 6218553633169082834
+    second: momonga_Dungeon_79
+  - first:
+      213: -4540936564712760997
+    second: momonga_Dungeon_80
+  - first:
+      213: 7063952284446358286
+    second: momonga_Dungeon_81
+  - first:
+      213: -1287655461501216628
+    second: momonga_Dungeon_82
+  - first:
+      213: 1666541786590078328
+    second: momonga_Dungeon_83
+  - first:
+      213: 1120291938798567350
+    second: momonga_Dungeon_84
+  - first:
+      213: 5228850446893029019
+    second: momonga_Dungeon_85
+  - first:
+      213: -8527069599244203891
+    second: momonga_Dungeon_86
+  - first:
+      213: 8427451607362121949
+    second: momonga_Dungeon_87
+  - first:
+      213: 8342876616374400455
+    second: momonga_Dungeon_88
+  - first:
+      213: 1156710507305625425
+    second: momonga_Dungeon_89
+  - first:
+      213: 5408694513272620362
+    second: momonga_Dungeon_90
+  - first:
+      213: -2832647196985742219
+    second: momonga_Dungeon_91
+  - first:
+      213: -2853785566752530601
+    second: momonga_Dungeon_92
+  - first:
+      213: 870120616980829976
+    second: momonga_Dungeon_93
+  - first:
+      213: -4179680110400567099
+    second: momonga_Dungeon_94
+  - first:
+      213: -4936473041157826408
+    second: momonga_Dungeon_95
+  - first:
+      213: -8183978471706718591
+    second: momonga_Dungeon_96
+  - first:
+      213: -1154216794474431108
+    second: momonga_Dungeon_97
+  - first:
+      213: 6803207556665628291
+    second: momonga_Dungeon_98
+  - first:
+      213: -4516958230269342590
+    second: momonga_Dungeon_99
+  - first:
+      213: -8454020087467516318
+    second: momonga_Dungeon_100
+  - first:
+      213: 843793405887241485
+    second: momonga_Dungeon_101
+  - first:
+      213: -5497931895274254646
+    second: momonga_Dungeon_102
+  - first:
+      213: -8548463636577915656
+    second: momonga_Dungeon_103
+  - first:
+      213: 215710855039429460
+    second: momonga_Dungeon_104
+  - first:
+      213: 1627826943625954204
+    second: momonga_Dungeon_105
+  - first:
+      213: 2724895411446167360
+    second: momonga_Dungeon_106
+  - first:
+      213: 1788591287743269121
+    second: momonga_Dungeon_107
+  - first:
+      213: 827263061726672313
+    second: momonga_Dungeon_108
+  - first:
+      213: -2744807568967775856
+    second: momonga_Dungeon_109
+  - first:
+      213: 4228116328426936683
+    second: momonga_Dungeon_110
+  - first:
+      213: -4162682354919053226
+    second: momonga_Dungeon_111
+  - first:
+      213: -8610385576187819771
+    second: momonga_Dungeon_112
+  - first:
+      213: -5564532003972636950
+    second: momonga_Dungeon_113
+  - first:
+      213: -4624117216549391491
+    second: momonga_Dungeon_114
+  - first:
+      213: 7692044103796252341
+    second: momonga_Dungeon_115
+  - first:
+      213: -7947059350545305960
+    second: momonga_Dungeon_116
+  - first:
+      213: 2349634524063675874
+    second: momonga_Dungeon_117
+  - first:
+      213: -4057030388121627056
+    second: momonga_Dungeon_118
+  - first:
+      213: -8046873302679361598
+    second: momonga_Dungeon_119
+  - first:
+      213: 7238112984733061879
+    second: momonga_Dungeon_120
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JugadorGuardiaIdle1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 448
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f579572b58a11442a88d32b28f9db08
+      internalID: 1462898294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaIdle2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 449
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce5165c764c1ccf45bf9be92f3f6b2e5
+      internalID: -612774163590085992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaIdle3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 448
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9641ce07e92bc94d8b46703183c92c7
+      internalID: -6230835990620198461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaIdle4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 448
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47f875fdb71bcb747833a1924d0220f4
+      internalID: -5579888102307320037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaRun1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 416
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6308b92e8091da6499f1947108982eb9
+      internalID: 652500850370928275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaRun2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 416
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 803a57a886f6fd848994233dee68a3cc
+      internalID: 8592941225231024076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaRun3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 416
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a84fd994e2a17f458cdd0c752846cb6
+      internalID: -6005364613987120665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuardiaRun4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 416
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10064058f83aca248ac39690335596f4
+      internalID: -917561999692173266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoZombiRun1
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 416
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b00509262c1abe149bca8d243fac425d
+      internalID: 3400505154229825426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoZombiRun2
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 416
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ea76166f3c57fa4dbd64c5ba4af5957
+      internalID: 431312195025279742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoZombiRun3
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 416
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e8efcc5f2f74a4880d243c6bc9cba6
+      internalID: -1663861600441877645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoZombiRun4
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 416
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e8d352c630a3349afd1326abf98e9f
+      internalID: 2301739707643308761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroIdle1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 384
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33460832deccad941aa68e94c5c7eae8
+      internalID: 1092896043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroIdle2
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 384
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 744b7bf5f3319b44890bcd2c3cfcd8a6
+      internalID: 678696479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroIdle3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 384
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c28c18161054ab4187494459d902d43
+      internalID: -1294814085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroIdle4
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 384
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8312c84956816194aa0cdc467c1225a6
+      internalID: 1471916112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroRun1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 352
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0914193c7187654cb57f7a84a24cf2e
+      internalID: 735252546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroRun2
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 352
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaab0da6e611fc84a86306cb09ede105
+      internalID: 256084814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroRun3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 352
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9daa97e1f4b83a343b6da418d1d5d026
+      internalID: 1927839904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorGuerreroRun4
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 352
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0be29df6d42ebf49ab2bcbf247a6ad4
+      internalID: -1166723046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoGuerreroRun1
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 352
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad248c903c82ef746b4d1af6b7462418
+      internalID: -3147701158041109175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoGuerreroRun2
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 352
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b62eee5deaf15bb47ade6c9f9d54b5f1
+      internalID: 3865208472570544675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoGuerreroRun3
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 352
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9d974fbce68f646a77298f6deb9228
+      internalID: -8871249872823922093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoGuerreroRun4
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 352
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3d1d31a10604d8499641124fd83cf25
+      internalID: -7851731329313786973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoIdle1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 320
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4338f4091000d934cbfdb2cb097ea1bf
+      internalID: -8901362646670387609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoIdle2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 320
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8b23495ba04e5141ac730f5d0fa54a5
+      internalID: -7130819182982699642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoIdle3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 320
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5823681731e6464b99103a25b4d5886
+      internalID: 7733886124396825037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoIdle4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 320
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ad68fb1a10253245a1d6ee8324f2b10
+      internalID: 5623370990784668052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoRun1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36f3bce666b2e80448d54683e845e8de
+      internalID: -551317892561294759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoRun2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde446d322212874987e723dd3dfc292
+      internalID: -5851142248225909776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoRun3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd966a4e40fb3b4999a9c651da3ac0c
+      internalID: -1016432504762349815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorMagoRun4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f48f1f9d79330b4a977bcc03136886e
+      internalID: 8536399145932301604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoMagoRun1
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2042f40e418263f4cb976babf09eb4a5
+      internalID: 1403139820871551446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoMagoRun2
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef50197dfad6e54e9ccc0c0ef285f1b
+      internalID: -4559799546985314518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoMagoRun3
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: befe722b70cd03b4eaa1e5083fdae8f6
+      internalID: -4197574065995228336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoMagoRun4
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 288
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed1c8cdaf3c18614bb87d9f10d1da538
+      internalID: 6316118959309240542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroidle1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 256
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b386a2e7ee2a7194b90c95f30f90b735
+      internalID: 383441153272985063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroidle2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 256
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a03c7f7624b71047878c322da2793b7
+      internalID: 7369978326167799720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroidle3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 256
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e09961636dcb24d83b35850bd2665c
+      internalID: -8750250964456063360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroidle4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 256
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b11beac6a0947104db69f643b0e908f1
+      internalID: -4965945196655241957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pocion
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 259
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 556832c373f243e49ac7929d8c1e4336
+      internalID: 2044766483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroRun1
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 224
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7febfe178907e4eaba2aad4c79db18
+      internalID: 5408694513272620362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroRun2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 224
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae0f6d5e93ac2cc4d9ef33fffeec2839
+      internalID: -2832647196985742219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroRun3
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 224
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef9c5b4b61a13c468a45f584ec840f4
+      internalID: -2853785566752530601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JugadorCaballeroRun4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 224
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df0f62c14b8e9645b0e7923405382ed
+      internalID: 870120616980829976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CorazonEntero
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 242
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da48105cd2af77f4681c6315d21ae39b
+      internalID: 1094262599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CorazonMedio
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 242
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a9a336dba0e504aab1a6ec9c0b219e
+      internalID: -1172470129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CorazonVacio
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 242
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80210ef0b58a50249a5328ab2bfa415d
+      internalID: 1534093588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoEsqueletoRun1
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 224
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f85913b595f2514a805ec8fc1abf971
+      internalID: -1154216794474431108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoEsqueletoRun2
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 224
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7331432605dfabf4bbd4cbf6fa95bcb1
+      internalID: 6803207556665628291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoEsqueletoRun3
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 224
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3cbcf7131e6e04e9b49010beec4fa0
+      internalID: -4516958230269342590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoEsqueletoRun4
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 224
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea59407af3ab94647b334ecbc14d060a
+      internalID: -8454020087467516318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoOrcoRun1
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 160
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e53ed3699a0cca408a5aa912a638ca6
+      internalID: -1566359344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoOrcoRun2
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 160
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15f0cd2ef2074ff40ba6104b24688600
+      internalID: 1572810800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoOrcoRun3
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 160
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d899bf28169507a4e978b8ae002c4683
+      internalID: 1180091198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemigoOrcoRun4
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 160
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 835e7679745c39b4f844ffc8800dcb5f
+      internalID: 579489636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9177d764790d8324ba497372f661bfc9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CorazonEntero: 1094262599
+      CorazonMedio: -1172470129
+      CorazonVacio: 1534093588
+      EnemigoEsqueletoRun1: -1154216794474431108
+      EnemigoEsqueletoRun2: 6803207556665628291
+      EnemigoEsqueletoRun3: -4516958230269342590
+      EnemigoEsqueletoRun4: -8454020087467516318
+      EnemigoGuerreroRun1: -3147701158041109175
+      EnemigoGuerreroRun2: 3865208472570544675
+      EnemigoGuerreroRun3: -8871249872823922093
+      EnemigoGuerreroRun4: -7851731329313786973
+      EnemigoMagoRun1: 1403139820871551446
+      EnemigoMagoRun2: -4559799546985314518
+      EnemigoMagoRun3: -4197574065995228336
+      EnemigoMagoRun4: 6316118959309240542
+      EnemigoOrcoRun1: -1566359344
+      EnemigoOrcoRun2: 1572810800
+      EnemigoOrcoRun3: 1180091198
+      EnemigoOrcoRun4: 579489636
+      EnemigoZombiRun1: 3400505154229825426
+      EnemigoZombiRun2: 431312195025279742
+      EnemigoZombiRun3: -1663861600441877645
+      EnemigoZombiRun4: 2301739707643308761
+      JugadorCaballeroRun1: 5408694513272620362
+      JugadorCaballeroRun2: -2832647196985742219
+      JugadorCaballeroRun3: -2853785566752530601
+      JugadorCaballeroRun4: 870120616980829976
+      JugadorCaballeroidle1: 383441153272985063
+      JugadorCaballeroidle2: 7369978326167799720
+      JugadorCaballeroidle3: -8750250964456063360
+      JugadorCaballeroidle4: -4965945196655241957
+      JugadorGuardiaIdle1: 1462898294
+      JugadorGuardiaIdle2: -612774163590085992
+      JugadorGuardiaIdle3: -6230835990620198461
+      JugadorGuardiaIdle4: -5579888102307320037
+      JugadorGuardiaRun1: 652500850370928275
+      JugadorGuardiaRun2: 8592941225231024076
+      JugadorGuardiaRun3: -6005364613987120665
+      JugadorGuardiaRun4: -917561999692173266
+      JugadorGuerreroIdle1: 1092896043
+      JugadorGuerreroIdle2: 678696479
+      JugadorGuerreroIdle3: -1294814085
+      JugadorGuerreroIdle4: 1471916112
+      JugadorGuerreroRun1: 735252546
+      JugadorGuerreroRun2: 256084814
+      JugadorGuerreroRun3: 1927839904
+      JugadorGuerreroRun4: -1166723046
+      JugadorMagoIdle1: -8901362646670387609
+      JugadorMagoIdle2: -7130819182982699642
+      JugadorMagoIdle3: 7733886124396825037
+      JugadorMagoIdle4: 5623370990784668052
+      JugadorMagoRun1: -551317892561294759
+      JugadorMagoRun2: -5851142248225909776
+      JugadorMagoRun3: -1016432504762349815
+      JugadorMagoRun4: 8536399145932301604
+      Pocion: 2044766483
+      momonga_Dungeon_10: 1734096197835735740
+      momonga_Dungeon_101: 843793405887241485
+      momonga_Dungeon_102: -5497931895274254646
+      momonga_Dungeon_103: -8548463636577915656
+      momonga_Dungeon_104: 215710855039429460
+      momonga_Dungeon_105: -2089996827
+      momonga_Dungeon_106: 1438143584
+      momonga_Dungeon_107: 2056433322
+      momonga_Dungeon_108: 853092003
+      momonga_Dungeon_109: -2744807568967775856
+      momonga_Dungeon_11: 7711390011267118183
+      momonga_Dungeon_110: 4228116328426936683
+      momonga_Dungeon_111: -4162682354919053226
+      momonga_Dungeon_112: -8610385576187819771
+      momonga_Dungeon_117: 2349634524063675874
+      momonga_Dungeon_118: -4057030388121627056
+      momonga_Dungeon_119: -8046873302679361598
+      momonga_Dungeon_12: 4143512336247707232
+      momonga_Dungeon_120: 7238112984733061879
+      momonga_Dungeon_17: 3494395009541514215
+      momonga_Dungeon_18: 3178770494848686696
+      momonga_Dungeon_19: 845893044648962833
+      momonga_Dungeon_20: 3823505406959497808
+      momonga_Dungeon_21: -5919938358861848927
+      momonga_Dungeon_30: 330716701
+      momonga_Dungeon_31: 5650045900657424983
+      momonga_Dungeon_32: -8534239703278541225
+      momonga_Dungeon_33: -1778995394586271231
+      momonga_Dungeon_34: -1194395702949094075
+      momonga_Dungeon_35: 2080759569347119904
+      momonga_Dungeon_36: -5425623948941133607
+      momonga_Dungeon_37: 2490985868480212486
+      momonga_Dungeon_38: -5560608081904742702
+      momonga_Dungeon_4: 5560012137279842015
+      momonga_Dungeon_43: -5624162519095243249
+      momonga_Dungeon_44: 8212861987051068593
+      momonga_Dungeon_45: 6099557482488170342
+      momonga_Dungeon_46: 4231506487630506068
+      momonga_Dungeon_47: 5223570454357723983
+      momonga_Dungeon_5: -1813242163614649347
+      momonga_Dungeon_56: -7758948421534788187
+      momonga_Dungeon_57: -2179584072239862569
+      momonga_Dungeon_58: 8261797728504904149
+      momonga_Dungeon_59: 5974886839663274301
+      momonga_Dungeon_6: -3704967498686379498
+      momonga_Dungeon_60: 3281625990977024618
+      momonga_Dungeon_61: -2709024203214079068
+      momonga_Dungeon_62: -282088589701503591
+      momonga_Dungeon_63: 6744377384291566503
+      momonga_Dungeon_68: -7572690698953468359
+      momonga_Dungeon_69: 9069632457481528348
+      momonga_Dungeon_7: 1195765778861372344
+      momonga_Dungeon_70: 2336767350496303036
+      momonga_Dungeon_79: 6218553633169082834
+      momonga_Dungeon_8: -2694375881544165901
+      momonga_Dungeon_80: -4540936564712760997
+      momonga_Dungeon_82: -1287655461501216628
+      momonga_Dungeon_83: 1666541786590078328
+      momonga_Dungeon_84: 1120291938798567350
+      momonga_Dungeon_85: 5228850446893029019
+      momonga_Dungeon_86: -8527069599244203891
+      momonga_Dungeon_87: 8427451607362121949
+      momonga_Dungeon_88: 8342876616374400455
+      momonga_Dungeon_89: 1156710507305625425
+      momonga_Dungeon_9: -2172077542636240602
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danio: 50
-  alcance: 2
+  danio: 100
+  alcance: 1
   recarga: 2
   capaEnemigos:
     serializedVersion: 2
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6aef88a7cbf2c44a8d6b91f1849447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangoDeteccion: 5
+  rangoDeteccion: 2
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: -7671631787105517523, guid: 42cdcc6e995e35243a7c99db6ecea8d4, type: 3}
+  m_Sprite: {fileID: -4146462697135019530, guid: ea8203af5ab315245a483d9d5ac905a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 1.375}
+    oldSize: {x: 0.21875, y: 0.75}
     newSize: {x: 0.3125, y: 1.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

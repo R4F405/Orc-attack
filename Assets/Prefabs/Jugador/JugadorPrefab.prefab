@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643b37db93557294c80b22bf26ba110e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 7
+  velocity: 4
 --- !u!114 &2994583999435506763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,15 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a4ad5b960e67459e0df93421a56be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabricadosDeArmas:
-  - {fileID: 3342311069874076743, guid: c8b9dc343a42ed74ba962ea80544ce61, type: 3}
-  - {fileID: 2434994715305800693, guid: ddacab3b69907ef4bb44d3868304b26a, type: 3}
-  - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
-  - {fileID: 8401330653836557154, guid: 167308418b989164a8049dd3bda9be52, type: 3}
-  - {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
+  prefabricadosDeArmas: []
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 5
+  numeroDeArmas: 1
 --- !u!114 &-639148711076508535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,12 +177,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 7038607374762230525, guid: 56166d86effc4da4c902fee6a60df97a, type: 3}
+  m_Sprite: {fileID: 678696479, guid: faceead829d827e4bbccdbb81784a83e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1.3125}
+  m_Size: {x: 0.625, y: 0.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -253,8 +248,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.3125}
-    newSize: {x: 1, y: 1.3125}
+    oldSize: {x: 0.625, y: 0.8125}
+    newSize: {x: 0.625, y: 0.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
