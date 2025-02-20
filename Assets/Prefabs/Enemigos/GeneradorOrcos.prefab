@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9001092863655417858}
   - component: {fileID: 5881503308364665680}
   m_Layer: 0
-  m_Name: GeneradorEnemigos
+  m_Name: GeneradorOrcos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b26a9846f8463e48838cb7cb19efc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemigosPrefabs:
-  - {fileID: 835747888833057900, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
-  tiempoEntreGeneraciones: 2
-  limiteInferior: {x: -17.5, y: 14.5}
-  limiteSuperior: {x: 17.5, y: -14.5}
+  orcoPrefab: {fileID: 835747888833057900, guid: 7ccf71ffc80373141aea3adbb843240e, type: 3}
+  limiteInferior: {x: -8, y: 8}
+  limiteSuperior: {x: 8, y: -8}
   enemigosPorOleada: 5
   tiempoEntreOleadas: 5

@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danio: 50
-  alcance: 2
-  recarga: 2
+  alcance: 1
+  recarga: 1
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
@@ -114,12 +114,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 5587124563336528128, guid: 518bab9a0c8918d42b751eda40d950d4, type: 3}
+  m_Sprite: {fileID: -1035376832474678582, guid: 2bb6f3f4d3ebd274d937e9e57da4368f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.375, y: 1.8125}
+  m_Size: {x: 0.3125, y: 0.96875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -159,17 +159,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0011196136, y: 0.00000035762787}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.375, y: 1.8125}
-    newSize: {x: 0.375, y: 1.8125}
+    oldSize: {x: 0.3125, y: 0.96875}
+    newSize: {x: 0.3125, y: 0.96875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.375, y: 1.8125}
+  m_Size: {x: 0.26535797, y: 0.95774794}
   m_EdgeRadius: 0
 --- !u!95 &-1484573508637490067
 Animator:

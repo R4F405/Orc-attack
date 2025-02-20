@@ -3,6 +3,7 @@ using UnityEngine;
 public class ControladorCamara : MonoBehaviour
 {
     private GameObject jugador;
+    public Grid background;
 
     private void Start()
     {

@@ -7,6 +7,7 @@ public class ArmasDistancia : MonoBehaviour
     public float velocidadBala = 10f; // Velocidad de la bala
     public float recarga = 1f; // Tiempo de recarga entre disparos
     public LayerMask capaEnemigos; // Capa de los enemigos
+    public float alcance = 2f;
 
     private Collider2D colliderJugador; // Referencia al collider del jugador
     private float tiempoSiguienteDisparo = 0f;
@@ -29,7 +30,7 @@ public class ArmasDistancia : MonoBehaviour
 
     private void Disparar()
     {
-        Collider2D[] enemigos = Physics2D.OverlapCircleAll(transform.position, 10f, capaEnemigos);
+        Collider2D[] enemigos = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
         if (enemigos.Length > 0)
         {
             Transform objetivo = enemigos[0].transform;

@@ -90,10 +90,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a4ad5b960e67459e0df93421a56be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabricadosDeArmas: []
+  prefabricadosDeArmas:
+  - {fileID: 1754110628231209729, guid: 1f0c63b04219b004587fd2afbfe530d7, type: 3}
+  - {fileID: 2469734866425781752, guid: b003e3a3ddfe49e4bbaa6c6a29613ab8, type: 3}
+  - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
+  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
+  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
   distanciaHorizontal: 1
-  distanciaVertical: 1
-  numeroDeArmas: 1
+  distanciaVertical: 0.5
+  numeroDeArmas: 5
 --- !u!114 &-639148711076508535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,11 +245,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0015218854, y: -0.15847933}
+  m_Offset: {x: 0.061194956, y: -0.0780998}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -254,5 +259,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.60902035, y: 0.99554133}
+  m_Size: {x: 0.5352868, y: 0.6888361}
   m_EdgeRadius: 0

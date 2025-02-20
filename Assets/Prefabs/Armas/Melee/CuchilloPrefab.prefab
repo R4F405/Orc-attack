@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danio: 50
-  alcance: 2
-  recarga: 2
+  alcance: 1
+  recarga: 1
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
@@ -169,7 +169,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.375, y: 0.8125}
+  m_Size: {x: 0.20527649, y: 0.49509716}
   m_EdgeRadius: 0
 --- !u!95 &-1057641799432764596
 Animator:

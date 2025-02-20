@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class MovimientoEnemigos : MonoBehaviour
+public class MovimientoEnemigoDistancia : MonoBehaviour
 {
-    private GameObject jugador;
+   private GameObject jugador;
     public float velocidad = 2f;
+    public float distanciaMinima = 3f; // Distancia a la que se detiene antes de atacar
 
     private bool estaMirandoDerecha = true;
 
     private void Start()
     {
-        jugador = GameObject.FindGameObjectWithTag("Jugador"); // Buscar al jugador automáticamente por su tag
+        jugador = GameObject.FindGameObjectWithTag("Jugador");
 
-        // Verificar si se encontró el jugador para evitar errores
         if (jugador == null)
         {
-            Debug.LogError("No se encontró un GameObject con la etiqueta 'Player'.");
+            Debug.LogError("No se encontró un GameObject con la etiqueta 'Jugador'.");
         }
     }
 
@@ -37,7 +37,12 @@ public class MovimientoEnemigos : MonoBehaviour
 
     private void IASeguimiento()
     {
-        transform.position = Vector2.MoveTowards(transform.position, jugador.transform.position, velocidad * Time.deltaTime);
+        float distancia = Vector2.Distance(transform.position, jugador.transform.position);
+
+        if (distancia > distanciaMinima)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, jugador.transform.position, velocidad * Time.deltaTime);
+        }
     }
 
     private void Girar(bool estaJugadorDerecha)

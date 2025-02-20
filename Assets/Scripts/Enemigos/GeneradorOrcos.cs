@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class GeneradorEnemigos : MonoBehaviour
+public class GeneradorOrcos : MonoBehaviour
 {
-    public GameObject[] enemigosPrefabs; // Array de prefabricados de enemigos
-    public float tiempoEntreGeneraciones = 2f; // Tiempo entre cada generación
+    public GameObject orcoPrefab; // Prefabricado de Orco
     public Vector2 limiteInferior; // Limite inferior de la zona de generación
     public Vector2 limiteSuperior; // Limite superior de la zona de generación
     public int enemigosPorOleada = 5; // Número de enemigos por oleada
@@ -43,9 +42,8 @@ public class GeneradorEnemigos : MonoBehaviour
 
         Vector3 posicionGeneracion = new Vector3(posX, posY, 0f);
 
-        // Elegir un enemigo aleatorio de los prefabricados
-        int indiceEnemigo = Random.Range(0, enemigosPrefabs.Length);
-        GameObject enemigo = Instantiate(enemigosPrefabs[indiceEnemigo], posicionGeneracion, Quaternion.identity);
+        // Instanciar enemigo
+        GameObject enemigo = Instantiate(orcoPrefab, posicionGeneracion, Quaternion.identity);
 
     }
 }

@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AnimacionEspadaDorada
+  m_Name: AnimacionMartillo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 04303f2bca770b04e9e83a284e6f0fc7, type: 2}
+  m_Motion: {fileID: 7400000, guid: f735d9e23a3680f4f8115447a5ddafd5, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -33,7 +33,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ControladorEspadaDorada
+  m_Name: ControladorMartillo
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Atacar
@@ -62,7 +62,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EspadaDorada
+  m_Name: Martillo
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -76,7 +76,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: db40e5dafe6f72f4684f162bb18a5570, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6d33a9f3a165e054790f81f4c48ab5fa, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
