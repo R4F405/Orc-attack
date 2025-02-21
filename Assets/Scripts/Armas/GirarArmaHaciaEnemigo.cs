@@ -4,6 +4,7 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
 {
     public float rangoDeteccion = 5f;
     public LayerMask capaEnemigos;
+    public bool pincha; // Si es una lanza
 
     private Quaternion rotacionInicial;
     private Vector3 escalaInicial;
@@ -31,17 +32,27 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
     {
         Collider2D[] enemigosDetectados = Physics2D.OverlapCircleAll(transform.position, rangoDeteccion, capaEnemigos);
 
-        if (enemigosDetectados.Length == 0) 
+        if (enemigosDetectados.Length == 0)
         {
-            if (transform.position.x < GameObject.FindWithTag("Jugador").transform.position.x)
+            if (pincha)
             {
-                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
-                transform.localScale = new Vector3(1, -1, 1);
+                // Si es una lanza y no hay enemigos, vuelve a su posición original
+                transform.rotation = rotacionInicial;
+                transform.localScale = escalaInicial;
             }
             else
             {
-                transform.rotation = rotacionInicial;
-                transform.localScale = escalaInicial;
+                // Si no es lanza, se voltea según la posición del jugador
+                if (transform.position.x < GameObject.FindWithTag("Jugador").transform.position.x)
+                {
+                    transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+                    transform.localScale = new Vector3(1, -1, 1);
+                }
+                else
+                {
+                    transform.rotation = rotacionInicial;
+                    transform.localScale = escalaInicial;
+                }
             }
             return;
         }
@@ -64,15 +75,24 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
             Vector2 direccion = (enemigoMasCercano.position - transform.position).normalized;
             float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
 
+            if (pincha)
+            {
+                angulo -= 90f; // Ajuste para que la parte superior apunte al enemigo
+            }
+
             transform.rotation = Quaternion.Euler(0f, 0f, angulo);
 
-            if (enemigoMasCercano.position.x < transform.position.x)
+            // Solo invertimos la escala si NO es una lanza
+            if (!pincha)
             {
-                transform.localScale = new Vector3(1, -1, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
+                if (enemigoMasCercano.position.x < transform.position.x)
+                {
+                    transform.localScale = new Vector3(1, -1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
             }
         }
     }

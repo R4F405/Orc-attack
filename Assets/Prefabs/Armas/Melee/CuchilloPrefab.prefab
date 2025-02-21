@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7984211970113728974}
   - component: {fileID: 5562574135968485896}
   - component: {fileID: -4387719117418088394}
+  - component: {fileID: -3654873920874255921}
   - component: {fileID: 652226166727489911}
   - component: {fileID: 6233747901344836441}
   - component: {fileID: -1057641799432764596}
@@ -66,10 +67,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6aef88a7cbf2c44a8d6b91f1849447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangoDeteccion: 5
+  rangoDeteccion: 3
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  pincha: 1
+--- !u!114 &-3654873920874255921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3798194697597539420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311e42d40a61f0844b2a9a1b7aa5f4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangoAtaque: 1
+  distanciaAtaque: 1.5
+  tiempoMovimiento: 0.3
+  capaEnemigos:
+    serializedVersion: 2
+    m_Bits: 64
+  atacando: 0
 --- !u!212 &652226166727489911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,7 +180,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.004682541, y: 0.000081419945}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -169,7 +190,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.20527649, y: 0.49509716}
+  m_Size: {x: 0.26003647, y: 0.5213239}
   m_EdgeRadius: 0
 --- !u!95 &-1057641799432764596
 Animator:

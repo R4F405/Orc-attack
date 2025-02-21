@@ -442,6 +442,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5881503308364665680, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8089942650525456140, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
       propertyPath: m_Name
       value: GeneradorOrcos
@@ -1532,28 +1536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barraVida: {fileID: 1590601426}
   textoVida: {fileID: 1887803212}
---- !u!1 &1687155200 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4002603662386111973, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
-  m_PrefabInstance: {fileID: 6375565243683976610}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1687155202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687155200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f8976d4debd834cb2be9887c6b54ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magoPrefab: {fileID: 1316480901873861959, guid: 911624770078afd4284483a1520379c7, type: 3}
-  limiteInferior: {x: -8, y: 8}
-  limiteSuperior: {x: 8, y: -8}
-  enemigosPorOleada: 2
-  tiempoEntreOleadas: 7
 --- !u!1 &1887803210
 GameObject:
   m_ObjectHideFlags: 0
@@ -15080,6 +15062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1916416878909933018, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4002603662386111973, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
       propertyPath: m_Name
       value: GeneradorMagos
@@ -15087,10 +15073,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4002603662386111973, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1687155202}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

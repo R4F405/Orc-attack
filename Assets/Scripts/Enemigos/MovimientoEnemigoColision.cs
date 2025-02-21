@@ -24,6 +24,12 @@ public class MovimientoEnemigoColision : MonoBehaviour
         {
             IASeguimiento();
         }
+
+        // Verificar si se encontró el jugador para evitar errores
+        if (jugador == null)
+        {
+        jugador = GameObject.FindGameObjectWithTag("Jugador"); // Buscar al jugador automáticamente por su tag        
+        }
     }
 
     void Update()

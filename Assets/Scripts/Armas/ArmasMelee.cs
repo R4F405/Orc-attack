@@ -8,7 +8,8 @@ public class ArmasMelee : MonoBehaviour
     public LayerMask capaEnemigos; // Capa de los enemigos
 
     private Animator animador;
-    private float tiempoSiguienteAtaque = 0f; // Tiempo hasta el próximo ataque permitido
+    private float tiempoSiguienteAtaque = 0f;  // Tiempo hasta el próximo ataque permitido
+    private bool atacando = false; // Controla si el ataque está en curso
 
     private void Start()
     {
@@ -17,8 +18,7 @@ public class ArmasMelee : MonoBehaviour
 
     private void Update()
     {
-        // Verificar si se puede atacar
-        if (Time.time >= tiempoSiguienteAtaque)
+        if (!atacando && Time.time >= tiempoSiguienteAtaque)
         {
             DetectarEnemigos();
         }
@@ -28,21 +28,37 @@ public class ArmasMelee : MonoBehaviour
     {
         Collider2D[] enemigosEnRango = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
 
-        foreach (Collider2D enemigo in enemigosEnRango)
+        if (enemigosEnRango.Length > 0)
+        {
+            atacando = true; // Marcar que el ataque ha comenzado
+            
+            if (animador != null)
+            {
+                animador.SetTrigger("Atacar"); // Activar animación
+            }
+
+            // Esperar un poco para que el ataque se sincronice con la animación
+            Invoke("AplicarDaño", 0.1f); 
+
+            // Establecer el tiempo para el siguiente ataque
+            tiempoSiguienteAtaque = Time.time + recarga;
+        }
+    }
+
+    private void AplicarDaño()
+    {
+        Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
+
+        foreach (Collider2D enemigo in enemigosGolpeados)
         {
             VidaEnemigo salud = enemigo.GetComponent<VidaEnemigo>();
             if (salud != null)
             {
-                salud.RecibirDaño(danio);
-                
-                if (animador != null)
-                {
-                    animador.SetTrigger("Atacar");
-                }
-
-                // Actualizar el tiempo del siguiente ataque permitido
-                tiempoSiguienteAtaque = Time.time + recarga;
+                salud.RecibirDaño(danio); // Aplicar daño
             }
         }
+
+        // Finalizar el ataque
+        atacando = false;
     }
 }
