@@ -9,6 +9,7 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
     private Quaternion rotacionInicial;
     private Vector3 escalaInicial;
     private Animator animador;
+    private bool atacando = false;
 
     private void Start()
     {
@@ -19,6 +20,8 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
 
     private void Update()
     {
+         if (atacando) return; // No girar si está atacando
+         
         // Si la animación de ataque está activa, no giramos el arma
         if (animador != null && animador.GetCurrentAnimatorStateInfo(0).IsName("Atacar"))
         {
@@ -26,6 +29,8 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
         }
 
         GirarHaciaEnemigo();
+
+
     }
 
     private void GirarHaciaEnemigo()
@@ -95,5 +100,10 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetAtacando(bool estado)
+    {
+        atacando = estado;
     }
 }

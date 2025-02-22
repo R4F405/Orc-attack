@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2795643654000810001}
-  - component: {fileID: 5390961112386211643}
+  - component: {fileID: -3903051034788969604}
   - component: {fileID: 8994268253388839795}
-  - component: {fileID: 832421664851582535}
   - component: {fileID: 5101891240077592627}
   - component: {fileID: 3304875262891698895}
   - component: {fileID: 8763605809244827622}
@@ -37,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5390961112386211643
+--- !u!114 &-3903051034788969604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danio: 50
-  alcance: 1
+  danio: 100
+  alcance: 1.5
   recarga: 1
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  pincha: 1
 --- !u!114 &8994268253388839795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,25 +72,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   pincha: 1
---- !u!114 &832421664851582535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3396083887977358244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 311e42d40a61f0844b2a9a1b7aa5f4c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangoAtaque: 1
-  distanciaAtaque: 1.5
-  tiempoMovimiento: 0.3
-  capaEnemigos:
-    serializedVersion: 2
-    m_Bits: 64
-  atacando: 0
 --- !u!212 &5101891240077592627
 SpriteRenderer:
   m_ObjectHideFlags: 0

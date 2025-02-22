@@ -7,7 +7,7 @@ public class PosicionarArmasJugador : MonoBehaviour
     public float distanciaVertical = 1.5f; // Distancia vertical entre las armas
     public int numeroDeArmas = 5; // Número total de armas que el jugador tiene
 
-    private GameObject[] armasInstanciadas; // Array de instancias de las armas
+    private GameObject[] armasInstanciadas;  // Array de instancias de las armas
 
     private void Start()
     {
@@ -124,4 +124,17 @@ public class PosicionarArmasJugador : MonoBehaviour
             }
         }
     }
+
+    public Vector3 ObtenerPosicionActualDelArma(GameObject arma)
+    {
+        for (int i = 0; i < armasInstanciadas.Length; i++)
+        {
+            if (armasInstanciadas[i] == arma)
+            {
+                return transform.position + (armasInstanciadas[i].transform.position - transform.position);
+            }
+        }
+        return arma.transform.position; // En caso de error, usa su posición actual
+    }
+
 }

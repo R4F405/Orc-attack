@@ -48,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danio: 50
+  danio: 100
   alcance: 1
   recarga: 1
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  pincha: 0
 --- !u!114 &-6819251590569630884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +71,7 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  pincha: 0
 --- !u!212 &5144009449002118943
 SpriteRenderer:
   m_ObjectHideFlags: 0

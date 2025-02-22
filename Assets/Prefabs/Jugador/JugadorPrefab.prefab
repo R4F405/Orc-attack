@@ -92,9 +92,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
   - {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
-  - {fileID: 3798194697597539420, guid: dea75c69166a77c45b4b01f96d614344, type: 3}
-  - {fileID: 5948458081476484835, guid: acd24041b415fd14b918f041aa4acbfc, type: 3}
-  - {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
+  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
+  - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
+  - {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 0.5
   numeroDeArmas: 4
