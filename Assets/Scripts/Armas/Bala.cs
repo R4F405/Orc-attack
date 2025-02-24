@@ -8,9 +8,18 @@ public class Bala : MonoBehaviour
     private Transform objetivo;
     private Rigidbody2D rb;
     private float velocidad;
+    private VidaJugador vidaJugador;
+    private GameObject jugador;
+    private int probabilidadRobarVida = 5;
     
     private void Start()
     {
+        ObtenerJugador();
+        if (jugador != null)
+        {
+            vidaJugador = jugador.GetComponent<VidaJugador>();
+        }
+
         rb = GetComponent<Rigidbody2D>();
         
         // Destruir la bala después de x segundos si no impacta con nada
@@ -20,13 +29,14 @@ public class Bala : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Balas"), LayerMask.NameToLayer("Balas"));
     }
 
-    public void ConfigurarBala(int nuevoDaño, float nuevaVelocidad, LayerMask nuevaCapaEnemigos, LayerMask nuevaCapaCajas, Collider2D colliderJugador, Transform enemigo)
+    public void ConfigurarBala(int nuevoDaño, float nuevaVelocidad, LayerMask nuevaCapaEnemigos, LayerMask nuevaCapaCajas, Collider2D colliderJugador, Transform enemigo, int nuevaProbabilidad)
     {
         danio = nuevoDaño;
         velocidad = nuevaVelocidad;
         capaEnemigos = nuevaCapaEnemigos;
         capaCajas = nuevaCapaCajas;
         objetivo = enemigo;
+        probabilidadRobarVida = nuevaProbabilidad;
 
         // Ignorar colisión con el jugador
         Collider2D miCollider = GetComponent<Collider2D>();
@@ -56,6 +66,7 @@ public class Bala : MonoBehaviour
             if (salud != null)
             {
                 salud.RecibirDaño(danio);
+                RobarVida();
             }
             Destroy(gameObject); // Destruir la bala al impactar con un enemigo
         }
@@ -67,6 +78,32 @@ public class Bala : MonoBehaviour
                 caja.RecibirGolpe();
             }
             Destroy(gameObject); // La bala también desaparece al impactar la caja
+        }
+    }
+
+    private void RobarVida() 
+    {
+        // Genera un número aleatorio entre 0 y 100
+        int probabilidad = Random.Range(0, 100);
+        // Si el número aleatorio es menor que la probabilidad de robar vida, se cura
+        if (probabilidad < probabilidadRobarVida)
+        {
+            if (vidaJugador != null)
+            {
+                vidaJugador.Curar(1); // Recupera 1 de vida
+                Debug.Log("Vida Robada");
+            }
+        }    
+    }
+
+    private void ObtenerJugador()
+    {
+        // Intentar obtener el jugador con el tag 'Jugador'
+         jugador = GameObject.FindWithTag("Jugador");
+
+        if (jugador != null)
+        {
+            vidaJugador = jugador.GetComponent<VidaJugador>();
         }
     }
 }

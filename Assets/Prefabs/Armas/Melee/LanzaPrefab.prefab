@@ -47,16 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danio: 100
-  alcance: 1.5
+  danioBase: 100
+  danio: 0
+  recargaBase: 1
   recarga: 1
+  probabilidadCriticoBase: 50
+  probabilidadCritico: 0
+  alcance: 1.5
+  pincha: 1
+  probabilidadRobarVida: 5
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
   capaCajas:
     serializedVersion: 2
     m_Bits: 512
-  pincha: 1
 --- !u!114 &8994268253388839795
 MonoBehaviour:
   m_ObjectHideFlags: 0

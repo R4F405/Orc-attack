@@ -3,18 +3,28 @@ using UnityEngine;
 public class ArmasDistancia : MonoBehaviour
 {
     public GameObject balaPrefab; // Prefab de la bala
-    public int danio = 10; // Daño de la bala
-    public float velocidadBala = 10f; // Velocidad de la bala
-    public float recarga = 1f; // Tiempo de recarga entre disparos
+
+    public int danioBase = 0; // Daño base de la bala (Solo se modifica desde el inspector)
+    [HideInInspector] public int danio = 0; // Daño de la bala
+
+    public float velocidadBala = 0f; // Velocidad de la bala
+
+    public float recargaBase = 0f; // Tiempo de recarga base entre disparos (Solo se modifica desde el inspector)
+    [HideInInspector]public float recarga = 0f; // Tiempo de recarga entre disparos
+
+    public float alcance = 0f;
+    public int probabilidadRobarVida = 0; // Probabilidad de robar 1 de vida tras golpe en %
     public LayerMask capaEnemigos; // Capa de los enemigos
     public LayerMask capaCajas; // Nueva capa para detectar cajas
-    public float alcance = 2f;
 
     private Collider2D colliderJugador; // Referencia al collider del jugador
     private float tiempoSiguienteDisparo = 0f;
 
     private void Start()
     {
+        danio = danioBase; // Inicializar el daño con el valor base
+        recarga = recargaBase; // Inicializar la recarga con el valor base
+
         if (colliderJugador == null)
         {
             colliderJugador = GameObject.FindWithTag("Jugador")?.GetComponent<Collider2D>();
@@ -40,17 +50,31 @@ public class ArmasDistancia : MonoBehaviour
             Bala scriptBala = bala.GetComponent<Bala>();
             if (scriptBala != null)
             {
-                scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo);
+                scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
             }
 
             tiempoSiguienteDisparo = Time.time + recarga;
         }
     }
 
-
-
     private Vector2 ObtenerPuntoDisparo()
     {
         return new Vector2(transform.position.x, transform.position.y + (GetComponent<SpriteRenderer>().bounds.size.y / 2));
+    }
+
+    public void AumentarProbabilidadRobarVida (int cantidad) 
+    {
+        probabilidadRobarVida += cantidad;
+    }
+
+    public void AumentarDanioPorPocentaje(int porcentaje)
+    {
+        danio = danio + Mathf.RoundToInt(danioBase * (porcentaje / 100f)); //Aumenta el daño con porcentajes tieniendo en cuenta el daño base
+    }
+
+    public void DisminuirRecargaPorPocentaje(int porcentaje)
+    {
+        recarga -= recargaBase * (porcentaje / 100f); // //Disminuye la recarga con porcentajes tieniendo en cuenta la recarga base base
+        recarga = Mathf.Round(recarga * 100f) / 100f; // Redondea a 2 decimales para mayor precisión 
     }
 }

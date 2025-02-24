@@ -101,13 +101,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balaPrefab: {fileID: 1590779091289258421, guid: 577a6c694494eeb45861e0e6cf28fa2b, type: 3}
-  danio: 100
+  danioBase: 100
+  danio: 0
   velocidadBala: 5
+  recargaBase: 1
   recarga: 1
+  alcance: 2
+  probabilidadRobarVida: 5
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
   capaCajas:
     serializedVersion: 2
     m_Bits: 512
-  alcance: 2

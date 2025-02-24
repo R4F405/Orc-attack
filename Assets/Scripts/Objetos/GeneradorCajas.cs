@@ -44,4 +44,12 @@ public class GeneradorCajas : MonoBehaviour
         // Instanciar caja
         Instantiate(cajaPrefab, posicionGeneracion, Quaternion.identity);
     }
+
+    public void DismininuirTiempo(float disminucion) 
+    {
+        if (tiempo > disminucion) 
+        {
+            tiempo = tiempo - disminucion;
+        }
+    }
 }

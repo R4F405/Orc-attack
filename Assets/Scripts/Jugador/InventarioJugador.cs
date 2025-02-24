@@ -3,6 +3,7 @@ using UnityEngine;
 public class InventarioJugador : MonoBehaviour
 {
     private int calaverasRecolectadas = 0; // Contador de calaveras
+    private int multiplicadorCalaveras = 1;
 
     private void Update()
     {
@@ -26,12 +27,16 @@ public class InventarioJugador : MonoBehaviour
 
     public void AgregarCalavera(int cantidad)
     {
-        calaverasRecolectadas += cantidad;
-        Debug.Log("Calaveras recogidas: " + calaverasRecolectadas);
+        calaverasRecolectadas = calaverasRecolectadas +  (cantidad * multiplicadorCalaveras);
     }
 
     public int ObtenerCantidadCalaveras()
     {
         return calaverasRecolectadas;
+    }
+
+    public void MultiplicadorCalaveras (int multiplicador) 
+    {
+        multiplicadorCalaveras = 1 * multiplicador;
     }
 }

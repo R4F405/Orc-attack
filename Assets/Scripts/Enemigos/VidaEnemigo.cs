@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class VidaEnemigo : MonoBehaviour
 {
-    public float saludMaxima = 100f;
+    public int saludMaxima = 100;
 
-    private float saludActual;
+    private int saludActual;
     private DropCalaveras dropObjeto; // Referencia al script DropObjeto
     private BarraExperiencia barraExp;
 
@@ -16,7 +16,7 @@ public class VidaEnemigo : MonoBehaviour
 
     }
 
-    public void RecibirDaño(float cantidad)
+    public void RecibirDaño(int cantidad)
     {
         saludActual -= cantidad;
         if (saludActual <= 0f)
@@ -41,12 +41,12 @@ public class VidaEnemigo : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public float ObtenerSalud()
+    public int ObtenerSalud()
     {
         return saludActual;
     }
 
-    public float ObtenerSaludMaxima()
+    public int ObtenerSaludMaxima()
     {
         return saludMaxima;
     }

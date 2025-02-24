@@ -3,26 +3,53 @@ using System.Collections;
 
 public class ArmasMelee : MonoBehaviour
 {
-    public int danio = 10; 
-    public float alcance = 2f; 
-    public float recarga = 1f; 
-    public LayerMask capaEnemigos; 
-    public LayerMask capaCajas; // Capa de las cajas
+    public int danioBase = 0; // Daño base del arma (Solo se modifica desde el inspector)
+    [HideInInspector] public int danio = 0; //Daño del arma
+
+    public float recargaBase = 0f; // Tiempo de recarga base entre ataques (Solo se modifica desde el inspector)
+    [HideInInspector]public float recarga = 0f; //Tiempo de recarga entre ataques
+
+    public int probabilidadCriticoBase = 0; //Probabilidad de critico base (Solo se modifica desde el inspector)
+    [HideInInspector] public int probabilidadCritico = 0; //probabilidad de critico
+
+    public float alcance = 0f; //Alcance del arma
     public bool pincha; // Determina si el arma pincha o no
+    public int probabilidadRobarVida = 0; //probabilidad en %
+    public LayerMask capaEnemigos; //capa de enemgos
+    public LayerMask capaCajas; // Capa de las cajas
 
     private Animator animador;
     private float tiempoSiguienteAtaque = 0f;  
     private bool atacando = false; 
     private Vector3 posicionInicial;
+    private VidaJugador vidaJugador;
+    private GameObject jugador;
+    private bool esCritico = false;
+    private int danioCritico;
 
     private void Start()
     {
+        danio = danioBase; // Inicializar el daño con el valor base
+        recarga = recargaBase; // Inicializar la recarga con el valor base
+        probabilidadCritico = probabilidadCriticoBase; //Inicializar la probabilidad de critico con el valor base
+        
+        ObtenerJugador();
+        if (jugador != null)
+        {
+            vidaJugador = jugador.GetComponent<VidaJugador>();
+        }
+
         animador = GetComponent<Animator>(); 
         posicionInicial = transform.position; // Guardar la posición inicial del arma
     }
 
     private void Update()
     {   
+        if (jugador == null) 
+        {
+            ObtenerJugador();
+        }
+
         if (!atacando && Time.time >= tiempoSiguienteAtaque)
         {
             DetectarEnemigos();
@@ -210,9 +237,72 @@ public class ArmasMelee : MonoBehaviour
             VidaEnemigo salud = enemigo.GetComponent<VidaEnemigo>();
             if (salud != null)
             {
-                salud.RecibirDaño(danio);
+                ProbabilidadCritico();
+                if (esCritico) 
+                {
+                    salud.RecibirDaño(danioCritico);
+                    Debug.Log("Golpe critico, daño: " + danioCritico);
+                }
+                else 
+                {
+                    salud.RecibirDaño(danio);
+                    Debug.Log("Golpe noemal, daño: " + danio);
+                }
+                esCritico = false;
                 atacando = false;
+                RobarVida();
             } else atacando = false; //False para evitar fallos, por si algun otra arma ha matado ya ese enemigo
         }
+    }
+
+    private void RobarVida() 
+    {
+        // Genera un número aleatorio entre 0 y 100
+        int probabilidad = Random.Range(0, 100);
+        // Si el número aleatorio es menor que la probabilidad de robar vida, se cura
+        if (probabilidad < probabilidadRobarVida)
+        {
+            if (vidaJugador != null)
+            {
+                vidaJugador.Curar(1); // Recupera 1 de vida
+            }
+        }    
+    }
+
+    private void ProbabilidadCritico() 
+    {
+        int probabilidad = Random.Range(0, 100);
+        if (probabilidad < probabilidadCritico)
+        {
+            danioCritico = danio * 2;
+            esCritico = true;
+        }   
+    }
+
+     private void ObtenerJugador()
+    {
+        // Intentar obtener el jugador con el tag 'Jugador'
+         jugador = GameObject.FindWithTag("Jugador");
+
+        if (jugador != null)
+        {
+            vidaJugador = jugador.GetComponent<VidaJugador>();
+        }
+    }
+
+    public void AumentarProbabilidadRobarVida (int cantidad) 
+    {
+        probabilidadRobarVida += cantidad;
+    }
+
+   public void AumentarDanioPorPocentaje(int porcentaje)
+    {
+        danio = danio + Mathf.RoundToInt(danioBase * (porcentaje / 100f)); //Aumenta el daño con porcentajes tieniendo en cuenta el daño base
+    }
+
+    public void DisminuirRecargaPorPocentaje(int porcentaje)
+    {
+        recarga -= recargaBase * (porcentaje / 100f); // //Disminuye la recarga con porcentajes tieniendo en cuenta la recarga base base
+        recarga = Mathf.Round(recarga * 100f) / 100f; // Redondea a 2 decimales para mayor precisión 
     }
 }
