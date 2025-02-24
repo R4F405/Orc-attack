@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -4387719117418088394}
   - component: {fileID: 652226166727489911}
   - component: {fileID: 6233747901344836441}
-  - component: {fileID: -1057641799432764596}
   m_Layer: 0
   m_Name: CuchilloPrefab
   m_TagString: Untagged
@@ -54,6 +53,9 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
   pincha: 1
 --- !u!114 &-4387719117418088394
 MonoBehaviour:
@@ -173,25 +175,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.26003647, y: 0.5213239}
   m_EdgeRadius: 0
---- !u!95 &-1057641799432764596
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798194697597539420}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9bb6495bf351a9c4caf2cfddd1acf1d6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

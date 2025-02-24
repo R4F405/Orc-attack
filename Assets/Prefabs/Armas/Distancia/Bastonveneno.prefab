@@ -107,3 +107,7 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
+  alcance: 2

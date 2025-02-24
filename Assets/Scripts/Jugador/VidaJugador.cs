@@ -25,6 +25,15 @@ public class VidaJugador : MonoBehaviour
         animator = GetComponent<Animator>(); //Se obtiene el componente 
     }
 
+    public void Curar(int cantidad)
+    {
+        saludActual += cantidad;
+        if (saludActual > saludMaxima)
+        {
+            saludActual = saludMaxima; // Evita que la salud supere el máximo
+        }
+    }
+
     public void RecibirDaño(int cantidad)
     {
         saludActual -= cantidad;

@@ -54,6 +54,9 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
   pincha: 0
 --- !u!114 &-6502486109326575079
 MonoBehaviour:
@@ -71,6 +74,9 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
   pincha: 0
 --- !u!212 &6494810252482711216
 SpriteRenderer:

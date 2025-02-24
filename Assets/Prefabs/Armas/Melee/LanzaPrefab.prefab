@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8994268253388839795}
   - component: {fileID: 5101891240077592627}
   - component: {fileID: 3304875262891698895}
-  - component: {fileID: 8763605809244827622}
   m_Layer: 0
   m_Name: LanzaPrefab
   m_TagString: Untagged
@@ -54,6 +53,9 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
   pincha: 1
 --- !u!114 &8994268253388839795
 MonoBehaviour:
@@ -173,25 +175,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.33478922, y: 1.2323538}
   m_EdgeRadius: 0
---- !u!95 &8763605809244827622
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3396083887977358244}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f9c8759a2309fb047a712e88fbc4e842, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

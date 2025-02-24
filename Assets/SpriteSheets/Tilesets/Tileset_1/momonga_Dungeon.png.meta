@@ -1625,6 +1625,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Caja
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 256
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b96f5f48d44f8f544a1f1d16e2c1068f
+      internalID: -197920552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1639,6 +1661,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      Caja: -197920552
       CorazonEntero: 1094262599
       CorazonMedio: -1172470129
       CorazonVacio: 1534093588

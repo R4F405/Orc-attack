@@ -52,6 +52,10 @@ MonoBehaviour:
   capaEnemigos:
     serializedVersion: 2
     m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
+  alcance: 2
 --- !u!212 &7573969922423596925
 SpriteRenderer:
   m_ObjectHideFlags: 0

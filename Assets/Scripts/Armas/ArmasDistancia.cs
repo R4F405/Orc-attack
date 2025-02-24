@@ -7,18 +7,19 @@ public class ArmasDistancia : MonoBehaviour
     public float velocidadBala = 10f; // Velocidad de la bala
     public float recarga = 1f; // Tiempo de recarga entre disparos
     public LayerMask capaEnemigos; // Capa de los enemigos
+    public LayerMask capaCajas; // Nueva capa para detectar cajas
     public float alcance = 2f;
 
     private Collider2D colliderJugador; // Referencia al collider del jugador
     private float tiempoSiguienteDisparo = 0f;
 
     private void Start()
-{
-    if (colliderJugador == null)
     {
-        colliderJugador = GameObject.FindWithTag("Jugador")?.GetComponent<Collider2D>();
+        if (colliderJugador == null)
+        {
+            colliderJugador = GameObject.FindWithTag("Jugador")?.GetComponent<Collider2D>();
+        }
     }
-}
 
     private void Update()
     {
@@ -30,16 +31,16 @@ public class ArmasDistancia : MonoBehaviour
 
     private void Disparar()
     {
-        Collider2D[] enemigos = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
-        if (enemigos.Length > 0)
+        Collider2D[] objetivos = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos | capaCajas);
+        if (objetivos.Length > 0)
         {
-            Transform objetivo = enemigos[0].transform;
+            Transform objetivo = objetivos[0].transform;
 
             GameObject bala = Instantiate(balaPrefab, ObtenerPuntoDisparo(), Quaternion.identity);
             Bala scriptBala = bala.GetComponent<Bala>();
             if (scriptBala != null)
             {
-                scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, colliderJugador, objetivo);
+                scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo);
             }
 
             tiempoSiguienteDisparo = Time.time + recarga;

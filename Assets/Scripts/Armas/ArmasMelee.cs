@@ -7,6 +7,7 @@ public class ArmasMelee : MonoBehaviour
     public float alcance = 2f; 
     public float recarga = 1f; 
     public LayerMask capaEnemigos; 
+    public LayerMask capaCajas; // Capa de las cajas
     public bool pincha; // Determina si el arma pincha o no
 
     private Animator animador;
@@ -21,11 +22,13 @@ public class ArmasMelee : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         if (!atacando && Time.time >= tiempoSiguienteAtaque)
         {
             DetectarEnemigos();
+            DetectarCajas(); // Llamamos a la nueva función para detectar cajas
         }
+
     }
 
     private void DetectarEnemigos()
@@ -62,6 +65,7 @@ public class ArmasMelee : MonoBehaviour
             }
             else
             {
+                atacando = false;
                 if (animador != null)
                 {
                     animador.SetTrigger("Atacar");
@@ -72,6 +76,32 @@ public class ArmasMelee : MonoBehaviour
             tiempoSiguienteAtaque = Time.time + recarga;
         }
     }
+
+    private void DetectarCajas()
+    {
+        Collider2D[] cajasEnRango = Physics2D.OverlapCircleAll(transform.position, alcance, capaCajas);
+
+        foreach (Collider2D caja in cajasEnRango)
+        {
+            RomperCaja cajaScript = caja.GetComponent<RomperCaja>();
+            if (cajaScript != null)
+            {
+                if (pincha)
+                {
+                    StartCoroutine(AtaquePinchadoCaja(caja.transform.position, cajaScript)); // Ahora pasa la caja correcta
+                }
+                else
+                {
+                    if (animador != null)
+                    {
+                        animador.SetTrigger("Atacar");
+                    }
+                    cajaScript.RecibirGolpe();
+                }
+            }
+        }
+    }
+
 
     private IEnumerator AtaquePinchado(Vector3 posicionEnemigo)
     {
@@ -121,6 +151,56 @@ public class ArmasMelee : MonoBehaviour
         }
     }
 
+    private IEnumerator AtaquePinchadoCaja(Vector3 posicionCaja, RomperCaja cajaScript)
+    {
+        GirarArmaHaciaEnemigo girarArma = GetComponent<GirarArmaHaciaEnemigo>();
+
+        if (girarArma != null)
+        {
+            girarArma.SetAtacando(true);
+        }
+
+        Vector3 posicionObjetivo = (posicionCaja - transform.position).normalized * alcance + transform.position;
+        float duracion = 0.15f; 
+        float tiempo = 0f;
+
+        PosicionarArmasJugador posicionador = FindAnyObjectByType<PosicionarArmasJugador>();
+        if (posicionador != null)
+        {
+            posicionInicial = posicionador.ObtenerPosicionActualDelArma(gameObject);
+        }
+
+        while (tiempo < duracion)
+        {
+            tiempo += Time.deltaTime;
+            transform.position = Vector3.Lerp(posicionInicial, posicionObjetivo, tiempo / duracion);
+            yield return null;
+        }
+
+        // **Aquí usamos la caja correcta**
+        if (cajaScript != null)
+        {
+            cajaScript.RecibirGolpe();
+        }
+
+        tiempo = 0f;
+        while (tiempo < duracion)
+        {
+            tiempo += Time.deltaTime;
+            transform.position = Vector3.Lerp(posicionObjetivo, posicionInicial, tiempo / duracion);
+            yield return null;
+        }
+
+        atacando = false;
+
+        if (girarArma != null)
+        {
+            girarArma.SetAtacando(false);
+        }
+    }
+
+
+
     private void AplicarDaño()
     {
         Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
@@ -132,7 +212,7 @@ public class ArmasMelee : MonoBehaviour
             {
                 salud.RecibirDaño(danio);
                 atacando = false;
-            }
+            } else atacando = false; //False para evitar fallos, por si algun otra arma ha matado ya ese enemigo
         }
     }
 }

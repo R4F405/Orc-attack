@@ -28,8 +28,8 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
             return;
         }
 
+       //GirarHaciaCaja();
         GirarHaciaEnemigo();
-
 
     }
 

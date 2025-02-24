@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bala : MonoBehaviour
 {
     private LayerMask capaEnemigos;
+    private LayerMask capaCajas;
     private int danio;
     private Transform objetivo;
     private Rigidbody2D rb;
@@ -19,11 +20,12 @@ public class Bala : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Balas"), LayerMask.NameToLayer("Balas"));
     }
 
-    public void ConfigurarBala(int nuevoDaño, float nuevaVelocidad, LayerMask nuevaCapaEnemigos, Collider2D colliderJugador, Transform enemigo)
+    public void ConfigurarBala(int nuevoDaño, float nuevaVelocidad, LayerMask nuevaCapaEnemigos, LayerMask nuevaCapaCajas, Collider2D colliderJugador, Transform enemigo)
     {
         danio = nuevoDaño;
         velocidad = nuevaVelocidad;
         capaEnemigos = nuevaCapaEnemigos;
+        capaCajas = nuevaCapaCajas;
         objetivo = enemigo;
 
         // Ignorar colisión con el jugador
@@ -46,7 +48,9 @@ public class Bala : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otro)
     {
-        if (((1 << otro.gameObject.layer) & capaEnemigos) != 0)
+        int capaOtro = 1 << otro.gameObject.layer;
+
+        if ((capaOtro & capaEnemigos) != 0)
         {
             VidaEnemigo salud = otro.GetComponent<VidaEnemigo>();
             if (salud != null)
@@ -54,6 +58,15 @@ public class Bala : MonoBehaviour
                 salud.RecibirDaño(danio);
             }
             Destroy(gameObject); // Destruir la bala al impactar con un enemigo
+        }
+        else if ((capaOtro & capaCajas) != 0)
+        {
+            RomperCaja caja = otro.GetComponent<RomperCaja>();
+            if (caja != null)
+            {
+                caja.RecibirGolpe();
+            }
+            Destroy(gameObject); // La bala también desaparece al impactar la caja
         }
     }
 }
