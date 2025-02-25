@@ -12,7 +12,7 @@ public class pruebaHabilidades : MonoBehaviour
    void Update()
    {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            gestorHabilidades.restarSegundosGenerarCajas = 5f;
+            gestorHabilidades.aumentarProbabilidadCritico = 20;
             gestorHabilidades.AplicarHabilidades();
         }
         

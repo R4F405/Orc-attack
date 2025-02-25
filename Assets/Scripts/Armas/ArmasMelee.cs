@@ -9,9 +9,7 @@ public class ArmasMelee : MonoBehaviour
     public float recargaBase = 0f; // Tiempo de recarga base entre ataques (Solo se modifica desde el inspector)
     [HideInInspector]public float recarga = 0f; //Tiempo de recarga entre ataques
 
-    public int probabilidadCriticoBase = 0; //Probabilidad de critico base (Solo se modifica desde el inspector)
-    [HideInInspector] public int probabilidadCritico = 0; //probabilidad de critico
-
+    public int probabilidadCritico = 0; //Probabilidad de critico 
     public float alcance = 0f; //Alcance del arma
     public bool pincha; // Determina si el arma pincha o no
     public int probabilidadRobarVida = 0; //probabilidad en %
@@ -31,7 +29,6 @@ public class ArmasMelee : MonoBehaviour
     {
         danio = danioBase; // Inicializar el daño con el valor base
         recarga = recargaBase; // Inicializar la recarga con el valor base
-        probabilidadCritico = probabilidadCriticoBase; //Inicializar la probabilidad de critico con el valor base
         
         ObtenerJugador();
         if (jugador != null)
@@ -226,8 +223,6 @@ public class ArmasMelee : MonoBehaviour
         }
     }
 
-
-
     private void AplicarDaño()
     {
         Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
@@ -241,12 +236,12 @@ public class ArmasMelee : MonoBehaviour
                 if (esCritico) 
                 {
                     salud.RecibirDaño(danioCritico);
-                    Debug.Log("Golpe critico, daño: " + danioCritico);
+                    Debug.Log("Golpe critico melee, daño: " + danioCritico);
                 }
                 else 
                 {
                     salud.RecibirDaño(danio);
-                    Debug.Log("Golpe noemal, daño: " + danio);
+                    Debug.Log("Golpe noemal melee, daño: " + danio);
                 }
                 esCritico = false;
                 atacando = false;
@@ -272,6 +267,7 @@ public class ArmasMelee : MonoBehaviour
     private void ProbabilidadCritico() 
     {
         int probabilidad = Random.Range(0, 100);
+         Debug.Log("probabilidad de critico melee" + probabilidad + " " + probabilidadCritico);
         if (probabilidad < probabilidadCritico)
         {
             danioCritico = danio * 2;
@@ -292,10 +288,10 @@ public class ArmasMelee : MonoBehaviour
 
     public void AumentarProbabilidadRobarVida (int cantidad) 
     {
-        probabilidadRobarVida += cantidad;
+        probabilidadRobarVida += cantidad; //Aumenta la probabilidad de robar vida
     }
 
-   public void AumentarDanioPorPocentaje(int porcentaje)
+    public void AumentarDanioPorPocentaje(int porcentaje)
     {
         danio = danio + Mathf.RoundToInt(danioBase * (porcentaje / 100f)); //Aumenta el daño con porcentajes tieniendo en cuenta el daño base
     }
@@ -304,5 +300,10 @@ public class ArmasMelee : MonoBehaviour
     {
         recarga -= recargaBase * (porcentaje / 100f); // //Disminuye la recarga con porcentajes tieniendo en cuenta la recarga base base
         recarga = Mathf.Round(recarga * 100f) / 100f; // Redondea a 2 decimales para mayor precisión 
+    }
+
+    public void AumentarProbabilidadCritico(int cantidad)
+    {
+       probabilidadCritico = probabilidadCritico + cantidad;     
     }
 }

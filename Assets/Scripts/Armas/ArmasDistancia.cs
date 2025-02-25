@@ -7,11 +7,12 @@ public class ArmasDistancia : MonoBehaviour
     public int danioBase = 0; // Daño base de la bala (Solo se modifica desde el inspector)
     [HideInInspector] public int danio = 0; // Daño de la bala
 
-    public float velocidadBala = 0f; // Velocidad de la bala
 
     public float recargaBase = 0f; // Tiempo de recarga base entre disparos (Solo se modifica desde el inspector)
     [HideInInspector]public float recarga = 0f; // Tiempo de recarga entre disparos
 
+    public int probabilidadCritico = 0; //Probabilidad de critico 
+    public float velocidadBala = 0f; // Velocidad de la bala
     public float alcance = 0f;
     public int probabilidadRobarVida = 0; // Probabilidad de robar 1 de vida tras golpe en %
     public LayerMask capaEnemigos; // Capa de los enemigos
@@ -19,6 +20,8 @@ public class ArmasDistancia : MonoBehaviour
 
     private Collider2D colliderJugador; // Referencia al collider del jugador
     private float tiempoSiguienteDisparo = 0f;
+    private bool esCritico = false;
+    private int danioCritico;
 
     private void Start()
     {
@@ -50,7 +53,18 @@ public class ArmasDistancia : MonoBehaviour
             Bala scriptBala = bala.GetComponent<Bala>();
             if (scriptBala != null)
             {
-                scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
+                ProbabilidadCritico();
+                if (esCritico) 
+                {
+                    Debug.Log("Golpe critico distancia, daño: " + danioCritico);
+                    scriptBala.ConfigurarBala(danioCritico, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
+                }
+                else 
+                {
+                    scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
+                    Debug.Log("Golpe normal distancia, daño: " + danio);
+                }
+                esCritico = false;
             }
 
             tiempoSiguienteDisparo = Time.time + recarga;
@@ -60,6 +74,17 @@ public class ArmasDistancia : MonoBehaviour
     private Vector2 ObtenerPuntoDisparo()
     {
         return new Vector2(transform.position.x, transform.position.y + (GetComponent<SpriteRenderer>().bounds.size.y / 2));
+    }
+
+    private void ProbabilidadCritico() 
+    {
+        int probabilidad = Random.Range(0, 100);
+         Debug.Log("probabilidad de critico distancia" + probabilidad + " " + probabilidadCritico);
+        if (probabilidad < probabilidadCritico)
+        {
+            danioCritico = danio * 2;
+            esCritico = true;
+        }   
     }
 
     public void AumentarProbabilidadRobarVida (int cantidad) 
@@ -76,5 +101,10 @@ public class ArmasDistancia : MonoBehaviour
     {
         recarga -= recargaBase * (porcentaje / 100f); // //Disminuye la recarga con porcentajes tieniendo en cuenta la recarga base base
         recarga = Mathf.Round(recarga * 100f) / 100f; // Redondea a 2 decimales para mayor precisión 
+    }
+
+     public void AumentarProbabilidadCritico(int cantidad)
+    {
+       probabilidadCritico = probabilidadCritico + cantidad;     
     }
 }

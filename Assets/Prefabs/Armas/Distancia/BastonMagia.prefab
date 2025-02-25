@@ -103,9 +103,10 @@ MonoBehaviour:
   balaPrefab: {fileID: 9193477732517052933, guid: 84dfac5b0253e23409d5e2cf561efedd, type: 3}
   danioBase: 100
   danio: 0
-  velocidadBala: 5
   recargaBase: 1
   recarga: 1
+  probabilidadCritico: 50
+  velocidadBala: 5
   alcance: 2
   probabilidadRobarVida: 5
   capaEnemigos:

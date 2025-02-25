@@ -52,8 +52,7 @@ MonoBehaviour:
   danio: 0
   recargaBase: 1
   recarga: 1
-  probabilidadCriticoBase: 50
-  probabilidadCritico: 0
+  probabilidadCritico: 50
   alcance: 1
   pincha: 0
   probabilidadRobarVida: 5

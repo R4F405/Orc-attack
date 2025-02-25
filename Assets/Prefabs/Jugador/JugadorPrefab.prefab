@@ -95,9 +95,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
   - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
+  - {fileID: 9107510053700692656, guid: fe31629b042b3d94fa48b2efe781974b, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 1
+  numeroDeArmas: 2
 --- !u!114 &5210412316129445707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +118,9 @@ MonoBehaviour:
   aumentarDanioPorPocentajeMelee: 0
   aumentarDanioPorPocentajeDistancia: 0
   disminuirRecargaPorPocentaje: 0
+  aumentarProbabilidadCritico: 0
+  aumentarDanioEstructuras: 0
+  "aumentarDanioCompa\xF1ero": 0
   restarSegundosGenerarCajas: 0
   multiplicadorCalaveras: 0
 --- !u!114 &-639148711076508535

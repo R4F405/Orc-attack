@@ -4,11 +4,14 @@ public class GestorHabilidades : MonoBehaviour
 {
     public int aumentarVidaMaxima = 0; //Se debe ir añadiendo la cantidad (int) de vida que quieres añadir cada vez
     public float restarSegundosRecuperar1Vida = 0f; //Se debe añadir la cantidad segundos (float) que quieres restarle al tiempo de recuperar vida {Se resta al ultimo valor, no al valor inicial}
-    public int aumentarProbabilidadRobarVida = 0; //Se añade directamente 
+    public int aumentarProbabilidadRobarVida = 0; //Se añade directamente el numero para aumentar la probabilidad 
     public int aumentarDanioPorPorcentaje = 0; //Se añade directamente el procentaje (int) que quieres aumentar del valor inicial
     public int aumentarDanioPorPocentajeMelee = 0; //Se añade directamente el procentaje (int) que quieres aumentar del valor inicial
     public int aumentarDanioPorPocentajeDistancia = 0; //Se añade directamente el procentaje (int) que quieres aumentar del valor inicial
     public int disminuirRecargaPorPocentaje = 0; //Se añade directamente el procentaje (int) que quieres disminuir del valor inicial
+    public int aumentarProbabilidadCritico = 0; //Se añade directamente el numero para aumentar la probabilidad 
+    public int aumentarDanioEstructuras = 0; // {{{{{{{Falta por crear}}}}}}}
+    public int aumentarDanioCompañero = 0; // {{{{{{{Falta por crear}}}}}}}
 
 
     public float restarSegundosGenerarCajas = 0f; //Se añade los segundos que se quiera restar del tiempo de generacion de cajas {Se resta al ultimo valor, no al valor inicial}
@@ -42,6 +45,8 @@ public class GestorHabilidades : MonoBehaviour
         FuncionAumentarDanioPorPocentajeMelee();
         FuncionAumentarDanioPorPocentajeDistancia();
         FuncionDisminuirRecargaPorPocentaje();
+        FuncionAumentarProbabilidadCritico();
+
 
 
         FuncionRestarSegundosGenerarCajas();
@@ -55,7 +60,7 @@ public class GestorHabilidades : MonoBehaviour
         aumentarDanioPorPocentajeMelee = 0;
         aumentarDanioPorPocentajeDistancia = 0;
         disminuirRecargaPorPocentaje = 0;
-
+        aumentarProbabilidadCritico = 0;
 
 
 
@@ -86,18 +91,24 @@ public class GestorHabilidades : MonoBehaviour
 
     private void FuncionAumentarProbabilidadRobarVida() 
     {
-        if (armasDistancia != null && armasMelee != null) 
+        if (armasDistancia != null ) 
         {
             armasDistancia.AumentarProbabilidadRobarVida(aumentarProbabilidadRobarVida);
-            armasMelee.AumentarProbabilidadRobarVida(aumentarProbabilidadRobarVida);
         } 
+        if (armasMelee != null)
+        {
+            armasMelee.AumentarProbabilidadRobarVida(aumentarProbabilidadRobarVida);
+        }
     }
 
     private void FuncionAumentarDanioPorPorcentaje() 
     {
-        if (armasDistancia != null && armasMelee != null) 
+        if (armasDistancia != null ) 
         {
             armasDistancia.AumentarDanioPorPocentaje(aumentarDanioPorPorcentaje);
+        }
+        if (armasMelee != null) 
+        {
             armasMelee.AumentarDanioPorPocentaje(aumentarDanioPorPorcentaje);
         }
     }
@@ -118,16 +129,32 @@ public class GestorHabilidades : MonoBehaviour
         }
     }
 
-     private void FuncionDisminuirRecargaPorPocentaje() 
+    private void FuncionDisminuirRecargaPorPocentaje() 
     {
-        if (armasDistancia != null && armasMelee != null) 
+        if (armasDistancia != null ) 
         {
             armasDistancia.DisminuirRecargaPorPocentaje(disminuirRecargaPorPocentaje);
+        }
+        if (armasMelee != null)
+        {
             armasMelee.DisminuirRecargaPorPocentaje(disminuirRecargaPorPocentaje);
         }
     }
 
+    private void FuncionAumentarProbabilidadCritico() 
+    {
+        if ( armasMelee != null) 
+        {
+            armasMelee.AumentarProbabilidadCritico(aumentarProbabilidadCritico);
 
+        } 
+        if (armasDistancia != null) 
+        {
+            armasDistancia.AumentarProbabilidadCritico(aumentarProbabilidadCritico);
+        }
+    }
+
+    
 
 
 
