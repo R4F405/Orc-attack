@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Jugador
+  - Armas
   layers:
   - Default
   - TransparentFX

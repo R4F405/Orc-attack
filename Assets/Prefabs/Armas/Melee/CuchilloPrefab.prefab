@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6233747901344836441}
   m_Layer: 0
   m_Name: CuchilloPrefab
-  m_TagString: Untagged
+  m_TagString: Armas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

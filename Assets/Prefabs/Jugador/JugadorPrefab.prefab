@@ -93,11 +93,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
-  - {fileID: 9107510053700692656, guid: fe31629b042b3d94fa48b2efe781974b, type: 3}
+  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
   distanciaHorizontal: 1
   distanciaVertical: 1
-  numeroDeArmas: 2
+  numeroDeArmas: 1
 --- !u!114 &5210412316129445707
 MonoBehaviour:
   m_ObjectHideFlags: 0

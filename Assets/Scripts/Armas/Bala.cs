@@ -91,7 +91,6 @@ public class Bala : MonoBehaviour
             if (vidaJugador != null)
             {
                 vidaJugador.Curar(1); // Recupera 1 de vida
-                Debug.Log("Vida Robada");
             }
         }    
     }

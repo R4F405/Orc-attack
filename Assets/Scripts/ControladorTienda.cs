@@ -5,10 +5,50 @@ using TMPro;
 
 public class ControladorTienda : MonoBehaviour
 {
+    private InventarioJugador inventarioJugador;
+    private PosicionarArmasJugador posicionadorArmas;
+    private int monedasJugador = 0;
 
     void Start()
     {
+        BuscarInventarioJugador();
+        BuscarPosicionadorArmas();
+        ActualizarUI();
         GenerarArmas();
+    }
+
+    void Update()
+    {
+        if (inventarioJugador == null) 
+        {
+            BuscarInventarioJugador();
+        }
+        
+        if (posicionadorArmas == null) 
+        {
+            BuscarPosicionadorArmas();
+        }
+
+        monedasJugador = inventarioJugador.ObtenerCantidadCalaveras();
+        ActualizarUI();
+    }
+
+    void BuscarInventarioJugador()
+    {
+        GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
+        if (jugador != null)
+        {
+            inventarioJugador = jugador.GetComponent<InventarioJugador>();
+        }
+    }
+
+    void BuscarPosicionadorArmas()
+    {
+        GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
+        if (jugador != null)
+        {
+            posicionadorArmas = jugador.GetComponent<PosicionarArmasJugador>();
+        }
     }
 
    [System.Serializable]
@@ -38,11 +78,9 @@ public class ControladorTienda : MonoBehaviour
     public TextMeshProUGUI[] roboSaludArmas;
 
     private OpcionArma[] opcionesActuales;
-    private int monedasJugador = 200; // Referencia a las monedas del jugador (debes enlazarla con el sistema real)
 
     void GenerarArmas()
     {
-        monedasJugadorTexto.text = monedasJugador.ToString();
         opcionesActuales = new OpcionArma[botonesArmas.Length];
 
         for (int i = 0; i < botonesArmas.Length; i++)
@@ -68,13 +106,23 @@ public class ControladorTienda : MonoBehaviour
     {
         OpcionArma armaSeleccionada = opcionesActuales[indice];
 
-        if (monedasJugador >= armaSeleccionada.precio)
+        if (inventarioJugador.ObtenerCantidadCalaveras() >= armaSeleccionada.precio)
         {
-            monedasJugador -= armaSeleccionada.precio;
-            // Aquí debes asignar el arma al jugador según tu sistema
+            inventarioJugador.RestarCalaveras(armaSeleccionada.precio);
+            ActualizarUI();
             Debug.Log("Compraste: " + armaSeleccionada.nombre);
             botonesArmas[indice].gameObject.SetActive(false);
-            monedasJugadorTexto.text = monedasJugador.ToString();
+
+            // Llamar al script que maneja la posición de las armas y agregarla al inventario del jugador
+            GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
+            if (jugador != null)
+            {
+                PosicionarArmasJugador posicionador = jugador.GetComponent<PosicionarArmasJugador>();
+                if (posicionador != null)
+                {
+                    posicionador.AgregarArma(armaSeleccionada.prefabArma);
+                }
+            }
         }
         else
         {
@@ -82,13 +130,32 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
-    public void RenovarTienda()
+    void ActualizarUI()
     {
-        if (monedasJugador >= 5)
+        if (inventarioJugador != null && monedasJugadorTexto != null)
         {
+            monedasJugadorTexto.text = inventarioJugador.ObtenerCantidadCalaveras().ToString();
+        }
+    }
+
+    public void RenovarTiendaConCosto()
+    {
+        if (inventarioJugador.ObtenerCantidadCalaveras() >= 5) //De momento el precio de renovar siempre es 5
+        {
+            inventarioJugador.RestarCalaveras(5); // Restar calaveras
+            ActualizarUI();
             botonesArmas[0].gameObject.SetActive(true);
             botonesArmas[1].gameObject.SetActive(true);
             GenerarArmas();
         }
     }
+
+    public void RenovarTiendaSinCosto()
+    {
+        ActualizarUI();
+        botonesArmas[0].gameObject.SetActive(true);
+        botonesArmas[1].gameObject.SetActive(true);
+        GenerarArmas();
+    }
+    
 }

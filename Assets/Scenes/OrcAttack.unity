@@ -791,8 +791,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1773990538}
-        m_TargetAssemblyTypeName: Tienda, Assembly-CSharp
-        m_MethodName: RenovarTienda
+        m_TargetAssemblyTypeName: ControladorTienda, Assembly-CSharp
+        m_MethodName: RenovarTiendaConCosto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1414,7 +1414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &399265346
 Transform:
   m_ObjectHideFlags: 0
@@ -1797,7 +1797,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1773990538}
         m_TargetAssemblyTypeName: ControladorTienda, Assembly-CSharp
-        m_MethodName: RenovarTienda
+        m_MethodName: RenovarTiendaSinCosto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2973,7 +2973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nivelActual: 1
   tiempoRestante: 20
-  panelTienda: {fileID: 399265345}
+  panelTienda: {fileID: 1021734394}
   textoNivel: {fileID: 823000849}
   textoTiempo: {fileID: 1244871670}
   GeneradorOrcos: {fileID: 845428380}
@@ -5659,7 +5659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1336049787
 Transform:
   m_ObjectHideFlags: 0
@@ -14603,8 +14603,8 @@ Tilemap:
   - first: {x: 0, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 9
-      m_TileSpriteIndex: 10
+      m_TileIndex: 7
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -20916,11 +20916,11 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: d84e930df142d4540ac4015e28fb36c2, type: 2}
   - m_RefCount: 49
     m_Data: {fileID: 11400000, guid: c7eca2fe034647844afbc7c6e8283136, type: 2}
-  - m_RefCount: 65
+  - m_RefCount: 66
     m_Data: {fileID: 11400000, guid: 1773e4af0fb36a64ea52e059fc5a0758, type: 2}
   - m_RefCount: 56
     m_Data: {fileID: 11400000, guid: e6042f3b11cc0aa4f8830a0f9fb086fd, type: 2}
-  - m_RefCount: 995
+  - m_RefCount: 994
     m_Data: {fileID: 11400000, guid: a64e72c2419db974481eca62f9ae6e5b, type: 2}
   - m_RefCount: 42
     m_Data: {fileID: 11400000, guid: 8896ee454547682428909deb2b9875e4, type: 2}
@@ -20939,13 +20939,13 @@ Tilemap:
     m_Data: {fileID: 3979137799469880484, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
   - m_RefCount: 49
     m_Data: {fileID: 4547986755193944361, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
-  - m_RefCount: 65
+  - m_RefCount: 66
     m_Data: {fileID: 4998937224500876124, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
   - m_RefCount: 56
     m_Data: {fileID: -6765549610841505982, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
   - m_RefCount: 42
     m_Data: {fileID: 3818660318709977233, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
-  - m_RefCount: 995
+  - m_RefCount: 994
     m_Data: {fileID: -4352730477567032214, guid: 31336922fa3d0ce4a84ca6c4789544db, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1296

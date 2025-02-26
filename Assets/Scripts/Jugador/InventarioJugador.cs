@@ -27,7 +27,7 @@ public class InventarioJugador : MonoBehaviour
 
     public void AgregarCalavera(int cantidad)
     {
-        calaverasRecolectadas = calaverasRecolectadas +  (cantidad * multiplicadorCalaveras);
+        calaverasRecolectadas += (cantidad * multiplicadorCalaveras);
     }
 
     public int ObtenerCantidadCalaveras()
@@ -38,5 +38,10 @@ public class InventarioJugador : MonoBehaviour
     public void MultiplicadorCalaveras (int multiplicador) 
     {
         multiplicadorCalaveras = 1 * multiplicador;
+    }
+
+    public void RestarCalaveras(int cantidad) 
+    {
+        calaverasRecolectadas -= cantidad;
     }
 }

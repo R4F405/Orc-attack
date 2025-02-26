@@ -56,13 +56,11 @@ public class ArmasDistancia : MonoBehaviour
                 ProbabilidadCritico();
                 if (esCritico) 
                 {
-                    Debug.Log("Golpe critico distancia, daño: " + danioCritico);
                     scriptBala.ConfigurarBala(danioCritico, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
                 }
                 else 
                 {
                     scriptBala.ConfigurarBala(danio, velocidadBala, capaEnemigos, capaCajas, colliderJugador, objetivo,probabilidadRobarVida);
-                    Debug.Log("Golpe normal distancia, daño: " + danio);
                 }
                 esCritico = false;
             }
@@ -79,7 +77,6 @@ public class ArmasDistancia : MonoBehaviour
     private void ProbabilidadCritico() 
     {
         int probabilidad = Random.Range(0, 100);
-         Debug.Log("probabilidad de critico distancia" + probabilidad + " " + probabilidadCritico);
         if (probabilidad < probabilidadCritico)
         {
             danioCritico = danio * 2;

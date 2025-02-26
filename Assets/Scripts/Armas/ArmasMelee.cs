@@ -236,12 +236,10 @@ public class ArmasMelee : MonoBehaviour
                 if (esCritico) 
                 {
                     salud.RecibirDaño(danioCritico);
-                    Debug.Log("Golpe critico melee, daño: " + danioCritico);
                 }
                 else 
                 {
                     salud.RecibirDaño(danio);
-                    Debug.Log("Golpe noemal melee, daño: " + danio);
                 }
                 esCritico = false;
                 atacando = false;
@@ -267,7 +265,6 @@ public class ArmasMelee : MonoBehaviour
     private void ProbabilidadCritico() 
     {
         int probabilidad = Random.Range(0, 100);
-         Debug.Log("probabilidad de critico melee" + probabilidad + " " + probabilidadCritico);
         if (probabilidad < probabilidadCritico)
         {
             danioCritico = danio * 2;

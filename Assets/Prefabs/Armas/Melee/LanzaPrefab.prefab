@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3304875262891698895}
   m_Layer: 0
   m_Name: LanzaPrefab
-  m_TagString: Untagged
+  m_TagString: Armas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -47,7 +47,7 @@ public class ControladorNiveles : MonoBehaviour
         panelTienda.SetActive(true); // Mostrar tienda
 
         GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
-        jugador.transform.position = Vector3.zero; // Coloca al jugador en (0,0,0)
+        jugador.transform.position = Vector2.zero; // Coloca al jugador en (0,0,0)
     }
 
     public void IniciarSiguienteNivel()

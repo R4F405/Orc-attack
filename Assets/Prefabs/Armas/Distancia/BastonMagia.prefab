@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5804872953550455634}
   m_Layer: 0
   m_Name: BastonMagia
-  m_TagString: Untagged
+  m_TagString: Armas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

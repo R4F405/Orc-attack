@@ -5,7 +5,7 @@ public class PosicionarArmasJugador : MonoBehaviour
     public GameObject[] prefabricadosDeArmas; // Array de prefabricados de armas
     public float distanciaHorizontal = 1.5f; // Distancia horizontal entre las armas
     public float distanciaVertical = 1.5f; // Distancia vertical entre las armas
-    public int numeroDeArmas = 5; // Número total de armas que el jugador tiene
+    public int numeroDeArmas = 1; // Número total de armas que el jugador tiene
 
     private GameObject[] armasInstanciadas;  // Array de instancias de las armas
 
@@ -13,12 +13,13 @@ public class PosicionarArmasJugador : MonoBehaviour
     {
         // Inicializar el array de armas instanciadas
         armasInstanciadas = new GameObject[numeroDeArmas];
+        Debug.Log(armasInstanciadas.Length);
 
         // Crear las armas alrededor del jugador
         PosicionarArmas();
     }
 
-    void PosicionarArmas()
+    public void PosicionarArmas()
     {
         // Si no hay prefabricados de armas, no hacer nada
         if (prefabricadosDeArmas.Length == 0) return;
@@ -80,50 +81,45 @@ public class PosicionarArmasJugador : MonoBehaviour
 
     private void Update()
     {
-        // Actualizar la posición de las armas para que sigan al jugador
-        for (int i = 0; i < numeroDeArmas; i++)
+        if (armasInstanciadas == null || armasInstanciadas.Length == 0) return;
+
+        for (int i = 0; i < armasInstanciadas.Length; i++)
         {
             if (armasInstanciadas[i] != null)
             {
-                // Ajuste dinámico de las posiciones, dependiendo de las armas
-                if (numeroDeArmas == 1)
+                // Ajuste dinámico de las posiciones dependiendo de la cantidad de armas
+                switch (numeroDeArmas)
                 {
-                    // Una sola arma, a la izquierda y un poco más arriba de la altura del jugador
-                    if (i == 0) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
-                }
-                else if (numeroDeArmas == 2)
-                {
-                    // Dos armas a los lados a la altura del jugador
-                    if (i == 0) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
-                    if (i == 1) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0);
-                }
-                else if (numeroDeArmas == 3)
-                {
-                    // Tres armas: dos a los lados y una encima
-                    if (i == 0) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
-                    if (i == 1) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0);
-                    if (i == 2) armasInstanciadas[i].transform.position = transform.position + new Vector3(0, distanciaVertical, 0);
-                }
-                else if (numeroDeArmas == 4)
-                {
-                    // Cuatro armas: dos a cada lado
-                    if (i == 0) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0) + new Vector3(0, -distanciaVertical, 0);
-                    if (i == 1) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0) + new Vector3(0, -distanciaVertical, 0);
-                    if (i == 2) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0) + new Vector3(0, distanciaVertical, 0);
-                    if (i == 3) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0) + new Vector3(0, distanciaVertical, 0);
-                }
-                else if (numeroDeArmas == 5)
-                {
-                    // Cinco armas: dos a cada lado y una encima
-                    if (i == 0) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0) + new Vector3(0, -distanciaVertical, 0);
-                    if (i == 1) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0) + new Vector3(0, -distanciaVertical, 0);
-                    if (i == 2) armasInstanciadas[i].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0) + new Vector3(0, distanciaVertical, 0);
-                    if (i == 3) armasInstanciadas[i].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0) + new Vector3(0, distanciaVertical, 0);
-                    if (i == 4) armasInstanciadas[i].transform.position = transform.position + new Vector3(0, 1.5f, 0);
+                    case 1:
+                        armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
+                        break;
+                    case 2:
+                        armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
+                        armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0);
+                        break;
+                    case 3:
+                        armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
+                        armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0);
+                        armasInstanciadas[2].transform.position = transform.position + new Vector3(0, distanciaVertical, 0);
+                        break;
+                    case 4:
+                        armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, -distanciaVertical, 0);
+                        armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, -distanciaVertical, 0);
+                        armasInstanciadas[2].transform.position = transform.position + new Vector3(-distanciaHorizontal, distanciaVertical, 0);
+                        armasInstanciadas[3].transform.position = transform.position + new Vector3(distanciaHorizontal, distanciaVertical, 0);
+                        break;
+                    case 5:
+                        armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, -distanciaVertical, 0);
+                        armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, -distanciaVertical, 0);
+                        armasInstanciadas[2].transform.position = transform.position + new Vector3(-distanciaHorizontal, distanciaVertical, 0);
+                        armasInstanciadas[3].transform.position = transform.position + new Vector3(distanciaHorizontal, distanciaVertical, 0);
+                        armasInstanciadas[4].transform.position = transform.position + new Vector3(0, distanciaVertical, 0);
+                        break;
                 }
             }
         }
     }
+
 
     public Vector3 ObtenerPosicionActualDelArma(GameObject arma)
     {
@@ -135,6 +131,40 @@ public class PosicionarArmasJugador : MonoBehaviour
             }
         }
         return arma.transform.position; // En caso de error, usa su posición actual
+    }
+
+    public void AgregarArma(GameObject nuevaArma)
+    {
+        // Eliminar todas las armas previas en la capa "Armas"
+        GameObject[] armasEnCapa = GameObject.FindGameObjectsWithTag("Armas");
+        foreach (var arma in armasEnCapa)
+        {
+            Destroy(arma);
+        }
+
+        // Incrementar el número de armas
+        numeroDeArmas++;
+
+        // Crear un nuevo array de prefabricados con el tamaño actualizado
+        GameObject[] nuevoArrayPrefabricados = new GameObject[numeroDeArmas];
+        
+        // Copiar las armas existentes al nuevo array de prefabricados
+        for (int i = 0; i < prefabricadosDeArmas.Length; i++)
+        {
+            nuevoArrayPrefabricados[i] = prefabricadosDeArmas[i];
+        }
+
+        // Añadir la nueva arma al final del array de prefabricados
+        nuevoArrayPrefabricados[numeroDeArmas - 1] = nuevaArma;
+
+        // Actualizar el array de prefabricados
+        prefabricadosDeArmas = nuevoArrayPrefabricados;
+
+        // Crear un nuevo array para las armas instanciadas con el tamaño actualizado
+        armasInstanciadas = new GameObject[numeroDeArmas];
+
+        // Reposicionar las armas
+        PosicionarArmas();
     }
 
 }
