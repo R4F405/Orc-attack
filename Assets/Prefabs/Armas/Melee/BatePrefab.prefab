@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danioBase: 100
+  danioBase: 6
   danio: 0
-  recargaBase: 1
+  recargaBase: 1.4
   recarga: 1
-  probabilidadCritico: 50
-  alcance: 1
+  probabilidadCritico: 10
+  alcance: 1.2
   pincha: 0
   probabilidadRobarVida: 5
   capaEnemigos:

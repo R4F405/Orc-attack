@@ -12,8 +12,6 @@ public class GestorHabilidades : MonoBehaviour
     public int aumentarProbabilidadCritico = 0; //Se añade directamente el numero para aumentar la probabilidad 
     public int aumentarDanioEstructuras = 0; // {{{{{{{Falta por crear}}}}}}}
     public int aumentarDanioCompañero = 0; // {{{{{{{Falta por crear}}}}}}}
-
-
     public float restarSegundosGenerarCajas = 0f; //Se añade los segundos que se quiera restar del tiempo de generacion de cajas {Se resta al ultimo valor, no al valor inicial}
     public int multiplicadorCalaveras = 0; // Se añade 2 o 3 segun el multiplicador que se quiera
 
@@ -46,9 +44,6 @@ public class GestorHabilidades : MonoBehaviour
         FuncionAumentarDanioPorPocentajeDistancia();
         FuncionDisminuirRecargaPorPocentaje();
         FuncionAumentarProbabilidadCritico();
-
-
-
         FuncionRestarSegundosGenerarCajas();
         FuncionMultiplicadorCalaveras();
 
@@ -61,13 +56,6 @@ public class GestorHabilidades : MonoBehaviour
         aumentarDanioPorPocentajeDistancia = 0;
         disminuirRecargaPorPocentaje = 0;
         aumentarProbabilidadCritico = 0;
-
-
-
-
-
-
-        
         restarSegundosGenerarCajas = 0f;
         multiplicadorCalaveras = 0;
     }
