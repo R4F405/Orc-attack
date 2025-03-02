@@ -100,7 +100,7 @@ public class PosicionarArmasJugador : MonoBehaviour
                     case 3:
                         armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, 0, 0);
                         armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, 0, 0);
-                        armasInstanciadas[2].transform.position = transform.position + new Vector3(0, distanciaVertical, 0);
+                        armasInstanciadas[2].transform.position = transform.position + new Vector3(0, distanciaVertical * 2f, 0);
                         break;
                     case 4:
                         armasInstanciadas[0].transform.position = transform.position + new Vector3(-distanciaHorizontal, -distanciaVertical, 0);
@@ -113,7 +113,7 @@ public class PosicionarArmasJugador : MonoBehaviour
                         armasInstanciadas[1].transform.position = transform.position + new Vector3(distanciaHorizontal, -distanciaVertical, 0);
                         armasInstanciadas[2].transform.position = transform.position + new Vector3(-distanciaHorizontal, distanciaVertical, 0);
                         armasInstanciadas[3].transform.position = transform.position + new Vector3(distanciaHorizontal, distanciaVertical, 0);
-                        armasInstanciadas[4].transform.position = transform.position + new Vector3(0, distanciaVertical, 0);
+                        armasInstanciadas[4].transform.position = transform.position + new Vector3(0, distanciaVertical * 2f, 0);
                         break;
                 }
             }
@@ -165,6 +165,11 @@ public class PosicionarArmasJugador : MonoBehaviour
 
         // Reposicionar las armas
         PosicionarArmas();
+    }
+
+    public GameObject[] ObtenerArmasActuales()
+    {
+        return armasInstanciadas;
     }
 
 }

@@ -18,7 +18,7 @@ public class GirarArmaHaciaEnemigo : MonoBehaviour
         animador = GetComponent<Animator>(); // Obtener el Animator del arma
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
          if (atacando) return; // No girar si está atacando
          

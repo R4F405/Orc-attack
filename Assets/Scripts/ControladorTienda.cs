@@ -15,6 +15,7 @@ public class ControladorTienda : MonoBehaviour
         BuscarPosicionadorArmas();
         ActualizarUI();
         GenerarArmas();
+        UpdateArmasJugadorUI();
     }
 
     void Update()
@@ -31,6 +32,7 @@ public class ControladorTienda : MonoBehaviour
 
         monedasJugador = inventarioJugador.ObtenerCantidadCalaveras();
         ActualizarUI();
+        UpdateArmasJugadorUI();  // Mantener actualizada la UI de armas del jugador
     }
 
     void BuscarInventarioJugador()
@@ -76,6 +78,8 @@ public class ControladorTienda : MonoBehaviour
     public TextMeshProUGUI[] criticosArmas;
     public TextMeshProUGUI[] recargasArmas;
     public TextMeshProUGUI[] roboSaludArmas;
+    public Button[] botonesArmasJugador;  // Los 5 botones para mostrar las armas del jugador
+    public Image[] imagenesArmasJugador;  // Las imágenes dentro de cada botón
 
     private OpcionArma[] opcionesActuales;
 
@@ -129,6 +133,34 @@ public class ControladorTienda : MonoBehaviour
             Debug.Log("No tienes suficientes monedas");
         }
     }
+
+    void UpdateArmasJugadorUI()
+    {
+        if (posicionadorArmas == null) return;
+
+        // Obtener las armas actuales del jugador
+        GameObject[] armasActuales = posicionadorArmas.ObtenerArmasActuales();
+
+        for (int i = 0; i < botonesArmasJugador.Length; i++)
+        {
+            if (i < armasActuales.Length && armasActuales[i] != null)
+            {
+                // Obtener el SpriteRenderer del arma
+                SpriteRenderer spriteRenderer = armasActuales[i].GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    imagenesArmasJugador[i].sprite = spriteRenderer.sprite;
+                    botonesArmasJugador[i].gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                // Si no hay un arma en esta posición, desactivar el botón
+                botonesArmasJugador[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     void ActualizarUI()
     {
