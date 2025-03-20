@@ -37,6 +37,9 @@ public class InventarioJugador : MonoBehaviour
 
     public void MultiplicadorCalaveras (int multiplicador) 
     {
+        if (multiplicador == 0) {
+            multiplicador = 1;
+        }
         multiplicadorCalaveras = 1 * multiplicador;
     }
 

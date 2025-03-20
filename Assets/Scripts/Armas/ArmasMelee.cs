@@ -240,6 +240,7 @@ public class ArmasMelee : MonoBehaviour
                 else 
                 {
                     salud.RecibirDaño(danio);
+                    Debug.Log("Daño: " + danio);
                 }
                 esCritico = false;
                 atacando = false;

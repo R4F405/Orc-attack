@@ -19,8 +19,6 @@ public class GestorHabilidades : MonoBehaviour
     private ArmasDistancia armasDistancia;
     private InventarioJugador inventarioJugador;
     private GeneradorCajas generadorCajas;
-
-
     
     private VidaJugador vidaJugador;
     
@@ -46,18 +44,6 @@ public class GestorHabilidades : MonoBehaviour
         FuncionAumentarProbabilidadCritico();
         FuncionRestarSegundosGenerarCajas();
         FuncionMultiplicadorCalaveras();
-
-        //Resetear variables
-        aumentarVidaMaxima = 0;
-        restarSegundosRecuperar1Vida = 0f;
-        aumentarProbabilidadRobarVida = 0;
-        aumentarDanioPorPorcentaje = 0;
-        aumentarDanioPorPocentajeMelee = 0;
-        aumentarDanioPorPocentajeDistancia = 0;
-        disminuirRecargaPorPocentaje = 0;
-        aumentarProbabilidadCritico = 0;
-        restarSegundosGenerarCajas = 0f;
-        multiplicadorCalaveras = 0;
     }
 
     private void FuncionAumentarVida() 

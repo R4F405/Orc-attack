@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 public class ControladorTienda : MonoBehaviour
@@ -15,7 +17,7 @@ public class ControladorTienda : MonoBehaviour
         BuscarPosicionadorArmas();
         ActualizarUI();
         GenerarArmas();
-        UpdateArmasJugadorUI();
+        GenerarObjetos();
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class ControladorTienda : MonoBehaviour
         monedasJugador = inventarioJugador.ObtenerCantidadCalaveras();
         ActualizarUI();
         UpdateArmasJugadorUI();  // Mantener actualizada la UI de armas del jugador
+        UpdateObjetosJugadorUI();
     }
 
     void BuscarInventarioJugador()
@@ -53,7 +56,7 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
-   [System.Serializable]
+    [System.Serializable]
     public class OpcionArma
     {
         public int precio;
@@ -65,6 +68,15 @@ public class ControladorTienda : MonoBehaviour
         public float recarga;
         public int roboSalud;
         public GameObject prefabArma;  // Referencia al arma que se entregará al comprar
+    }
+
+    [System.Serializable]
+    public class OpcionObjeto
+    {
+        public int precio;
+        public Sprite imagen;
+        public string nombre;
+        public string descripcion;
     }
 
     public TextMeshProUGUI monedasJugadorTexto;
@@ -81,18 +93,30 @@ public class ControladorTienda : MonoBehaviour
     public Button[] botonesArmasJugador;  // Los 5 botones para mostrar las armas del jugador
     public Image[] imagenesArmasJugador;  // Las imágenes dentro de cada botón
 
-    private OpcionArma[] opcionesActuales;
+
+    public OpcionObjeto[] listaObjetos;
+    public Button botonObjeto;
+    public Image imagenObjeto;
+    public TextMeshProUGUI precioObjeto;
+    public TextMeshProUGUI nombreObjeto;
+    public TextMeshProUGUI descripcionObjeto;
+    public Button[] botonesObjetosJugador;  // Los 16 botones para mostrar los objetos del jugador
+    public Image[] imagenesObjetosJugador;  // Las imágenes dentro de cada botón
+
+    private OpcionArma[] opcionesArmasActuales;
+    private OpcionObjeto opcionObjetoActual;
+    private List<OpcionObjeto> objetosComprados = new List<OpcionObjeto>();
 
     void GenerarArmas()
     {
-        opcionesActuales = new OpcionArma[botonesArmas.Length];
+        opcionesArmasActuales = new OpcionArma[botonesArmas.Length];
 
         for (int i = 0; i < botonesArmas.Length; i++)
         {
             OpcionArma armaSeleccionada = listaArmas[Random.Range(0, listaArmas.Length)];
 
             // Guardar el arma seleccionada
-            opcionesActuales[i] = armaSeleccionada;
+            opcionesArmasActuales[i] = armaSeleccionada;
 
             // Asignar la información a los textos
             imagenesArmas[i].sprite = armaSeleccionada.imagen;
@@ -106,9 +130,18 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    void GenerarObjetos()
+    {
+        opcionObjetoActual = listaObjetos[Random.Range(0, listaObjetos.Length)];
+        imagenObjeto.sprite = opcionObjetoActual.imagen;
+        precioObjeto.text = opcionObjetoActual.precio.ToString();
+        nombreObjeto.text = opcionObjetoActual.nombre;
+        descripcionObjeto.text = opcionObjetoActual.descripcion;
+    }
+
     public void ComprarArma(int indice)
     {
-        OpcionArma armaSeleccionada = opcionesActuales[indice];
+        OpcionArma armaSeleccionada = opcionesArmasActuales[indice];
 
         if (inventarioJugador.ObtenerCantidadCalaveras() >= armaSeleccionada.precio)
         {
@@ -132,6 +165,22 @@ public class ControladorTienda : MonoBehaviour
         {
             Debug.Log("No tienes suficientes monedas");
         }
+    }
+
+    public void ComprarObjeto()
+    {
+        OpcionObjeto objetoSeleccionado = opcionObjetoActual;
+
+        if (inventarioJugador.ObtenerCantidadCalaveras() >= objetoSeleccionado.precio)
+        {
+            inventarioJugador.RestarCalaveras(objetoSeleccionado.precio);
+            ActualizarUI();
+            Debug.Log("Compraste: " + objetoSeleccionado.nombre);
+            botonObjeto.gameObject.SetActive(false);
+        }
+
+        objetosComprados.Add(opcionObjetoActual);
+
     }
 
     void UpdateArmasJugadorUI()
@@ -161,6 +210,26 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    void UpdateObjetosJugadorUI()
+    {
+        List<OpcionObjeto> objetosActuales = objetosComprados;
+
+        for (int i = 0; i < botonesObjetosJugador.Length; i++)
+        {
+            if (i < objetosActuales.Count && objetosActuales[i] != null)
+            {
+                // Obtener el sprite del arma
+                imagenesObjetosJugador[i].sprite = objetosActuales[i].imagen; // Asignación directa del sprite
+                botonesObjetosJugador[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                // Si no hay un arma en esta posición, desactivar el botón
+                botonesObjetosJugador[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     void ActualizarUI()
     {
@@ -178,7 +247,9 @@ public class ControladorTienda : MonoBehaviour
             ActualizarUI();
             botonesArmas[0].gameObject.SetActive(true);
             botonesArmas[1].gameObject.SetActive(true);
+            botonObjeto.gameObject.SetActive(true);
             GenerarArmas();
+            GenerarObjetos();
         }
     }
 
@@ -187,7 +258,9 @@ public class ControladorTienda : MonoBehaviour
         ActualizarUI();
         botonesArmas[0].gameObject.SetActive(true);
         botonesArmas[1].gameObject.SetActive(true);
+        botonObjeto.gameObject.SetActive(true);
         GenerarArmas();
+        GenerarObjetos();
     }
     
 }
