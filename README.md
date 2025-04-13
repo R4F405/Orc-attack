@@ -21,6 +21,16 @@
 
 ---
 
+### 🖼️ **Imagenes**
+
+#### Menú principal
+![Menú Principal](Imagenes/Menu.png)
+
+#### Gameplay
+![Gameplay](Imagenes/Juego.png)
+
+---
+
 ### 🧩 **Características**
 - 🛒 **Tienda:** Compra armas y objetos que otorgan habilidades.
 - 🔢 **Armas Dinámicas:** Hasta 5 armas, con posicionamiento dinámico según la cantidad adquirida.
@@ -63,3 +73,5 @@ Para dudas o colaboraciones, contacta a través del repositorio oficial en Git.
 
 ### 🎨 **Créditos**
 Tileset utilizado en el juego proporcionado por [momongaa](https://momongaa.itch.io/roguelite-dungeon-tileset)
+
+
