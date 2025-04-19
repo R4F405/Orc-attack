@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 8842358968005702366}
   - component: {fileID: 2207734615782242476}
   - component: {fileID: 6053892171484661830}
-  - component: {fileID: 8933609678667334040}
   m_Layer: 0
   m_Name: JugadorPrefab
   m_TagString: Jugador
@@ -36,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 1802820728355739433}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.045, y: 0.012, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,18 +109,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945fcc8c68e686f46a3c42dbb2eeec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aumentarVidaMaxima: 0
-  restarSegundosRecuperar1Vida: 0
-  aumentarProbabilidadRobarVida: 0
-  aumentarDanioPorPorcentaje: 0
-  aumentarDanioPorPocentajeMelee: 0
-  aumentarDanioPorPocentajeDistancia: 0
-  disminuirRecargaPorPocentaje: 0
-  aumentarProbabilidadCritico: 0
-  aumentarDanioEstructuras: 0
-  "aumentarDanioCompa\xF1ero": 0
-  restarSegundosGenerarCajas: 0
-  multiplicadorCalaveras: 0
+  textoTiendaVidaMaxima: {fileID: 0}
+  textoTiendaRecuperacionVida: {fileID: 0}
+  textoTiendaRoboSalud: {fileID: 0}
+  textoTiendaDanioGeneral: {fileID: 0}
+  textoTiendaDanioMelee: {fileID: 0}
+  textoTiendaDanioDistancia: {fileID: 0}
+  textoTiendaTiempoRecarga: {fileID: 0}
+  textoTiendaProbabilidadCritico: {fileID: 0}
+  textoTiendaGeneracionCajas: {fileID: 0}
+  textoTiendaMultiplicadorCalaveras: {fileID: 0}
 --- !u!114 &-639148711076508535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,15 +281,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5352868, y: 0.6888361}
   m_EdgeRadius: 0
---- !u!114 &8933609678667334040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802820728355739433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764cbfa33bec8094a952c24342a9d936, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

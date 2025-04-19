@@ -28,6 +28,19 @@ public class ArmasDistancia : MonoBehaviour
         danio = danioBase; // Inicializar el daño con el valor base
         recarga = recargaBase; // Inicializar la recarga con el valor base
 
+        // Aplicar mejoras persistentes
+        GestorMejorasArmas gestorMejoras = GestorMejorasArmas.instancia;
+        if (gestorMejoras != null)
+        {
+            AumentarDanioPorPocentaje(gestorMejoras.ObtenerAumentoDanioPorcentaje());
+            AumentarProbabilidadCritico(gestorMejoras.ObtenerAumentoProbabilidadCritico());
+            AumentarProbabilidadRobarVida(gestorMejoras.ObtenerAumentoProbabilidadRobarVida());
+            DisminuirRecargaPorPocentaje(gestorMejoras.ObtenerDisminucionRecargaPorcentaje());
+            
+            // Debug para verificar las mejoras aplicadas
+            Debug.Log("Arma Distancia inicializada: Aplicadas mejoras del GestorMejorasArmas");
+        }
+
         if (colliderJugador == null)
         {
             colliderJugador = GameObject.FindWithTag("Jugador")?.GetComponent<Collider2D>();
@@ -91,13 +104,30 @@ public class ArmasDistancia : MonoBehaviour
 
     public void AumentarDanioPorPocentaje(int porcentaje)
     {
-        danio = danio + Mathf.RoundToInt(danioBase * (porcentaje / 100f)); //Aumenta el daño con porcentajes tieniendo en cuenta el daño base
+        // Corregido para evitar la división entera que resultaría en 0 con porcentajes < 100
+        float porcentajeDecimal = porcentaje / 100f;
+        int aumento = Mathf.RoundToInt(danioBase * porcentajeDecimal);
+        danio += aumento;
+        
+        // Debug para verificar que se está aplicando el daño correctamente
+        Debug.Log("Arma Distancia: Daño base = " + danioBase + ", Porcentaje = " + porcentaje + "%, Aumento = " + aumento + ", Daño final = " + danio);
     }
 
     public void DisminuirRecargaPorPocentaje(int porcentaje)
     {
-        recarga -= recargaBase * (porcentaje / 100f); // //Disminuye la recarga con porcentajes tieniendo en cuenta la recarga base base
-        recarga = Mathf.Round(recarga * 100f) / 100f; // Redondea a 2 decimales para mayor precisión 
+        // Corregido para evitar la división entera que resultaría en 0 con porcentajes < 100
+        float porcentajeDecimal = porcentaje / 100f;
+        float disminucion = recargaBase * porcentajeDecimal;
+        recarga -= disminucion;
+        
+        // Asegurarse de que la recarga no sea menor que un valor mínimo
+        if (recarga < 0.1f) recarga = 0.1f;
+        
+        // Redondear a 2 decimales para mayor precisión
+        recarga = Mathf.Round(recarga * 100f) / 100f;
+        
+        // Debug para verificar que se está aplicando la recarga correctamente
+        Debug.Log("Arma Distancia: Recarga base = " + recargaBase + ", Porcentaje = " + porcentaje + "%, Disminución = " + disminucion + ", Recarga final = " + recarga);
     }
 
      public void AumentarProbabilidadCritico(int cantidad)

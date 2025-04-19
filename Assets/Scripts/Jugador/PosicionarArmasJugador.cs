@@ -24,11 +24,23 @@ public class PosicionarArmasJugador : MonoBehaviour
         // Si no hay prefabricados de armas, no hacer nada
         if (prefabricadosDeArmas.Length == 0) return;
 
+        // Buscar el GestorMejorasArmas para asegurarnos de que existe
+        GestorMejorasArmas gestorMejoras = FindAnyObjectByType<GestorMejorasArmas>();
+        if (gestorMejoras == null)
+        {
+            // Si no existe, crear un objeto con el componente GestorMejorasArmas
+            GameObject gestorMejorasObj = new GameObject("GestorMejorasArmas");
+            gestorMejoras = gestorMejorasObj.AddComponent<GestorMejorasArmas>();
+            DontDestroyOnLoad(gestorMejorasObj);
+            Debug.Log("Creado nuevo GestorMejorasArmas");
+        }
+
         if (numeroDeArmas == 1)
         {
             // Si hay solo una arma, se coloca a la izquierda un poco más arriba de la altura del jugador
             Vector3 posicionIzquierda = new Vector3(-distanciaHorizontal, distanciaVertical, 0);
             armasInstanciadas[0] = Instantiate(prefabricadosDeArmas[0], transform.position + posicionIzquierda, Quaternion.identity);
+            Debug.Log("Arma instanciada con danioBase: " + armasInstanciadas[0].GetComponent<ArmasMelee>()?.danioBase);
         }
         else if (numeroDeArmas == 2)
         {
