@@ -50,4 +50,10 @@ public class VidaEnemigo : MonoBehaviour
     {
         return saludMaxima;
     }
+    
+    // Método para reiniciar la salud actual al valor máximo
+    public void ReiniciarSalud()
+    {
+        saludActual = saludMaxima;
+    }
 }

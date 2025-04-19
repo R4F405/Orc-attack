@@ -78,8 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe72faceb82ce34fa020ea1b11897a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saludMaxima: 15
-  tiempoEntreRecuperaciones: 5
+  saludMaxima: 20
+  tiempoEntreRecuperaciones: 10
 --- !u!114 &4091030505422079902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,16 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945fcc8c68e686f46a3c42dbb2eeec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textoTiendaVidaMaxima: {fileID: 0}
-  textoTiendaRecuperacionVida: {fileID: 0}
-  textoTiendaRoboSalud: {fileID: 0}
-  textoTiendaDanioGeneral: {fileID: 0}
-  textoTiendaDanioMelee: {fileID: 0}
-  textoTiendaDanioDistancia: {fileID: 0}
-  textoTiendaTiempoRecarga: {fileID: 0}
-  textoTiendaProbabilidadCritico: {fileID: 0}
-  textoTiendaGeneracionCajas: {fileID: 0}
-  textoTiendaMultiplicadorCalaveras: {fileID: 0}
 --- !u!114 &-639148711076508535
 MonoBehaviour:
   m_ObjectHideFlags: 0

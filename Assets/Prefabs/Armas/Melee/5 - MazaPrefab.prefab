@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8798595568663504760}
   - component: {fileID: 4734916626788023210}
   m_Layer: 0
-  m_Name: MazaPrefab
+  m_Name: 5 - MazaPrefab
   m_TagString: Armas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0ce04c4888faa49b7d575d6dc9bf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danioBase: 10
+  danioBase: 12
   danio: 0
-  recargaBase: 1
+  recargaBase: 1.5
   recarga: 1
-  probabilidadCritico: 50
-  alcance: 1
+  probabilidadCritico: 10
+  alcance: 1.5
   pincha: 0
   probabilidadRobarVida: 5
   capaEnemigos:

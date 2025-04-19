@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3589697293302285118}
-  - component: {fileID: 6371285584522032679}
   - component: {fileID: 8973535826771136155}
+  - component: {fileID: 6371285584522032679}
   m_Layer: 0
   m_Name: BastonFuego
   m_TagString: Armas
@@ -33,6 +33,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8973535826771136155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581885585990029321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b4a692ac26e5f4296b9071796c513f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balaPrefab: {fileID: 3105148796505836261, guid: cbfe2a1f76151324da92c99720c48651, type: 3}
+  danioBase: 9
+  danio: 0
+  recargaBase: 1.5
+  recarga: 1
+  probabilidadCritico: 7
+  velocidadBala: 5
+  alcance: 3
+  probabilidadRobarVida: 5
+  capaEnemigos:
+    serializedVersion: 2
+    m_Bits: 64
+  capaCajas:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!212 &6371285584522032679
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,30 +115,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8973535826771136155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581885585990029321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b4a692ac26e5f4296b9071796c513f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balaPrefab: {fileID: 3105148796505836261, guid: cbfe2a1f76151324da92c99720c48651, type: 3}
-  danioBase: 100
-  danio: 0
-  recargaBase: 1
-  recarga: 1
-  probabilidadCritico: 50
-  velocidadBala: 5
-  alcance: 2
-  probabilidadRobarVida: 5
-  capaEnemigos:
-    serializedVersion: 2
-    m_Bits: 64
-  capaCajas:
-    serializedVersion: 2
-    m_Bits: 512

@@ -101,7 +101,7 @@ public class GestorHabilidades : MonoBehaviour
                 Debug.Log("Aplicada habilidad: Aumentar Daño Distancia");
                 break;
             case 7:
-                disminuirRecargaPorPocentaje += 1; // Acumulamos 1% cada vez
+                disminuirRecargaPorPocentaje += 3; // Acumulamos 1% cada vez
                 FuncionDisminuirRecargaPorPocentaje();
                 Debug.Log("Aplicada habilidad: Reducir Recarga");
                 break;

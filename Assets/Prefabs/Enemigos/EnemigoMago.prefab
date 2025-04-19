@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proyectilPrefab: {fileID: 4461703634406086963, guid: 8e01dd176dcfe2949bb4d41ae7cef548, type: 3}
-  tiempoEntreDisparos: 5
-  "da\xF1o": 1
+  tiempoEntreDisparos: 3
+  "da\xF1o": 2
 --- !u!114 &-6693336022043056961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c351f827dcd304faee478a2ec1865e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saludMaxima: 5
+  saludMaxima: 20
 --- !u!114 &-6939375493500429778
 MonoBehaviour:
   m_ObjectHideFlags: 0

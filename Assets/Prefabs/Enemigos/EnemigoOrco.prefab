@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "da\xF1o": 1
-  tiempoEntreAtaques: 1.5
+  tiempoEntreAtaques: 2.5
 --- !u!114 &-2573238889286742868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c351f827dcd304faee478a2ec1865e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saludMaxima: 5
+  saludMaxima: 30
 --- !u!114 &-8440197599734552996
 MonoBehaviour:
   m_ObjectHideFlags: 0

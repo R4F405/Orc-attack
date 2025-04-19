@@ -5,17 +5,22 @@ public class GeneradorOrcos : MonoBehaviour
     public GameObject orcoPrefab; // Prefabricado de Orco
     public Vector2 limiteInferior; // Límite inferior de la zona de generación
     public Vector2 limiteSuperior; // Límite superior de la zona de generación
-    public int enemigosPorOleada = 5; // Número de enemigos por oleada
-    public float tiempoEntreOleadas = 5f; // Tiempo entre oleadas
+    public int enemigosPorOleada = 5; // Número base de enemigos por oleada
+    public float tiempoEntreOleadas = 5f; // Tiempo base entre oleadas
     public float radioSeguridad = 2f; // Radio alrededor del jugador donde no pueden aparecer enemigos
 
     private Transform jugador; // Referencia al jugador
     private float temporizador; // Temporizador para gestionar las oleadas
+    private ControladorNiveles controladorNiveles; // Referencia al controlador de niveles
+    private int enemigosPorOleadaActual;
+    private float tiempoEntreOleadasActual;
 
     private void Start()
     {
         BuscarJugador();
-        temporizador = tiempoEntreOleadas; // Inicia el temporizador para la primera oleada
+        BuscarControladorNiveles();
+        AjustarDificultadSegunNivel();
+        temporizador = tiempoEntreOleadasActual; // Inicia el temporizador para la primera oleada
     }
 
     private void Update()
@@ -27,12 +32,18 @@ public class GeneradorOrcos : MonoBehaviour
             return; // No generar enemigos hasta que el jugador sea encontrado
         }
 
+        // Si no tenemos referencia al controlador de niveles, seguir buscándolo
+        if (controladorNiveles == null)
+        {
+            BuscarControladorNiveles();
+        }
+
         temporizador -= Time.deltaTime;
 
         if (temporizador <= 0)
         {
             GenerarOleada();
-            temporizador = tiempoEntreOleadas; // Reiniciar temporizador para la siguiente oleada
+            temporizador = tiempoEntreOleadasActual; // Reiniciar temporizador para la siguiente oleada
         }
     }
 
@@ -46,9 +57,39 @@ public class GeneradorOrcos : MonoBehaviour
         }
     }
 
+    void BuscarControladorNiveles()
+    {
+        controladorNiveles = FindAnyObjectByType<ControladorNiveles>();
+        if (controladorNiveles != null)
+        {
+            AjustarDificultadSegunNivel();
+        }
+    }
+
+    void AjustarDificultadSegunNivel()
+    {
+        if (controladorNiveles == null) return;
+
+        int nivelActual = controladorNiveles.nivelActual;
+        
+        // Ajustar cantidad de enemigos por oleada (aumenta con el nivel)
+        enemigosPorOleadaActual = enemigosPorOleada + Mathf.FloorToInt(nivelActual / 2);
+        
+        // Ajustar tiempo entre oleadas (disminuye con el nivel, pero tiene un mínimo)
+        tiempoEntreOleadasActual = Mathf.Max(2.0f, tiempoEntreOleadas - (nivelActual * 0.2f));
+        
+        Debug.Log($"Nivel {nivelActual}: {enemigosPorOleadaActual} orcos por oleada, cada {tiempoEntreOleadasActual} segundos");
+    }
+
     void GenerarOleada()
     {
-        for (int i = 0; i < enemigosPorOleada; i++)
+        // Actualizar dificultad antes de generar la oleada
+        if (controladorNiveles != null)
+        {
+            AjustarDificultadSegunNivel();
+        }
+
+        for (int i = 0; i < enemigosPorOleadaActual; i++)
         {
             GenerarEnemigo();
         }
@@ -77,6 +118,33 @@ public class GeneradorOrcos : MonoBehaviour
         } while (!posicionValida);
 
         // Instanciar enemigo
-        Instantiate(orcoPrefab, posicionGeneracion, Quaternion.identity);
+        GameObject orco = Instantiate(orcoPrefab, posicionGeneracion, Quaternion.identity);
+        
+        // Ajustar estadísticas según el nivel
+        if (controladorNiveles != null)
+        {
+            int nivelActual = controladorNiveles.nivelActual;
+            
+            // Ajustar la vida del enemigo
+            VidaEnemigo vidaEnemigo = orco.GetComponent<VidaEnemigo>();
+            if (vidaEnemigo != null)
+            {
+                // Aumenta la vida en 5 puntos por cada nivel
+                vidaEnemigo.saludMaxima = vidaEnemigo.saludMaxima + (nivelActual - 1) * 5;
+                // Importante: reiniciar la salud actual al máximo
+                vidaEnemigo.ReiniciarSalud();
+            }
+            
+            // Ajustar el daño del enemigo
+            SistemaDanioColisionEnemigo sistemaDanio = orco.GetComponent<SistemaDanioColisionEnemigo>();
+            if (sistemaDanio != null)
+            {
+                // Aumenta el daño cada 2 niveles
+                if (nivelActual > 2)
+                {
+                    sistemaDanio.daño = sistemaDanio.daño + Mathf.FloorToInt((nivelActual - 1) / 2);
+                }
+            }
+        }
     }
 }
