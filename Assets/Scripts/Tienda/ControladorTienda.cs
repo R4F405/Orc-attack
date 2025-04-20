@@ -149,7 +149,33 @@ public class ControladorTienda : MonoBehaviour
 
     void GenerarObjetos()
     {
-        opcionObjetoActual = listaObjetos[Random.Range(0, listaObjetos.Length)];
+        // Buscar GestorHabilidades para verificar si ya tiene el multiplicador
+        GestorHabilidades gestorHabilidades = null;
+        if (jugador != null)
+        {
+            gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
+        }
+        
+        // Crear lista temporal de objetos disponibles
+        List<OpcionObjeto> objetosDisponibles = new List<OpcionObjeto>(listaObjetos);
+        
+        // Si ya tiene el multiplicador de calaveras, eliminar esa opción
+        if (gestorHabilidades != null && gestorHabilidades.TieneMultiplicadorCalaveras())
+        {
+            objetosDisponibles.RemoveAll(obj => obj.id == 10);
+            Debug.Log("Multiplicador de calaveras ya comprado, removido de objetos de tienda.");
+        }
+        
+        // Si no hay objetos disponibles, desactivar el botón
+        if (objetosDisponibles.Count == 0)
+        {
+            botonObjeto.gameObject.SetActive(false);
+            Debug.LogWarning("No hay objetos disponibles para mostrar en la tienda.");
+            return;
+        }
+        
+        // Seleccionar un objeto aleatorio
+        opcionObjetoActual = objetosDisponibles[Random.Range(0, objetosDisponibles.Count)];
         imagenObjeto.sprite = opcionObjetoActual.imagen;
         precioObjeto.text = opcionObjetoActual.precio.ToString();
         nombreObjeto.text = opcionObjetoActual.nombre;
@@ -188,25 +214,54 @@ public class ControladorTienda : MonoBehaviour
     {
         OpcionObjeto objetoSeleccionado = opcionObjetoActual;
 
+        // Verificar si tiene suficientes calaveras
         if (inventarioJugador.ObtenerCantidadCalaveras() >= objetoSeleccionado.precio)
         {
+            // Si es el multiplicador de calaveras, verificar si ya lo tiene
+            if (objetoSeleccionado.id == 10)
+            {
+                if (jugador == null)
+                {
+                    BuscarJugador();
+                }
+                
+                if (jugador != null)
+                {
+                    GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
+                    if (gestorHabilidades != null && gestorHabilidades.TieneMultiplicadorCalaveras())
+                    {
+                        Debug.LogWarning("Ya has comprado el multiplicador de calaveras");
+                        return;
+                    }
+                }
+            }
+            
+            // Proceder con la compra
             inventarioJugador.RestarCalaveras(objetoSeleccionado.precio);
             ActualizarUI();
             Debug.Log("Compraste: " + objetoSeleccionado.nombre);
             botonObjeto.gameObject.SetActive(false);
 
             // Aplicar la habilidad correspondiente usando el ID del objeto
-            GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
+            if (jugador == null)
+            {
+                BuscarJugador();
+            }
+            
             if (jugador != null)
             {
                 GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
                 if (gestorHabilidades != null)
                 {
-                    gestorHabilidades.AplicarHabilidadPorID(objetoSeleccionado.id); // Método hipotético
+                    gestorHabilidades.AplicarHabilidadPorID(objetoSeleccionado.id);
                 }
             }
 
             objetosComprados.Add(opcionObjetoActual);
+        }
+        else
+        {
+            Debug.Log("No tienes suficientes calaveras para comprar este objeto");
         }
     }
 

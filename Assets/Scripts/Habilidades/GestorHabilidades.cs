@@ -116,9 +116,17 @@ public class GestorHabilidades : MonoBehaviour
                 Debug.Log("Aplicada habilidad: Reducir Tiempo Generación Cajas");
                 break;
             case 10:
-                multiplicadorCalaveras = 2; // Multiplicador x2 (esto no se acumula, se mantiene igual)
-                FuncionMultiplicadorCalaveras();
-                Debug.Log("Aplicada habilidad: Multiplicador Calaveras");
+                // Verificar si ya tiene el multiplicador de calaveras
+                if (multiplicadorCalaveras == 0)
+                {
+                    multiplicadorCalaveras = 2; // Multiplicador x2 (esto no se acumula, se mantiene igual)
+                    FuncionMultiplicadorCalaveras();
+                    Debug.Log("Aplicada habilidad: Multiplicador Calaveras");
+                }
+                else
+                {
+                    Debug.LogWarning("Ya has adquirido el multiplicador de calaveras");
+                }
                 break;
             default:
                 Debug.LogWarning($"ID de habilidad no reconocido: {id}");
@@ -329,5 +337,11 @@ public class GestorHabilidades : MonoBehaviour
     public int ObtenerMultiplicadorCalaveras()
     {
         return multiplicadorCalaveras;
+    }
+
+    // Método para verificar si ya se compró el multiplicador de calaveras
+    public bool TieneMultiplicadorCalaveras()
+    {
+        return multiplicadorCalaveras > 0;
     }
 }
