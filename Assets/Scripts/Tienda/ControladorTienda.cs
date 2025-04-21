@@ -16,6 +16,8 @@ public class ControladorTienda : MonoBehaviour
     {
         BuscarInventarioJugador();
         BuscarPosicionadorArmas();
+        ActualizarEstadisticasArmas();
+        ActualizarPreciosObjetos();
         ActualizarUI();
         GenerarArmas();
         GenerarObjetos();
@@ -188,6 +190,9 @@ public class ControladorTienda : MonoBehaviour
 
         if (inventarioJugador.ObtenerCantidadCalaveras() >= armaSeleccionada.precio)
         {
+            // Reproducir sonido de compra exitosa
+            SonidosUI.ReproducirSonidoCompra();
+            
             inventarioJugador.RestarCalaveras(armaSeleccionada.precio);
             ActualizarUI();
             Debug.Log("Compraste: " + armaSeleccionada.nombre);
@@ -206,6 +211,9 @@ public class ControladorTienda : MonoBehaviour
         }
         else
         {
+            // Reproducir sonido de error - fondos insuficientes
+            SonidosUI.ReproducirSonidoError();
+            
             Debug.Log("No tienes suficientes monedas");
         }
     }
@@ -230,6 +238,9 @@ public class ControladorTienda : MonoBehaviour
                     GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
                     if (gestorHabilidades != null && gestorHabilidades.TieneMultiplicadorCalaveras())
                     {
+                        // Reproducir sonido de error - ya se tiene el objeto
+                        SonidosUI.ReproducirSonidoError();
+                        
                         Debug.LogWarning("Ya has comprado el multiplicador de calaveras");
                         return;
                     }
@@ -237,6 +248,9 @@ public class ControladorTienda : MonoBehaviour
             }
             
             // Proceder con la compra
+            // Reproducir sonido de compra exitosa
+            SonidosUI.ReproducirSonidoCompra();
+            
             inventarioJugador.RestarCalaveras(objetoSeleccionado.precio);
             ActualizarUI();
             Debug.Log("Compraste: " + objetoSeleccionado.nombre);
@@ -261,6 +275,9 @@ public class ControladorTienda : MonoBehaviour
         }
         else
         {
+            // Reproducir sonido de error - fondos insuficientes
+            SonidosUI.ReproducirSonidoError();
+            
             Debug.Log("No tienes suficientes calaveras para comprar este objeto");
         }
     }
@@ -325,19 +342,29 @@ public class ControladorTienda : MonoBehaviour
     {
         if (inventarioJugador.ObtenerCantidadCalaveras() >= 5) //De momento el precio de renovar siempre es 5
         {
+            // Sonido de compra exitosa
+            SonidosUI.ReproducirSonidoCompra();
+            
             inventarioJugador.RestarCalaveras(5); // Restar calaveras
             ActualizarUI();
+            ActualizarPreciosObjetos();
             botonesArmas[0].gameObject.SetActive(true);
             botonesArmas[1].gameObject.SetActive(true);
             botonObjeto.gameObject.SetActive(true);
             GenerarArmas();
             GenerarObjetos();
         }
+        else
+        {
+            // Sonido de error - fondos insuficientes
+            SonidosUI.ReproducirSonidoError();
+        }
     }
 
     public void RenovarTiendaSinCosto()
     {
         ActualizarUI();
+        ActualizarPreciosObjetos();
         botonesArmas[0].gameObject.SetActive(true);
         botonesArmas[1].gameObject.SetActive(true);
         botonObjeto.gameObject.SetActive(true);
@@ -355,6 +382,156 @@ public class ControladorTienda : MonoBehaviour
             {
                 gestorHabilidades.ActualizarTextos();
             }
+        }
+    }
+
+    void ActualizarEstadisticasArmas()
+    {
+        foreach (OpcionArma arma in listaArmas)
+        {
+            if (arma.prefabArma != null)
+            {
+                // Obtener componentes del arma según su tipo
+                ArmasMelee armaMelee = arma.prefabArma.GetComponent<ArmasMelee>();
+                ArmasDistancia armaDistancia = arma.prefabArma.GetComponent<ArmasDistancia>();
+                
+                if (armaMelee != null)
+                {
+                    // Es un arma cuerpo a cuerpo
+                    arma.danio = armaMelee.danioBase;
+                    arma.critico = armaMelee.probabilidadCritico;
+                    arma.recarga = armaMelee.recargaBase;
+                    arma.roboSalud = armaMelee.probabilidadRobarVida;
+                    arma.tipo = "Melee";
+                    
+                    // Calcular precio basado en estadísticas
+                    float precioPorDanio = arma.danio * 1.5f;
+                    float precioPorCritico = arma.critico * 0.5f;
+                    float precioPorRoboSalud = arma.roboSalud * 0.8f;
+                    float precioPorRecarga = (1f / arma.recarga) * 3f; // Inversamente proporcional - menos recarga = más caro
+                    
+                    // Precio base 5 + factores
+                    arma.precio = Mathf.RoundToInt(5 + precioPorDanio + precioPorCritico + precioPorRoboSalud + precioPorRecarga);
+                    
+                    // Ajustes para armas específicas por nombre
+                    if (arma.nombre.Contains("Espada Gigante"))
+                    {
+                        arma.precio += 10; // Arma premium
+                    }
+                    
+                    // Asegurar precio mínimo
+                    if (arma.precio < 5) arma.precio = 5;
+                    
+                    Debug.Log($"Arma melee actualizada: {arma.nombre}, Daño: {arma.danio}, Precio: {arma.precio}");
+                }
+                else if (armaDistancia != null)
+                {
+                    // Es un arma a distancia
+                    arma.danio = armaDistancia.danioBase;
+                    arma.critico = armaDistancia.probabilidadCritico;
+                    arma.recarga = armaDistancia.recargaBase;
+                    arma.roboSalud = armaDistancia.probabilidadRobarVida;
+                    arma.tipo = "Distancia";
+                    
+                    // Las armas a distancia son generalmente más caras
+                    float precioPorDanio = arma.danio * 2f;
+                    float precioPorCritico = arma.critico * 0.7f;
+                    float precioPorRoboSalud = arma.roboSalud * 1f;
+                    float precioPorRecarga = (1f / arma.recarga) * 4f;
+                    
+                    // Precio base 10 + factores (base más alta para armas a distancia)
+                    arma.precio = Mathf.RoundToInt(10 + precioPorDanio + precioPorCritico + precioPorRoboSalud + precioPorRecarga);
+                    
+                    // Ajustes especiales por tipo de bastón
+                    if (arma.nombre.Contains("Curacion"))
+                    {
+                        arma.precio += 8; // Bastón de curación es más valioso
+                    }
+                    else if (arma.nombre.Contains("Fuego"))
+                    {
+                        arma.precio += 5; // Bastón de fuego hace daño extra
+                    }
+                    
+                    // Asegurar precio mínimo
+                    if (arma.precio < 8) arma.precio = 8;
+                    
+                    Debug.Log($"Arma distancia actualizada: {arma.nombre}, Daño: {arma.danio}, Precio: {arma.precio}");
+                }
+                else
+                {
+                    Debug.LogWarning($"El prefab {arma.nombre} no tiene componente ArmasMelee ni ArmasDistancia.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"El arma {arma.nombre} no tiene prefab asignado.");
+            }
+        }
+    }
+
+    void ActualizarPreciosObjetos()
+    {
+        foreach (OpcionObjeto objeto in listaObjetos)
+        {
+            // Establecer precio basado en ID (tipo de habilidad)
+            switch (objeto.id)
+            {
+                case 1: // Aumentar Vida Máxima
+                    objeto.precio = 15;
+                    break;
+                case 2: // Reducir Tiempo Recuperación Vida
+                    objeto.precio = 18;
+                    break;
+                case 3: // Aumentar Probabilidad Robar Vida
+                    objeto.precio = 22;
+                    break;
+                case 4: // Aumentar Daño Por Porcentaje (general)
+                    objeto.precio = 25;
+                    break;
+                case 5: // Aumentar Daño Melee
+                    objeto.precio = 22;
+                    break;
+                case 6: // Aumentar Daño Distancia
+                    objeto.precio = 22;
+                    break;
+                case 7: // Reducir Recarga
+                    objeto.precio = 20;
+                    break;
+                case 8: // Aumentar Probabilidad Crítico
+                    objeto.precio = 25;
+                    break;
+                case 9: // Reducir Tiempo Generación Cajas
+                    objeto.precio = 18;
+                    break;
+                case 10: // Multiplicador Calaveras
+                    objeto.precio = 50; // Habilidad premium - solo se puede comprar una vez
+                    break;
+                default:
+                    // Para cualquier ID futuro que puedas añadir
+                    objeto.precio = 20; // Precio por defecto
+                    Debug.LogWarning($"ID de habilidad no reconocido: {objeto.id}. Se estableció precio por defecto.");
+                    break;
+            }
+            
+            // Ajuste de precios según nivel de juego
+            GameObject controladorNivelesObj = GameObject.FindWithTag("GameController");
+            if (controladorNivelesObj != null)
+            {
+                ControladorNiveles controladorNiveles = controladorNivelesObj.GetComponent<ControladorNiveles>();
+                if (controladorNiveles != null)
+                {
+                    int nivelActual = controladorNiveles.nivelActual;
+                    
+                    // Pequeño incremento de precio basado en el nivel (5% por nivel)
+                    if (nivelActual > 1)
+                    {
+                        float incrementoPorNivel = 0.05f * (nivelActual - 1);
+                        objeto.precio = Mathf.RoundToInt(objeto.precio * (1 + incrementoPorNivel));
+                    }
+                }
+            }
+            
+            Debug.Log($"Objeto configurado: {objeto.nombre} (ID: {objeto.id}), Precio: {objeto.precio}");
         }
     }
 }

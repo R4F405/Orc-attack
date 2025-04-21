@@ -239,7 +239,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 132051105}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2056607264}
+        m_TargetAssemblyTypeName: GestorSonidosUI, Assembly-CSharp
+        m_MethodName: ReproducirSonidoClic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &155000640
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +658,95 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2056607264}
+        m_TargetAssemblyTypeName: GestorSonidosUI, Assembly-CSharp
+        m_MethodName: ReproducirSonidoClic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1001 &668779046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2541896548724560783, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_Name
+      value: GestorSonidosUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: sonidoClic
+      value: 
+      objectReference: {fileID: 8300000, guid: ea7d9ba44f99e7b429158dd9495e479c, type: 3}
+    - target: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: sonidoError
+      value: 
+      objectReference: {fileID: 8300000, guid: 6698d4b625b8e5940a38c725f677a9cc, type: 3}
+    - target: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: sonidoCompra
+      value: 
+      objectReference: {fileID: 8300000, guid: e7ab4c35ab8052f46aa54aae8ef68a6f, type: 3}
+    - target: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: sonidoSeleccion
+      value: 
+      objectReference: {fileID: 8300000, guid: 3773209a81a712f4fac86bdbce7ffd9d, type: 3}
+    - target: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: sonidoNavegacion
+      value: 
+      objectReference: {fileID: 8300000, guid: 3773209a81a712f4fac86bdbce7ffd9d, type: 3}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764211678351342510, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
 --- !u!1 &740112083
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +871,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1399615835}
         m_TargetAssemblyTypeName: ControladorEscenas, Assembly-CSharp
         m_MethodName: BotonIniciar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2056607264}
+        m_TargetAssemblyTypeName: GestorSonidosUI, Assembly-CSharp
+        m_MethodName: ReproducirSonidoClic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1035,7 +1148,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1050674839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2056607264}
+        m_TargetAssemblyTypeName: GestorSonidosUI, Assembly-CSharp
+        m_MethodName: ReproducirSonidoClic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1091598390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1241,52 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1196648445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1196648447}
+  - component: {fileID: 1196648446}
+  m_Layer: 0
+  m_Name: InicializadorUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1196648446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196648445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ecbff1318b0b934f915e5dd66840730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botonesConSonido: []
+  aplicarATodosLosBotones: 1
+--- !u!4 &1196648447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196648445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 333.9754, y: 464.59344, z: -5.697326}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1244525833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,7 +1407,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1244525835}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2056607264}
+        m_TargetAssemblyTypeName: GestorSonidosUI, Assembly-CSharp
+        m_MethodName: ReproducirSonidoClic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1257037908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,6 +2221,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983824223}
   m_CullTransparentMesh: 1
+--- !u!114 &2056607264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5252615325847021596, guid: cdd31750b57a3b74abd4fd0437e5a49f, type: 3}
+  m_PrefabInstance: {fileID: 668779046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9e40f4d94cd9d4087aae374686e70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2047,3 +2241,5 @@ SceneRoots:
   - {fileID: 1641546746}
   - {fileID: 1399615836}
   - {fileID: 1556196754}
+  - {fileID: 668779046}
+  - {fileID: 1196648447}

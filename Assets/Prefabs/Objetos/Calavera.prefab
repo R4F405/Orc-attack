@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangoRecoleccion: 1
   cantidad: 1
+  sonidoRecoleccion: {fileID: 8300000, guid: 44c375b13cbe3344383bc2c292605ebc, type: 3}
 --- !u!212 &3467589806286229813
 SpriteRenderer:
   m_ObjectHideFlags: 0

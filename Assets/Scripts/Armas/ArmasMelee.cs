@@ -9,6 +9,7 @@ public class ArmasMelee : MonoBehaviour
     public float recargaBase = 0f; // Tiempo de recarga base entre ataques (Solo se modifica desde el inspector)
     [HideInInspector]public float recarga = 0f; //Tiempo de recarga entre ataques
 
+    public AudioClip sonidoGolpe; // Sonido para el golpe
     public int probabilidadCritico = 0; //Probabilidad de critico 
     public float alcance = 0f; //Alcance del arma
     public bool pincha; // Determina si el arma pincha o no
@@ -16,6 +17,7 @@ public class ArmasMelee : MonoBehaviour
     public LayerMask capaEnemigos; //capa de enemgos
     public LayerMask capaCajas; // Capa de las cajas
 
+    private AudioSource audioSource; // Referencia al AudioSource
     private Animator animador;
     private float tiempoSiguienteAtaque = 0f;  
     private bool atacando = false; 
@@ -29,6 +31,16 @@ public class ArmasMelee : MonoBehaviour
     {
         danio = danioBase; // Inicializar el daño con el valor base
         recarga = recargaBase; // Inicializar la recarga con el valor base
+
+        // Obtener o crear AudioSource
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
 
         // Aplicar mejoras persistentes
         GestorMejorasArmas gestorMejoras = GestorMejorasArmas.instancia;
@@ -237,6 +249,12 @@ public class ArmasMelee : MonoBehaviour
     {
         Collider2D[] enemigosGolpeados = Physics2D.OverlapCircleAll(transform.position, alcance, capaEnemigos);
 
+        // Reproducir sonido de golpe
+        if (audioSource != null && sonidoGolpe != null)
+        {
+            audioSource.PlayOneShot(sonidoGolpe);
+        }
+
         foreach (Collider2D enemigo in enemigosGolpeados)
         {
             VidaEnemigo salud = enemigo.GetComponent<VidaEnemigo>();
@@ -246,6 +264,7 @@ public class ArmasMelee : MonoBehaviour
                 if (esCritico) 
                 {
                     salud.RecibirDaño(danioCritico);
+                    Debug.Log("Daño: " + danioCritico);
                 }
                 else 
                 {

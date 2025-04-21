@@ -5,16 +5,25 @@ public class VidaJugador : MonoBehaviour
 {
     public int saludMaxima = 15;
     public float tiempoEntreRecuperaciones = 10f; // Intervalo en segundos
+    public AudioClip sonidoDaño; // Sonido cuando el jugador recibe daño
 
     private int cantidadRecuperacion = 1;         // Cantidad de vida que se recupera
     private MovimientoJugador movimientoJugador; 
     private int saludActual;
+    private AudioSource audioSource;
 
     private void Start()
     {
         saludActual = saludMaxima; // Inicia con la salud máxima
 
         movimientoJugador = GetComponent<MovimientoJugador>();
+        
+        // Obtener o crear componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
 
         // Iniciar la rutina de recuperación de vida
         StartCoroutine(RecuperacionVidaAutomatica());
@@ -59,6 +68,13 @@ public class VidaJugador : MonoBehaviour
     public void RecibirDaño(int cantidad)
     {
         saludActual -= cantidad;
+        
+        // Reproducir sonido de daño
+        if (sonidoDaño != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(sonidoDaño);
+        }
+        
         if (saludActual <= 0f)
         {
             Muerte();

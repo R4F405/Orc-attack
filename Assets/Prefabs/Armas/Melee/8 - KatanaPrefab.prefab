@@ -52,6 +52,7 @@ MonoBehaviour:
   danio: 0
   recargaBase: 1.4
   recarga: 1
+  sonidoGolpe: {fileID: 8300000, guid: 9653b6380bdf04b49a11e80b79dbc805, type: 3}
   probabilidadCritico: 15
   alcance: 1.6
   pincha: 0

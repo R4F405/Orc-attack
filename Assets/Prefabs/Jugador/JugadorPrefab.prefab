@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saludMaxima: 20
   tiempoEntreRecuperaciones: 10
+  "sonidoDa\xF1o": {fileID: 8300000, guid: 60e9b1a83c35d7f4aa0e6aad2fb04457, type: 3}
 --- !u!114 &4091030505422079902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
+  - {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
   distanciaHorizontal: 0.7
   distanciaVertical: 0.5
   numeroDeArmas: 1

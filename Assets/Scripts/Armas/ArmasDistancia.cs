@@ -18,6 +18,9 @@ public class ArmasDistancia : MonoBehaviour
     public LayerMask capaEnemigos; // Capa de los enemigos
     public LayerMask capaCajas; // Nueva capa para detectar cajas
 
+    public AudioClip sonidoDisparo; // Sonido para el disparo
+
+    private AudioSource audioSource; // Referencia al AudioSource
     private Collider2D colliderJugador; // Referencia al collider del jugador
     private float tiempoSiguienteDisparo = 0f;
     private bool esCritico = false;
@@ -27,6 +30,16 @@ public class ArmasDistancia : MonoBehaviour
     {
         danio = danioBase; // Inicializar el daño con el valor base
         recarga = recargaBase; // Inicializar la recarga con el valor base
+
+        // Obtener o crear AudioSource
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
 
         // Aplicar mejoras persistentes
         GestorMejorasArmas gestorMejoras = GestorMejorasArmas.instancia;
@@ -61,6 +74,12 @@ public class ArmasDistancia : MonoBehaviour
         if (objetivos.Length > 0)
         {
             Transform objetivo = objetivos[0].transform;
+
+            // Reproducir sonido de disparo
+            if (audioSource != null && sonidoDisparo != null)
+            {
+                audioSource.PlayOneShot(sonidoDisparo);
+            }
 
             GameObject bala = Instantiate(balaPrefab, ObtenerPuntoDisparo(), Quaternion.identity);
             Bala scriptBala = bala.GetComponent<Bala>();

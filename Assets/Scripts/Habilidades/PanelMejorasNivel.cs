@@ -112,30 +112,28 @@ public class PanelMejorasNivel : MonoBehaviour
             return;
         }
         
-        // Nivel por defecto si no se encuentra la BarraExperiencia o si hay algún error
-        int nivelJugadorPorDefecto = 1; // Nivel por defecto
-        
         // Calcular mejoras disponibles basado en el nivel de experiencia del jugador
         if (barraExperiencia != null)
         {
             try
             {
                 int nivelJugador = barraExperiencia.ObtenerNivelActual();
-                mejorasDisponibles = nivelJugador * mejorasPorNivel;
+                // Calcular las mejoras por el nivel actual, no acumulativamente
+                mejorasDisponibles = mejorasPorNivel; // Una mejora por cada vez que suba de nivel
                 Debug.Log("Nivel del jugador: " + nivelJugador + ", Mejoras disponibles: " + mejorasDisponibles);
             }
             catch (System.Exception e)
             {
                 Debug.LogError("Error al obtener el nivel del jugador: " + e.Message);
-                mejorasDisponibles = nivelJugadorPorDefecto * mejorasPorNivel;
-                Debug.LogWarning("Usando nivel por defecto: " + nivelJugadorPorDefecto);
+                mejorasDisponibles = mejorasPorNivel; // Solo dar mejoras por nivel actual
+                Debug.LogWarning("Usando nivel por defecto: mejorasPorNivel");
             }
         }
         else
         {
             // Fallback si no se encuentra la barra de experiencia
-            mejorasDisponibles = nivelJugadorPorDefecto * mejorasPorNivel;
-            Debug.LogWarning("No se encontró la BarraExperiencia, usando nivel por defecto: " + nivelJugadorPorDefecto);
+            mejorasDisponibles = mejorasPorNivel; // Solo dar mejoras por nivel actual
+            Debug.LogWarning("No se encontró la BarraExperiencia, usando mejoras por defecto: mejorasPorNivel");
         }
         
         // Asegurar que al menos haya 1 mejora disponible
@@ -178,14 +176,14 @@ public class PanelMejorasNivel : MonoBehaviour
         
         // Crear una copia de la lista de mejoras para no modificar la original
         List<OpcionMejora> mejorasDisponibles = new List<OpcionMejora>(todasLasMejoras);
+        Debug.Log($"Total de mejoras antes de filtrar: {mejorasDisponibles.Count}");
         
-        // Filtrar el multiplicador de calaveras si ya está comprado
-        if (gestorHabilidades != null && gestorHabilidades.TieneMultiplicadorCalaveras())
-        {
-            // Eliminar la mejora del multiplicador de calaveras (ID 10) si existe
-            mejorasDisponibles.RemoveAll(mejora => mejora.idHabilidad == 10);
-            Debug.Log("Multiplicador de calaveras ya comprado, removido de opciones disponibles.");
-        }
+        // IMPORTANTE: Siempre eliminar la mejora de calaveras x2 (ID 10) de las opciones de mejora por nivel
+        // Esta mejora solo debe estar disponible en la tienda
+        int mejoraDeCalaveraSRemovidas = mejorasDisponibles.RemoveAll(mejora => mejora.idHabilidad == 10);
+        Debug.Log($"Mejoras de calaveras removidas del selector: {mejoraDeCalaveraSRemovidas}");
+        
+        Debug.Log($"Total de mejoras después de filtrar: {mejorasDisponibles.Count}");
         
         // Comprobar si hay mejoras disponibles después del filtrado
         if (mejorasDisponibles.Count == 0)
@@ -201,7 +199,9 @@ public class PanelMejorasNivel : MonoBehaviour
         {
             // Elegir una mejora aleatoria
             int indiceAleatorio = Random.Range(0, mejorasDisponibles.Count);
-            opcionesActuales.Add(mejorasDisponibles[indiceAleatorio]);
+            OpcionMejora mejoraSeleccionada = mejorasDisponibles[indiceAleatorio];
+            opcionesActuales.Add(mejoraSeleccionada);
+            Debug.Log($"Mejora seleccionada: {mejoraSeleccionada.nombre} (ID: {mejoraSeleccionada.idHabilidad})");
             
             // Remover la mejora seleccionada para no repetirla
             mejorasDisponibles.RemoveAt(indiceAleatorio);

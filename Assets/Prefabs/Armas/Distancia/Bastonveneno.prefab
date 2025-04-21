@@ -60,6 +60,7 @@ MonoBehaviour:
   capaCajas:
     serializedVersion: 2
     m_Bits: 512
+  sonidoDisparo: {fileID: 8300000, guid: ac3297b209fd1b34ba2f96063612d357, type: 3}
 --- !u!212 &6789875165771281503
 SpriteRenderer:
   m_ObjectHideFlags: 0

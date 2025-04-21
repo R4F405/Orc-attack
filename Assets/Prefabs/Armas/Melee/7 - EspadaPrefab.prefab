@@ -62,6 +62,8 @@ MonoBehaviour:
   capaCajas:
     serializedVersion: 2
     m_Bits: 512
+  audioSource: {fileID: 0}
+  sonidoGolpe: {fileID: 8300000, guid: 379919e6ddc1cf94988ab8e5a136423c, type: 3}
 --- !u!114 &-6502486109326575079
 MonoBehaviour:
   m_ObjectHideFlags: 0

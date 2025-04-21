@@ -12,12 +12,21 @@ public class ControladorNiveles : MonoBehaviour
     public GameObject GeneradorOrcos;
     public GameObject GeneradorMagos;
     public GameObject GeneradorCajas;
+    public AudioClip sonidoFinNivel; // Sonido al finalizar un nivel
 
     private bool nivelEnCurso = true;
     private PanelMejorasNivel gestorMejorasNivel;
+    private AudioSource audioSource;
 
     void Start()
     {
+        // Obtener o crear componente AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        
         ActualizarUI();
         panelTienda.SetActive(false); // Asegurar que la tienda esté desactivada al inicio
         
@@ -53,6 +62,12 @@ public class ControladorNiveles : MonoBehaviour
         DestruirObjetosPorCapa("Enemigo");
         DestruirObjetosPorCapa("Caja");
         DestruirObjetosPorCapa("Calavera");
+        
+        // Reproducir sonido de fin de nivel
+        if (sonidoFinNivel != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(sonidoFinNivel);
+        }
         
         GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
         jugador.transform.position = Vector2.zero; // Coloca al jugador en (0,0,0)
