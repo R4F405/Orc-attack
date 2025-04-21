@@ -4,7 +4,7 @@ using TMPro;
 public class ControladorNiveles : MonoBehaviour
 {
     public int nivelActual = 1;
-    public float tiempoRestante = 20f;
+    public float tiempoRestante = 40f;
     public GameObject panelTienda;
     public GameObject panelMejorasNivel;
     public TextMeshProUGUI textoNivel;
@@ -35,6 +35,10 @@ public class ControladorNiveles : MonoBehaviour
             gestorMejorasNivel = panelMejorasNivel.GetComponent<PanelMejorasNivel>();
             panelMejorasNivel.SetActive(false);
         }
+        
+        // Desactivar GeneradorMagos en niveles antes del 3
+        if (GeneradorMagos != null)
+            GeneradorMagos.SetActive(nivelActual >= 3);
     }
 
     void Update()
@@ -116,7 +120,7 @@ public class ControladorNiveles : MonoBehaviour
         Time.timeScale = 1;
         
         nivelActual++;
-        tiempoRestante = 20 + (nivelActual - 1) * 5; // Se suma 5 segundos por nivel
+        tiempoRestante = 40f; // Tiempo fijo de 40 segundos para todos los niveles
         nivelEnCurso = true;
         panelTienda.SetActive(false); // Ocultar tienda
         if (panelMejorasNivel != null)
@@ -125,7 +129,8 @@ public class ControladorNiveles : MonoBehaviour
         }
         GeneradorCajas.SetActive(true);
         GeneradorOrcos.SetActive(true);
-        GeneradorMagos.SetActive(true);
+        // Activar GeneradorMagos solo a partir del nivel 3
+        GeneradorMagos.SetActive(nivelActual >= 3);
         ActualizarUI();
         
         // Curar al jugador al máximo al iniciar un nuevo nivel

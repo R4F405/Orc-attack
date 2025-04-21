@@ -322,11 +322,11 @@ public class ArmasMelee : MonoBehaviour
     {
         // Corregido para evitar la división entera que resultaría en 0 con porcentajes < 100
         float porcentajeDecimal = porcentaje / 100f;
-        int aumento = Mathf.RoundToInt(danioBase * porcentajeDecimal);
+        int aumento = Mathf.RoundToInt(danio * porcentajeDecimal);
         danio += aumento;
         
         // Debug para verificar que se está aplicando el daño correctamente
-        Debug.Log("Arma Melee: Daño base = " + danioBase + ", Porcentaje = " + porcentaje + "%, Aumento = " + aumento + ", Daño final = " + danio);
+        Debug.Log("Arma Melee: Daño base = " + danio + ", Porcentaje = " + porcentaje + "%, Aumento = " + aumento + ", Daño final = " + danio);
     }
 
     public void DisminuirRecargaPorPocentaje(int porcentaje)

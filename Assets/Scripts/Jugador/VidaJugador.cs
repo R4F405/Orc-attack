@@ -6,6 +6,7 @@ public class VidaJugador : MonoBehaviour
     public int saludMaxima = 15;
     public float tiempoEntreRecuperaciones = 10f; // Intervalo en segundos
     public AudioClip sonidoDaño; // Sonido cuando el jugador recibe daño
+    public AudioClip sonidoMuerte; // Sonido cuando el jugador muere
 
     private int cantidadRecuperacion = 1;         // Cantidad de vida que se recupera
     private MovimientoJugador movimientoJugador; 
@@ -86,6 +87,12 @@ public class VidaJugador : MonoBehaviour
         if (movimientoJugador != null)
         {
             movimientoJugador.enabled = false; // Desactiva el script de movimiento
+        }
+
+        // Reproducir sonido de muerte
+        if (sonidoMuerte != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(sonidoMuerte);
         }
     }
 

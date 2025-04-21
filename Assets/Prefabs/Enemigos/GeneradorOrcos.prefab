@@ -48,4 +48,5 @@ MonoBehaviour:
   limiteInferior: {x: -8, y: 8}
   limiteSuperior: {x: 8, y: -8}
   enemigosPorOleada: 5
-  tiempoEntreOleadas: 5
+  tiempoEntreOleadas: 4
+  radioSeguridad: 2

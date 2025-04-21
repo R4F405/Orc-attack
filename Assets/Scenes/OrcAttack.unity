@@ -2797,6 +2797,10 @@ PrefabInstance:
       propertyPath: radioSeguridad
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5881503308364665680, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
+      propertyPath: tiempoEntreOleadas
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8089942650525456140, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
       propertyPath: m_Name
       value: GeneradorOrcos
@@ -6125,7 +6129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nivelActual: 1
-  tiempoRestante: 20
+  tiempoRestante: 40
   panelTienda: {fileID: 1021734394}
   panelMejorasNivel: {fileID: 17321669}
   textoNivel: {fileID: 823000849}
@@ -15440,7 +15444,7 @@ GameObject:
   - component: {fileID: 1925241217}
   - component: {fileID: 1925241216}
   m_Layer: 5
-  m_Name: SiguienteNivel
+  m_Name: Ir Tienda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15510,9 +15514,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 724274261}
-        m_TargetAssemblyTypeName: ControladorNiveles, Assembly-CSharp
-        m_MethodName: IniciarSiguienteNivel
+      - m_Target: {fileID: 17321671}
+        m_TargetAssemblyTypeName: PanelMejorasNivel, Assembly-CSharp
+        m_MethodName: ContinuarASiguienteNivel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

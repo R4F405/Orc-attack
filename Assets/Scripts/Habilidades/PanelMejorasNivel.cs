@@ -34,6 +34,7 @@ public class PanelMejorasNivel : MonoBehaviour
     private List<OpcionMejora> opcionesActuales = new List<OpcionMejora>();
     private int mejorasDisponibles = 0;
     private int mejorasSeleccionadas = 0;
+    private int ultimoNivelProcesado = 0; // Último nivel de experiencia donde se aplicaron mejoras
 
     private void Awake()
     {
@@ -118,9 +119,9 @@ public class PanelMejorasNivel : MonoBehaviour
             try
             {
                 int nivelJugador = barraExperiencia.ObtenerNivelActual();
-                // Calcular las mejoras por el nivel actual, no acumulativamente
-                mejorasDisponibles = mejorasPorNivel; // Una mejora por cada vez que suba de nivel
-                Debug.Log("Nivel del jugador: " + nivelJugador + ", Mejoras disponibles: " + mejorasDisponibles);
+                // Calcular las mejoras como la diferencia entre nivel actual y el último nivel procesado
+                mejorasDisponibles = nivelJugador - ultimoNivelProcesado; // Solo las mejoras nuevas desde la última vez
+                Debug.Log("Nivel del jugador: " + nivelJugador + ", Último nivel procesado: " + ultimoNivelProcesado + ", Mejoras disponibles: " + mejorasDisponibles);
             }
             catch (System.Exception e)
             {
@@ -274,8 +275,15 @@ public class PanelMejorasNivel : MonoBehaviour
         }
     }
 
-    private void ContinuarASiguienteNivel()
+    public void ContinuarASiguienteNivel()
     {
+        // Guardar el nivel actual como el último procesado
+        if (barraExperiencia != null)
+        {
+            ultimoNivelProcesado = barraExperiencia.ObtenerNivelActual();
+            Debug.Log("Guardando último nivel procesado: " + ultimoNivelProcesado);
+        }
+        
         // Ocultar este panel
         gameObject.SetActive(false);
         

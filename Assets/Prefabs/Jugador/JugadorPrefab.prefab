@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 4
+  sonidoMovimiento: {fileID: 8300000, guid: edbf3e93711204147ba258c132c7f56d, type: 3}
 --- !u!114 &2994583999435506763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +82,7 @@ MonoBehaviour:
   saludMaxima: 20
   tiempoEntreRecuperaciones: 10
   "sonidoDa\xF1o": {fileID: 8300000, guid: 60e9b1a83c35d7f4aa0e6aad2fb04457, type: 3}
+  sonidoMuerte: {fileID: 8300000, guid: 089c4b2a45d33744b89ca5752667c4b3, type: 3}
 --- !u!114 &4091030505422079902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabricadosDeArmas:
-  - {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
+  - {fileID: 3798194697597539420, guid: dea75c69166a77c45b4b01f96d614344, type: 3}
   distanciaHorizontal: 0.7
   distanciaVertical: 0.5
   numeroDeArmas: 1

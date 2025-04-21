@@ -3,8 +3,10 @@ using UnityEngine;
 public class VidaEnemigo : MonoBehaviour
 {
     public int saludMaxima = 100;
+    public AudioClip sonidoMuerte;
 
     private int saludActual;
+    private AudioSource audioSource;
     private DropCalaveras dropObjeto; // Referencia al script DropObjeto
     private BarraExperiencia barraExp;
 
@@ -13,7 +15,10 @@ public class VidaEnemigo : MonoBehaviour
         saludActual = saludMaxima;
         dropObjeto = GetComponent<DropCalaveras>(); // Obtener el script DropObjeto si está presente
         barraExp = FindAnyObjectByType<BarraExperiencia>(); // Busca la barra en la escena
-
+        // Obtener o crear AudioSource para reproducir sonidos
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void RecibirDaño(int cantidad)
@@ -27,6 +32,24 @@ public class VidaEnemigo : MonoBehaviour
 
     private void Muerte()
     {
+        // Desactivar visuales
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            r.enabled = false;
+        // Desactivar colisiones
+        foreach (Collider c in GetComponents<Collider>())
+            c.enabled = false;
+        foreach (Collider2D c2d in GetComponents<Collider2D>())
+            c2d.enabled = false;
+        // Desactivar scripts de movimiento
+        var movCol = GetComponent<MovimientoEnemigoColision>();
+        if (movCol != null) movCol.enabled = false;
+        var movDist = GetComponent<MovimientoEnemigoDistancia>();
+        if (movDist != null) movDist.enabled = false;
+
+        // Reproducir sonido de muerte antes de destruir
+        if (audioSource != null && sonidoMuerte != null)
+            audioSource.PlayOneShot(sonidoMuerte);
+
         // Llamar a SoltarObjeto si el enemigo tiene el script DropObjeto
         if (dropObjeto != null)
         {
@@ -38,7 +61,8 @@ public class VidaEnemigo : MonoBehaviour
             barraExp.GanarExperiencia(); // Sumar experiencia al morir
         }
 
-        Destroy(gameObject);
+        // Destruir el objeto tras la duración del clip para que se escuche completo
+        Destroy(gameObject, sonidoMuerte != null ? sonidoMuerte.length : 0f);
     }
 
     public int ObtenerSalud()

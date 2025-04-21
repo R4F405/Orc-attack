@@ -81,7 +81,7 @@ public class GeneradorMagos : MonoBehaviour
         
         // Ajustar tiempo entre oleadas (disminuye con el nivel, pero tiene un mínimo)
         // Los magos aparecen menos frecuentemente que los orcos
-        tiempoEntreOleadasActual = Mathf.Max(3.5f, tiempoEntreOleadas - (nivelActual * 0.15f));
+        tiempoEntreOleadasActual = Mathf.Max(3.5f, tiempoEntreOleadas - (nivelActual * 0.1f));
         
         Debug.Log($"Nivel {nivelActual}: {enemigosPorOleadaActual} magos por oleada, cada {tiempoEntreOleadasActual} segundos");
     }
@@ -134,8 +134,8 @@ public class GeneradorMagos : MonoBehaviour
             VidaEnemigo vidaEnemigo = mago.GetComponent<VidaEnemigo>();
             if (vidaEnemigo != null)
             {
-                // Aumenta la vida en 4 puntos por cada nivel
-                vidaEnemigo.saludMaxima = vidaEnemigo.saludMaxima + (nivelActual - 1) * 4;
+                // Aumenta la vida en x puntos por cada nivel
+                vidaEnemigo.saludMaxima = vidaEnemigo.saludMaxima + (nivelActual - 1) * 2;
                 // Importante: reiniciar la salud actual al máximo
                 vidaEnemigo.ReiniciarSalud();
             }

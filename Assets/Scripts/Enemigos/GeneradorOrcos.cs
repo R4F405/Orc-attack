@@ -6,7 +6,7 @@ public class GeneradorOrcos : MonoBehaviour
     public Vector2 limiteInferior; // Límite inferior de la zona de generación
     public Vector2 limiteSuperior; // Límite superior de la zona de generación
     public int enemigosPorOleada = 5; // Número base de enemigos por oleada
-    public float tiempoEntreOleadas = 5f; // Tiempo base entre oleadas
+    public float tiempoEntreOleadas = 3f; // Tiempo base entre oleadas
     public float radioSeguridad = 2f; // Radio alrededor del jugador donde no pueden aparecer enemigos
 
     private Transform jugador; // Referencia al jugador
@@ -129,8 +129,8 @@ public class GeneradorOrcos : MonoBehaviour
             VidaEnemigo vidaEnemigo = orco.GetComponent<VidaEnemigo>();
             if (vidaEnemigo != null)
             {
-                // Aumenta la vida en 5 puntos por cada nivel
-                vidaEnemigo.saludMaxima = vidaEnemigo.saludMaxima + (nivelActual - 1) * 5;
+                // Aumenta la vida en x puntos por cada nivel
+                vidaEnemigo.saludMaxima = vidaEnemigo.saludMaxima + (nivelActual - 1) * 2;
                 // Importante: reiniciar la salud actual al máximo
                 vidaEnemigo.ReiniciarSalud();
             }

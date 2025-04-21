@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c351f827dcd304faee478a2ec1865e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saludMaxima: 22
+  saludMaxima: 5
+  sonidoMuerte: {fileID: 8300000, guid: 3897b04b9318dbb4a9c5b13073518bc6, type: 3}
 --- !u!114 &-8440197599734552996
 MonoBehaviour:
   m_ObjectHideFlags: 0

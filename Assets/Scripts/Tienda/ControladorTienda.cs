@@ -186,6 +186,13 @@ public class ControladorTienda : MonoBehaviour
 
     public void ComprarArma(int indice)
     {
+        // Validar que no supere el máximo de 5 armas
+        if (posicionadorArmas != null && posicionadorArmas.numeroDeArmas >= 5)
+        {
+            SonidosUI.ReproducirSonidoError();
+            Debug.LogWarning("Ya tienes el número máximo de armas");
+            return;
+        }
         OpcionArma armaSeleccionada = opcionesArmasActuales[indice];
 
         if (inventarioJugador.ObtenerCantidadCalaveras() >= armaSeleccionada.precio)
