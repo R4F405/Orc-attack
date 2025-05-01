@@ -69,4 +69,40 @@ public static class ExtensionesAudio
             source.volume = volumenBase;
         }
     }
+    
+    /// <summary>
+    /// Reproduce un sonido en una posición específica respetando el volumen global.
+    /// El sonido seguirá reproduciéndose incluso si el objeto original es destruido.
+    /// </summary>
+    /// <param name="clip">El clip de audio a reproducir</param>
+    /// <param name="posicion">La posición 3D donde reproducir el sonido</param>
+    /// <param name="volumenBase">Volumen base del sonido (0-1)</param>
+    /// <param name="tipo">Tipo de audio para aplicar el volumen adecuado</param>
+    public static void ReproducirEnPosicion(AudioClip clip, Vector3 posicion, float volumenBase = 1.0f, TipoAudio tipo = TipoAudio.Efectos)
+    {
+        if (clip == null)
+            return;
+            
+        float volumenFinal = volumenBase;
+        
+        if (GestorAudioGlobal.instancia != null)
+        {
+            // Calcular el volumen según la configuración global
+            switch (tipo)
+            {
+                case TipoAudio.Musica:
+                    volumenFinal = GestorAudioGlobal.instancia.volumenMusica * GestorAudioGlobal.instancia.volumenGlobal * volumenBase;
+                    break;
+                case TipoAudio.Efectos:
+                    volumenFinal = GestorAudioGlobal.instancia.volumenEfectos * GestorAudioGlobal.instancia.volumenGlobal * volumenBase;
+                    break;
+                case TipoAudio.UI:
+                    volumenFinal = GestorAudioGlobal.instancia.volumenUI * GestorAudioGlobal.instancia.volumenGlobal * volumenBase;
+                    break;
+            }
+        }
+        
+        // Reproducir el sonido con el volumen ajustado
+        AudioSource.PlayClipAtPoint(clip, posicion, volumenFinal);
+    }
 } 

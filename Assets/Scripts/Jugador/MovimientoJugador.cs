@@ -8,6 +8,7 @@ public class MovimientoJugador : MonoBehaviour
     public AudioClip sonidoMovimiento; // Sonido de pasos al moverse
     private AudioSource audioSource;
     private Rigidbody2D rigidBody;
+    private float volumenOriginal = 1.0f;
 
     //Se llama al empezar
     private void Start() 
@@ -20,6 +21,7 @@ public class MovimientoJugador : MonoBehaviour
         if (sonidoMovimiento != null) {
             audioSource.clip = sonidoMovimiento;
             audioSource.loop = true;
+            volumenOriginal = audioSource.volume;
         }
     }
 
@@ -37,6 +39,9 @@ public class MovimientoJugador : MonoBehaviour
         Movimiento();
         // Reproducir o detener sonido de movimiento
         if (audioSource != null && sonidoMovimiento != null) {
+            // Actualizar el volumen según el sistema global
+            audioSource.ActualizarVolumen(volumenOriginal, TipoAudio.Efectos);
+            
             if (direction != Vector2.zero) {
                 if (!audioSource.isPlaying)
                     audioSource.Play();

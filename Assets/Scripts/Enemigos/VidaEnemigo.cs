@@ -47,8 +47,11 @@ public class VidaEnemigo : MonoBehaviour
         if (movDist != null) movDist.enabled = false;
 
         // Reproducir sonido de muerte antes de destruir
-        if (audioSource != null && sonidoMuerte != null)
-            audioSource.PlayOneShot(sonidoMuerte);
+        if (sonidoMuerte != null)
+        {
+            // Usar el nuevo método estático para reproducir el sonido
+            ExtensionesAudio.ReproducirEnPosicion(sonidoMuerte, transform.position, 1.0f, TipoAudio.Efectos);
+        }
 
         // Llamar a SoltarObjeto si el enemigo tiene el script DropObjeto
         if (dropObjeto != null)
@@ -61,8 +64,8 @@ public class VidaEnemigo : MonoBehaviour
             barraExp.GanarExperiencia(); // Sumar experiencia al morir
         }
 
-        // Destruir el objeto tras la duración del clip para que se escuche completo
-        Destroy(gameObject, sonidoMuerte != null ? sonidoMuerte.length : 0f);
+        // Destruir el objeto inmediatamente, ya que el sonido continuará reproduciéndose
+        Destroy(gameObject);
     }
 
     public int ObtenerSalud()

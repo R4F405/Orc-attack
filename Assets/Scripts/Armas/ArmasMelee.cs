@@ -252,7 +252,7 @@ public class ArmasMelee : MonoBehaviour
         // Reproducir sonido de golpe
         if (audioSource != null && sonidoGolpe != null)
         {
-            audioSource.PlayOneShot(sonidoGolpe);
+            audioSource.ReproducirConVolumenGlobal(sonidoGolpe, 1.0f, TipoAudio.Efectos);
         }
 
         foreach (Collider2D enemigo in enemigosGolpeados)

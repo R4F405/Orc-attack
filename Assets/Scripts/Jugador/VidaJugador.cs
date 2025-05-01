@@ -73,7 +73,7 @@ public class VidaJugador : MonoBehaviour
         // Reproducir sonido de daño
         if (sonidoDaño != null && audioSource != null)
         {
-            audioSource.PlayOneShot(sonidoDaño);
+            audioSource.ReproducirConVolumenGlobal(sonidoDaño, 1.0f, TipoAudio.Efectos);
         }
         
         if (saludActual <= 0f)
@@ -92,7 +92,7 @@ public class VidaJugador : MonoBehaviour
         // Reproducir sonido de muerte
         if (sonidoMuerte != null && audioSource != null)
         {
-            audioSource.PlayOneShot(sonidoMuerte);
+            audioSource.ReproducirConVolumenGlobal(sonidoMuerte, 1.0f, TipoAudio.Efectos);
         }
     }
 

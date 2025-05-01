@@ -25,7 +25,12 @@ public class MusicaMenuPrincipal : MonoBehaviour
             if (musicaMenu != null)
             {
                 GestorAudioGlobal.instancia.ReproducirMusica(musicaMenu);
-                Debug.Log("MusicaMenuPrincipal: Reproduciendo música del menú");
+                // Ajustar volumen específico para el menú
+                if (volumenMenu < 1.0f)
+                {
+                    GestorAudioGlobal.instancia.EstablecerVolumenMusica(volumenMenu);
+                }
+                Debug.Log("MusicaMenuPrincipal: Reproduciendo música del menú con volumen " + volumenMenu);
             }
             else
             {

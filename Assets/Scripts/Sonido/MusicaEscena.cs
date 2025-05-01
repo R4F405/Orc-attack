@@ -40,7 +40,13 @@ public class MusicaEscena : MonoBehaviour
             GestorAudioGlobal.instancia.DetenerMusica();
             GestorAudioGlobal.instancia.ReproducirMusica(musicaEscena);
             
-            Debug.Log($"MusicaEscena: Reproduciendo música '{musicaEscena.name}' para escena '{SceneManager.GetActiveScene().name}'");
+            // Ajustar volumen específico para esta escena
+            if (volumenEscena < 1.0f)
+            {
+                GestorAudioGlobal.instancia.EstablecerVolumenMusica(volumenEscena);
+            }
+            
+            Debug.Log($"MusicaEscena: Reproduciendo música '{musicaEscena.name}' para escena '{SceneManager.GetActiveScene().name}' con volumen {volumenEscena}");
         }
         else
         {
@@ -83,6 +89,27 @@ public class MusicaEscena : MonoBehaviour
         if (GestorAudioGlobal.instancia != null)
         {
             GestorAudioGlobal.instancia.PausarReanudarMusica(false);
+        }
+    }
+    
+    /// <summary>
+    /// Realiza una transición suave a otra música
+    /// </summary>
+    /// <param name="nuevaMusica">Nuevo clip de audio a reproducir</param>
+    public void TransicionMusica(AudioClip nuevaMusica)
+    {
+        if (GestorAudioGlobal.instancia != null && nuevaMusica != null)
+        {
+            // Implementación simple sin fundido real
+            // Para implementar un fundido real, se necesitaría una coroutine
+            // que gradualmente baje y suba el volumen
+            Debug.Log($"MusicaEscena: Transición a nueva música con tiempo {tiempoTransicion}s");
+            
+            GestorAudioGlobal.instancia.DetenerMusica();
+            GestorAudioGlobal.instancia.ReproducirMusica(nuevaMusica);
+            
+            // En una implementación completa, aquí usaríamos el tiempo de transición
+            // para hacer un fundido gradual
         }
     }
     

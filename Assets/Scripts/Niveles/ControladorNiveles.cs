@@ -70,7 +70,7 @@ public class ControladorNiveles : MonoBehaviour
         // Reproducir sonido de fin de nivel
         if (sonidoFinNivel != null && audioSource != null)
         {
-            audioSource.PlayOneShot(sonidoFinNivel);
+            audioSource.ReproducirConVolumenGlobal(sonidoFinNivel, 1.0f, TipoAudio.Efectos);
         }
         
         GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");

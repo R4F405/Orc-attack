@@ -78,7 +78,7 @@ public class ArmasDistancia : MonoBehaviour
             // Reproducir sonido de disparo
             if (audioSource != null && sonidoDisparo != null)
             {
-                audioSource.PlayOneShot(sonidoDisparo);
+                audioSource.ReproducirConVolumenGlobal(sonidoDisparo, 1.0f, TipoAudio.Efectos);
             }
 
             GameObject bala = Instantiate(balaPrefab, ObtenerPuntoDisparo(), Quaternion.identity);
