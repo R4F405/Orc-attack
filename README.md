@@ -12,7 +12,7 @@
 - 🛒 **Tienda y sistema de mejoras** - Gasta tus calaveras recolectadas en nuevas armas y habilidades
 - 📈 **Sistema de experiencia** - Gana XP eliminando enemigos para desbloquear mejoras
 - 🎮 **Controles intuitivos** - Movimiento fluido y sistema de ataque automático
-- 🔊 **Efectos de sonido inmersivos** - Retroalimentación auditiva para acciones importantes
+- 🔊 **Sistema de audio completo** - Música adaptativa y efectos de sonido inmersivos
 - 🎨 **Estética pixel art** - Gráficos retro de estilo roguelike
 
 ---
@@ -38,10 +38,15 @@
 - Combina armas a distancia y cuerpo a cuerpo para una estrategia efectiva
 
 ### Sistema de Sonido
+- **Música adaptativa**:
+  - Diferentes pistas para cada escena del juego
+  - Sistema de transición entre músicas
+  - Control de volumen personalizable
 - **Efectos de juego**:
   - Sonido distintivo al recoger calaveras
   - Feedback auditivo cuando el jugador recibe daño
   - Sonido especial al completar un nivel
+  - Pasos del personaje al moverse
 - **Sonidos de UI**:
   - Clicks de botones
   - Sonido de compra exitosa
@@ -75,6 +80,7 @@
 ### Enemigos
 - **Orcos cuerpo a cuerpo**: Se acercan para atacar directamente
 - **Magos a distancia**: Lanzan proyectiles desde lejos
+- **Tanques**: Enemigos con gran resistencia y daño mejorado
 - **Sistema generativo**: Generadores automatizados que crean oleadas progresivas
 
 ### Sistema de Experiencia
@@ -108,7 +114,9 @@
 - **Motor**: Unity 2022.3 o superior
 - **Lenguaje**: C#
 - **Gráficos**: Sprites 2D con estilo pixel art
-- **Audio**: Sistema de audio integrado de Unity
+- **Audio**: Sistema de audio completo con música y efectos
+  - Gestor de audio global para control centralizado
+  - Sistema de música adaptativa por escena
   - Componentes AudioSource/AudioClip para efectos localizados
   - Sistema centralizado para sonidos UI (GestorSonidosUI)
 
@@ -120,21 +128,20 @@ El proyecto está en desarrollo activo con las siguientes características ya im
 - ✅ Tienda funcional con múltiples mejoras
 - ✅ Sistema de combate con diferentes tipos de armas
 - ✅ Sistema de experiencia y progresión
-- ✅ Efectos de sonido para acciones clave y UI
+- ✅ Sistema de música adaptativa y efectos de sonido
 - ✅ Menús de navegación y pausa
+- ✅ Variedad de enemigos con distintos comportamientos
 
 Próximas mejoras:
-- ⏳ Más variedad de enemigos y jefes
+- ⏳ Más tipos de enemigos y jefes finales
 - ⏳ Sistema de guardado de partida
 - ⏳ Logros y desbloqueos
-- ⏳ Música de fondo adaptativa
 - ⏳ Nuevos tipos de armas y habilidades
 
 ---
 
 ## 🔢 **Controles**
 - **WASD**: Movimiento del personaje
-- **Mouse**: Apuntar
 - **ESC**: Menú de pausa
 
 ---
