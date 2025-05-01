@@ -1,0 +1,64 @@
+# Guía para Configurar el Panel de Opciones (Versión Simplificada)
+
+## 1. Estructura del Panel
+
+Crea una estructura simple con menos objetos anidados para mejorar el rendimiento:
+
+```
+- Panel Opciones (GameObject con componente Panel o Image)
+  |- Título (TextMeshPro - Text)
+  |- Panel Volumen
+  |  |- Slider Volumen Global + TextMeshPro (valor)
+  |  |- Slider Volumen Música + TextMeshPro (valor)
+  |  |- Slider Volumen Efectos + TextMeshPro (valor)
+  |  |- Slider Volumen UI + TextMeshPro (valor)
+  |
+  |- Panel Gráficos
+  |  |- Resolución (TextMeshPro - Text + TMP_Dropdown)
+  |  |- Calidad (TextMeshPro - Text + TMP_Dropdown)
+  |  |- Modo Pantalla (TextMeshPro - Text + TMP_Dropdown o Toggle)
+  |  |- Límite FPS (TextMeshPro - Text + TMP_Dropdown)
+  |  |- VSync (TextMeshPro - Text + Toggle)
+  |
+  |- Botones
+     |- Aplicar (Button + TextMeshPro - Text)
+     |- Restaurar (Button + TextMeshPro - Text)
+     |- Volver (Button + TextMeshPro - Text)
+```
+
+## 2. Optimizaciones para Rendimiento
+
+Para minimizar el impacto en rendimiento:
+
+1. **Reducir objetos anidados**: Usa pocos objetos en la jerarquía
+2. **Usar Layout Groups**: Configura los paneles con VerticalLayoutGroup para reducir objetos
+3. **Desactivar Raycast Target**: En elementos no interactivos como textos
+4. **Un solo Canvas**: Intenta tener todo bajo un solo Canvas para reducir batches
+5. **Desactivar paneles no usados**: Asegúrate que solo el panel activo esté habilitado
+
+## 3. Configuración Básica
+
+1. Añade el script `ControladorVolumen` al Panel Volumen
+2. Añade el script `ControladorOpciones` al Panel Gráficos
+3. Configura las referencias en el Inspector como se indica en el script
+
+## 4. Referencia de Opciones 
+
+### Resoluciones
+El dropdown de resoluciones mostrará todas las resoluciones disponibles en el formato:
+`[ancho] x [alto] @ [tasa de refresco]Hz` (por ejemplo: "1920 x 1080 @ 60Hz")
+
+### Opciones FPS
+El script configura automáticamente las siguientes opciones para FPS:
+- Sin límite
+- 30 FPS
+- 60 FPS
+- 120 FPS
+- 144 FPS
+- 240 FPS
+
+## 5. Consideraciones Finales
+
+- Asegúrate de que el panel de opciones esté inicialmente desactivado
+- Para mejorar el rendimiento, usa referencias simples y evita scripts complejos
+- Prueba el rendimiento con cada cambio para asegurarte de que no hay tirones 
