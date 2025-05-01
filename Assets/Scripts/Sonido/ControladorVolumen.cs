@@ -16,6 +16,13 @@ public class ControladorVolumen : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private bool actualizarAlIniciar = true;
     
+    // Valores por defecto
+    [Header("Valores Por Defecto")]
+    [SerializeField] private float volumenGlobalPorDefecto = 1.0f;
+    [SerializeField] private float volumenMusicaPorDefecto = 1.0f;
+    [SerializeField] private float volumenEfectosPorDefecto = 1.0f;
+    [SerializeField] private float volumenUIPorDefecto = 1.0f;
+    
     private void Start()
     {
         // Configurar listeners para los sliders
@@ -84,6 +91,36 @@ public class ControladorVolumen : MonoBehaviour
         {
             sliderVolumenUI.value = GestorAudioGlobal.instancia.volumenUI;
         }
+    }
+    
+    /// <summary>
+    /// Restaura todos los valores de volumen a los valores por defecto
+    /// </summary>
+    public void RestaurarValoresPorDefecto()
+    {
+        if (GestorAudioGlobal.instancia == null)
+            return;
+            
+        // Establecer volúmenes en GestorAudioGlobal
+        GestorAudioGlobal.instancia.EstablecerVolumenGlobal(volumenGlobalPorDefecto);
+        GestorAudioGlobal.instancia.EstablecerVolumenMusica(volumenMusicaPorDefecto);
+        GestorAudioGlobal.instancia.EstablecerVolumenEfectos(volumenEfectosPorDefecto);
+        GestorAudioGlobal.instancia.EstablecerVolumenUI(volumenUIPorDefecto);
+        
+        // Actualizar sliders con los nuevos valores
+        if (sliderVolumenGlobal != null)
+            sliderVolumenGlobal.value = volumenGlobalPorDefecto;
+            
+        if (sliderVolumenMusica != null)
+            sliderVolumenMusica.value = volumenMusicaPorDefecto;
+            
+        if (sliderVolumenEfectos != null)
+            sliderVolumenEfectos.value = volumenEfectosPorDefecto;
+            
+        if (sliderVolumenUI != null)
+            sliderVolumenUI.value = volumenUIPorDefecto;
+            
+        Debug.Log("ControladorVolumen: Valores de volumen restaurados a valores por defecto");
     }
     
     /// <summary>

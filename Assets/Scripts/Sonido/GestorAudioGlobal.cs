@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gestor global de audio para controlar el volumen general del juego.
@@ -35,6 +36,19 @@ public class GestorAudioGlobal : MonoBehaviour
     
     [SerializeField]
     private bool reproducirMusicaAlIniciar = true;
+    
+    [Header("Configuración de Escenas")]
+    [Tooltip("Si está activado, detiene la música al cambiar de escena")]
+    [SerializeField]
+    private bool detenerMusicaAlCambiarEscena = false;
+    
+    [Tooltip("Si está activado, busca componentes MusicaEscena al cargar una nueva escena")]
+    [SerializeField]
+    private bool buscarMusicaEscenaAutomaticamente = true;
+    
+    // Información sobre la escena actual
+    private string escenaActual;
+    private MusicaEscena musicaEscenaActual;
 
     // Nombre de la clave PlayerPrefs para guardar configuración
     private const string PREF_VOLUMEN_GLOBAL = "VolumenGlobal";
@@ -61,11 +75,26 @@ public class GestorAudioGlobal : MonoBehaviour
                 musicaAudioSource.playOnAwake = false;
             }
             
-            Debug.Log("GestorAudioGlobal inicializado");
+            // Registrar para eventos de cambio de escena
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            
+            // Almacenar escena actual
+            escenaActual = SceneManager.GetActiveScene().name;
+            
+            Debug.Log("GestorAudioGlobal inicializado en escena: " + escenaActual);
         }
         else if (instancia != this)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Desregistrar del evento de cambio de escena si este objeto es destruido
+        if (instancia == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
@@ -74,10 +103,53 @@ public class GestorAudioGlobal : MonoBehaviour
         // Aplicar volumen inicial a todos los AudioSources activos en la escena
         ActualizarVolumenTodosLosSources();
         
-        // Reproducir música si está configurado
-        if (reproducirMusicaAlIniciar)
+        // Reproducir música si está configurado y no hay una MusicaEscena específica
+        if (reproducirMusicaAlIniciar && musicaEscenaActual == null)
         {
             ReproducirMusica(musicaPrincipal);
+        }
+    }
+    
+    /// <summary>
+    /// Se llama automáticamente cuando se carga una nueva escena
+    /// </summary>
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Guardar nombre de la escena anterior
+        string escenaAnterior = escenaActual;
+        escenaActual = scene.name;
+        
+        Debug.Log($"GestorAudioGlobal: Cambio de escena de '{escenaAnterior}' a '{escenaActual}'");
+        
+        // Detener música si está configurado
+        if (detenerMusicaAlCambiarEscena)
+        {
+            DetenerMusica();
+        }
+        
+        // Actualizar volumen para todos los AudioSources de la nueva escena
+        ActualizarVolumenTodosLosSources();
+        
+        // Buscar componente MusicaEscena en la nueva escena
+        if (buscarMusicaEscenaAutomaticamente)
+        {
+            // Eliminar referencia a la música de escena anterior
+            musicaEscenaActual = null;
+            
+            // Buscar nuevo componente MusicaEscena
+            MusicaEscena[] musicasEscena = FindObjectsOfType<MusicaEscena>();
+            if (musicasEscena.Length > 0)
+            {
+                if (musicasEscena.Length > 1)
+                {
+                    Debug.LogWarning($"GestorAudioGlobal: Se encontraron múltiples componentes MusicaEscena en '{escenaActual}'. Se usará el primero encontrado.");
+                }
+                
+                musicaEscenaActual = musicasEscena[0];
+                Debug.Log($"GestorAudioGlobal: Se encontró MusicaEscena en '{escenaActual}'");
+                
+                // La reproducción se maneja en el Start() de MusicaEscena
+            }
         }
     }
 
@@ -136,7 +208,7 @@ public class GestorAudioGlobal : MonoBehaviour
                 musicaAudioSource.Pause();
                 Debug.Log("GestorAudioGlobal: Música pausada");
             }
-            else if (!pausar && !musicaAudioSource.isPlaying)
+            else if (!pausar && !musicaAudioSource.isPlaying && musicaAudioSource.clip != null)
             {
                 musicaAudioSource.UnPause();
                 Debug.Log("GestorAudioGlobal: Música reanudada");
