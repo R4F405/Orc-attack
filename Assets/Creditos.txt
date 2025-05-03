@@ -1,0 +1,93 @@
+---------------------------------------------------------------------------------------------------------
+
+				CREDITOS GRAFICOS 
+
+---------------------------------------------------------------------------------------------------------
+
+roguelite-dungeon-tileset (momonga) - https://momongaa.itch.io/roguelite-dungeon-tileset
+
+48-free-rpg-loot-icons-pixel-art (Free Game Assets GUI, Sprite, Tilesets) - https://free-game-assets.itch.io/48-free-rpg-loot-icons-pixel-art
+
+32rogues (Seth) - https://sethbb.itch.io/32rogues
+
+throwknight (Emma) - https://enma1890.itch.io/throwknight
+
+fire-pixel-bullet-16x16 (BDragon1727) - https://bdragon1727.itch.io/fire-pixel-bullet-16x16
+
+---------------------------------------------------------------------------------------------------------
+
+				CREDITOS SONIDOS 
+
+---------------------------------------------------------------------------------------------------------
+
+walk-grass.wav (JanKoehl) - https://freesound.org/people/JanKoehl/sounds/85603/
+
+piggrunt1.wav (Michel88) - https://freesound.org/people/Michel88/sounds/76973/
+
+deathh.wav (Michel88) - https://freesound.org/people/Michel88/sounds/76960/
+
+monster_sound_medium_death.wav (Leadstarson) - https://freesound.org/people/Leadstarson/sounds/559621/
+
+Game Sound Selection.wav (Bertrof) - https://freesound.org/people/Bertrof/sounds/131658/
+
+Coins / Selling sound (williamornelas) - https://freesound.org/people/williamornelas/sounds/525147/
+
+Error_03.wav (distillerystudio) - https://freesound.org/people/distillerystudio/sounds/327736/
+
+Slime Squish (qubodup) - https://freesound.org/people/qubodup/sounds/442772/
+
+Orc_34.wav (LittleRobotSoundFactory) - https://freesound.org/people/LittleRobotSoundFactory/sounds/316361/
+
+Victory Sound 1.wav (SilverIllusionist) - https://freesound.org/people/SilverIllusionist/sounds/462250/
+
+hurt_player.wav (FullStackSound) - https://freesound.org/people/FullStackSound/sounds/662465/
+
+Upgrade/select UI (TechspiredMinds) - https://freesound.org/people/TechspiredMinds/sounds/729216/
+
+Coin_C_06 (cabled_mess) - https://freesound.org/people/cabled_mess/sounds/350869/
+
+Shut the Door.wav (BaDoink) - https://freesound.org/people/BaDoink/sounds/561704/
+
+Pick-up Health (juancamiloorjuela) - https://freesound.org/people/juancamiloorjuela/sounds/204318/
+
+Short Water Squish (qubodup) - https://freesound.org/people/qubodup/sounds/737232/
+
+Fire Burst.wav (SilverIllusionist) - https://freesound.org/people/SilverIllusionist/sounds/472688/
+
+Swinging staff whoosh (strong) 06.wav (Nightflame) - https://freesound.org/people/Nightflame/sounds/422511/
+
+Hit 4 (ihitokage) - https://freesound.org/people/ihitokage/sounds/395358/
+
+Slice02.wav (kingsrow) - https://freesound.org/people/kingsrow/sounds/348082/
+
+Baseball Bat Hit 1 (CTCollab) - https://freesound.org/people/CTCollab/sounds/223609/
+
+Thwack 02 (HECKFRICKER) - https://freesound.org/people/HECKFRICKER/sounds/797822/
+
+Basic Melee Hit (SypherZent) - https://freesound.org/people/SypherZent/sounds/420673/
+
+Hit 3 (ihitokage) - https://freesound.org/people/ihitokage/sounds/395359/
+
+Slash2.ogg (wesleyextreme_gamer) - https://freesound.org/people/wesleyextreme_gamer/sounds/574820/
+
+wpn_2 generic.wav (SlavicMagic) - https://freesound.org/people/SlavicMagic/sounds/446015/
+
+wpn_3 generic.wav (SlavicMagic) - https://freesound.org/people/SlavicMagic/sounds/446014/
+
+Sword Stab Body Hit (-GeorgeDiamond-) - https://freesound.org/people/-GeorgeDiamond-/sounds/718259/
+
+Sword Impact (velcronator) - https://freesound.org/people/velcronator/sounds/733887/
+
+clank.wav (Empiremonkey) - https://freesound.org/people/Empiremonkey/sounds/616492/
+
+Hit Swing Sword Small 2 (CogFireStudios) - https://freesound.org/people/CogFireStudios/sounds/547040/
+
+---------------------------------------------------------------------------------------------------------
+
+					CREDITOS MUSICA 
+
+---------------------------------------------------------------------------------------------------------
+
+Synthwave Retro 80s (DELOSound) - https://pixabay.com/es/music/sintetizador-synthwave-retro-80s-321106/
+
+Synthwave 80s Retro Background Music (HitsLab) - https://pixabay.com/es/music/sintetizador-synthwave-80s-retro-background-music-329439/

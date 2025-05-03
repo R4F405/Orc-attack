@@ -1551,9 +1551,9 @@ RectTransform:
   - {fileID: 1091557163}
   - {fileID: 1582762602}
   - {fileID: 1245727548}
-  - {fileID: 1336049787}
   - {fileID: 399265346}
   - {fileID: 17321670}
+  - {fileID: 1336049787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5178,6 +5178,10 @@ PrefabInstance:
     - target: {fileID: 8089942650525456140, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089942650525456140, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9001092863655417858, guid: 85cdce5a47d52254f9389a0468f8bdd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13903,6 +13907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeneradorTanques
       objectReference: {fileID: 0}
+    - target: {fileID: 8089942650525456140, guid: 30089aada60d3f941a31eb850707c67a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 9001092863655417858, guid: 30089aada60d3f941a31eb850707c67a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14308,7 +14316,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091557162}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16509,7 +16517,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245727547}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19473,7 +19481,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582762601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20060,6 +20068,10 @@ PrefabInstance:
     - target: {fileID: 134756984460121647, guid: 1a310260baa0b424a9f1b71993acbfb4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134756984460121647, guid: 1a310260baa0b424a9f1b71993acbfb4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8203432324797983713, guid: 1a310260baa0b424a9f1b71993acbfb4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23850,7 +23862,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931423056}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44021,6 +44033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GeneradorJugador
       objectReference: {fileID: 0}
+    - target: {fileID: 1473903274628069653, guid: 27d594668dc4d8946970c4c38410962d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2949039196474263620, guid: 27d594668dc4d8946970c4c38410962d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -44061,6 +44077,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8112801753068719136, guid: 27d594668dc4d8946970c4c38410962d, type: 3}
+      propertyPath: prefabJugadorPorDefecto
+      value: 
+      objectReference: {fileID: 1802820728355739433, guid: 9383ab9e52ea31840a4e419d7999c3b8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44125,6 +44145,10 @@ PrefabInstance:
     - target: {fileID: 4002603662386111973, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002603662386111973, guid: 4de5669a0205ec74a9b662f63e1a7a45, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

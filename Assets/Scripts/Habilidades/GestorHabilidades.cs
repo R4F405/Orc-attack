@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GestorHabilidades : MonoBehaviour
 {
     //VARIABLES DE LAS HABILIDADES
-    private int aumentarVidaMaxima = 0; //Se debe ir añadiendo la cantidad (int) de vida que quieres añadir cada vez
     private float restarSegundosRecuperar1Vida = 0f; //Se debe añadir la cantidad segundos (float) que quieres restarle al tiempo de recuperar vida {Se resta al ultimo valor, no al valor inicial}
     private int aumentarProbabilidadRobarVida = 0; //Se añade directamente el numero para aumentar la probabilidad 
     private int aumentarDanioPorPorcentaje = 0; //Se añade directamente el procentaje (int) que quieres aumentar del valor inicial
@@ -71,8 +70,7 @@ public class GestorHabilidades : MonoBehaviour
         switch (id)
         {
             case 1:
-                aumentarVidaMaxima += 10;
-                FuncionAumentarVida();
+                FuncionAumentarVida(); // Siempre +10
                 Debug.Log("Aplicada habilidad: Aumentar Vida");
                 break;
             case 2:
@@ -144,7 +142,7 @@ public class GestorHabilidades : MonoBehaviour
     {
         if (vidaJugador != null)
         {
-            vidaJugador.AumentarSaludMaxima(aumentarVidaMaxima);
+            vidaJugador.AumentarSaludMaxima(10);
             vidaJugador.Curar(vidaJugador.ObtenerSaludMaxima());
         } 
     }
