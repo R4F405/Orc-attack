@@ -119,6 +119,12 @@
   - Sistema de música adaptativa por escena
   - Componentes AudioSource/AudioClip para efectos localizados
   - Sistema centralizado para sonidos UI (GestorSonidosUI)
+- **Documentación**: Todos los scripts incluyen documentación XML completa
+  - Comentarios XML estándar de C# (`///`) para clases, métodos y propiedades
+  - Documentación de parámetros con etiquetas `<param>` y `<returns>`
+  - Descripciones detalladas con `<remarks>` según sea necesario
+  - Facilita la generación automática de documentación y ayuda en el IDE
+  - Ademas se incluye algun comentario basico (`//`) para pequeñas aclariaciones
 
 ---
 
@@ -141,8 +147,14 @@ Próximas mejoras:
 ---
 
 ## 🔢 **Controles**
-- **WASD**: Movimiento del personaje
+- **WASD** o **Flechas de dirección**: Movimiento del personaje
 - **ESC**: Menú de pausa
+  - Acceso a opciones y sonido
+  - Volver al menú principal
+- **Click Izquierdo del Ratón**: Interacción en menús y tienda
+  - Selección de mejoras
+  - Compra de artículos
+  - Navegación por los diferentes paneles
 
 ---
 
@@ -162,8 +174,16 @@ Para dudas o colaboraciones, contacta a través del repositorio oficial en Git.
 ---
 
 ## 🎨 **Créditos**
-- **Arte**: [momongaa](https://momongaa.itch.io/roguelite-dungeon-tileset)
-- **Efectos de sonido**: Creados específicamente para el proyecto
-- **Desarrollo**: Equipo de Orc Attack
+
+### - Desarrollo: R4F405
+
+- **Arte**: 
+  - [momongaa](https://momongaa.itch.io/roguelite-dungeon-tileset) - roguelite-dungeon-tileset
+  - [Free Game Assets GUI, Sprite, Tilesets](https://free-game-assets.itch.io/48-free-rpg-loot-icons-pixel-art) - 48-free-rpg-loot-icons-pixel-art
+  - [Seth](https://sethbb.itch.io/32rogues) - 32rogues
+  - [Emma](https://enma1890.itch.io/throwknight) - throwknight
+  - [BDragon1727](https://bdragon1727.itch.io/fire-pixel-bullet-16x16) - fire-pixel-bullet-16x16
+
+- **Efectos de sonido y Música**: Consulta el archivo [Assets/Creditos.txt](Assets/Creditos.txt) para la lista completa de atribuciones
 
 
