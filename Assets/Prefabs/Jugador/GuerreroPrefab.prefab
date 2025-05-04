@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86a4ad5b960e67459e0df93421a56be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabricadosDeArmas: []
+  prefabricadosDeArmas:
+  - {fileID: 3798194697597539420, guid: dea75c69166a77c45b4b01f96d614344, type: 3}
   distanciaHorizontal: 0.7
   distanciaVertical: 0.5
   numeroDeArmas: 1
@@ -128,6 +129,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945fcc8c68e686f46a3c42dbb2eeec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aumentarVidaMaxima: 0
+  restarSegundosRecuperar1Vida: 0
+  aumentarProbabilidadRobarVida: 0
+  aumentarDanioPorPorcentaje: 0
+  aumentarDanioPorPocentajeMelee: 0
+  aumentarDanioPorPocentajeDistancia: 0
+  disminuirRecargaPorPocentaje: 0
+  aumentarProbabilidadCritico: 0
+  restarSegundosGenerarCajas: 0
+  multiplicadorCalaveras: 1
 --- !u!114 &-639148711076508535
 MonoBehaviour:
   m_ObjectHideFlags: 0

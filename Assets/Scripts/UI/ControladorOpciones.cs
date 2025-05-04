@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Collections;
 
 /// <summary>
-/// Controlador para las opciones gráficas del juego.
-/// Permite ajustar resolución, calidad, modo de pantalla y FPS límite.
+/// Controlador para las opciones gráficas y de rendimiento del juego.
+/// Permite ajustar resolución, calidad gráfica, modo de pantalla y limitación de FPS.
+/// También gestiona el guardado y carga de preferencias del usuario.
 /// </summary>
 public class ControladorOpciones : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class ControladorOpciones : MonoBehaviour
     // Opciones de limitador de FPS
     private readonly int[] opcionesFPS = { -1, 30, 60, 120, 144, 240 };
 
+    /// <summary>
+    /// Inicializa los controles de UI y carga la configuración actual del sistema.
+    /// </summary>
     private void Start()
     {
         // Inicializar los componentes UI
@@ -50,6 +54,9 @@ public class ControladorOpciones : MonoBehaviour
         ConfigurarListeners();
     }
 
+    /// <summary>
+    /// Inicializa todos los controles de opciones gráficas y de rendimiento.
+    /// </summary>
     private void InicializarOpciones()
     {
         // Inicializar dropdown de resoluciones
@@ -65,6 +72,9 @@ public class ControladorOpciones : MonoBehaviour
         InicializarDropdownFPS();
     }
 
+    /// <summary>
+    /// Configura el dropdown de resoluciones con todas las resoluciones soportadas por el sistema.
+    /// </summary>
     private void InicializarDropdownResolucion()
     {
         if (dropdownResolucion == null) return;
@@ -95,11 +105,14 @@ public class ControladorOpciones : MonoBehaviour
         dropdownResolucion.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Configura el dropdown de calidad con los niveles de calidad predefinidos de Unity.
+    /// </summary>
     private void InicializarDropdownCalidad()
     {
         if (dropdownCalidad == null) return;
 
-        // Obtener niveles de calidad de Unity - versión simple original
+        // Obtener niveles de calidad de Unity
         string[] nombresCalidad = QualitySettings.names;
         List<string> opcionesCalidad = new List<string>(nombresCalidad);
 
@@ -109,6 +122,10 @@ public class ControladorOpciones : MonoBehaviour
         dropdownCalidad.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Configura el dropdown con los diferentes modos de ventana disponibles
+    /// (pantalla completa exclusiva, ventana maximizada o ventana normal).
+    /// </summary>
     private void InicializarDropdownModoVentana()
     {
         if (dropdownModoVentana == null) return;
@@ -143,6 +160,9 @@ public class ControladorOpciones : MonoBehaviour
         dropdownModoVentana.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Configura el dropdown con las opciones de limitación de FPS y el toggle de VSync.
+    /// </summary>
     private void InicializarDropdownFPS()
     {
         if (dropdownFPS == null) return;
@@ -182,6 +202,9 @@ public class ControladorOpciones : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Guarda en memoria la configuración actual para poder restaurarla si es necesario.
+    /// </summary>
     private void CargarConfiguracionActual()
     {
         // Guardar configuración actual
@@ -198,6 +221,9 @@ public class ControladorOpciones : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Configura los eventos para los controles de UI (botones, toggles, etc).
+    /// </summary>
     private void ConfigurarListeners()
     {
         // Añadir listeners a botones
@@ -225,7 +251,8 @@ public class ControladorOpciones : MonoBehaviour
     }
 
     /// <summary>
-    /// Aplica la configuración seleccionada
+    /// Aplica la configuración gráfica y de rendimiento seleccionada en los controles de UI.
+    /// También guarda las preferencias del usuario para futuras sesiones.
     /// </summary>
     public void AplicarConfiguracion()
     {
@@ -279,8 +306,9 @@ public class ControladorOpciones : MonoBehaviour
     }
 
     /// <summary>
-    /// Cambia el modo de ventana (pantalla completa o ventana)
+    /// Actualiza el dropdown de modo ventana cuando se cambia el toggle de pantalla completa.
     /// </summary>
+    /// <param name="pantallaCompleta">True si está en pantalla completa, false si está en modo ventana</param>
     public void CambiarModoVentana(bool pantallaCompleta)
     {
         if (dropdownModoVentana != null)
@@ -291,15 +319,21 @@ public class ControladorOpciones : MonoBehaviour
     }
 
     /// <summary>
-    /// Cambia la configuración de VSync
+    /// Activa o desactiva la sincronización vertical (VSync).
     /// </summary>
+    /// <param name="activar">True para activar VSync, false para desactivarlo</param>
     public void CambiarVSync(bool activar)
     {
         QualitySettings.vSyncCount = activar ? 1 : 0;
     }
 
     /// <summary>
-    /// Restaura todos los valores a la configuración predeterminada
+    /// Restaura todas las opciones a sus valores predeterminados óptimos:
+    /// - Resolución más alta disponible
+    /// - Calidad gráfica máxima
+    /// - Pantalla completa
+    /// - Sin límite de FPS
+    /// - VSync activado
     /// </summary>
     public void RestaurarValoresPredeterminados()
     {
@@ -343,7 +377,7 @@ public class ControladorOpciones : MonoBehaviour
     }
 
     /// <summary>
-    /// Guarda las preferencias del usuario
+    /// Guarda las preferencias de configuración del usuario en PlayerPrefs para recuperarlas en futuras sesiones.
     /// </summary>
     private void GuardarPreferencias()
     {
@@ -385,7 +419,7 @@ public class ControladorOpciones : MonoBehaviour
     }
 
     /// <summary>
-    /// Carga las preferencias guardadas
+    /// Carga las preferencias guardadas previamente por el usuario desde PlayerPrefs.
     /// </summary>
     private void CargarPreferencias()
     {
@@ -440,12 +474,19 @@ public class ControladorOpciones : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Carga las preferencias guardadas cuando se activa el panel de opciones.
+    /// </summary>
     private void OnEnable()
     {
         // Cargar preferencias cuando se active el panel
         CargarPreferencias();
     }
 
+    /// <summary>
+    /// Aplica una resolución específica basada en su índice en la lista de resoluciones disponibles.
+    /// </summary>
+    /// <param name="index">Índice de la resolución en el array de resoluciones</param>
     public void AplicarResolucion(int index)
     {
         if (resoluciones == null || resoluciones.Length == 0 || index < 0 || index >= resoluciones.Length) return;

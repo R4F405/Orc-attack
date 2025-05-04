@@ -1,19 +1,45 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Controla el menú principal del juego.
+/// </summary>
+/// <remarks>
+/// Esta clase se encarga de gestionar los diferentes paneles del menú principal,
+/// incluyendo la navegación entre ellos y las acciones de los botones.
+/// </remarks>
 public class ControladorMenuPrincipal: MonoBehaviour
 {
     [Header("Paneles")]
+    /// <summary>
+    /// Panel que contiene los botones principales del menú.
+    /// </summary>
     [SerializeField] private GameObject panelPrincipal; // Panel con botones principales
+    
+    /// <summary>
+    /// Panel que contiene las opciones configurables del juego.
+    /// </summary>
     [SerializeField] private GameObject panelOpciones;  // Panel de opciones
+    
+    /// <summary>
+    /// Panel que contiene los créditos del juego (opcional).
+    /// </summary>
     [SerializeField] private GameObject panelCreditos;  // Panel de créditos (opcional)
     
     [Header("Configuración")]
+    /// <summary>
+    /// Nombre de la escena que se cargará al iniciar el juego.
+    /// </summary>
     [SerializeField] private string nombreEscenaJuego = "Nivel1"; // Nombre de la escena a cargar al jugar
     
-    // Nombre del sistema para debug
+    /// <summary>
+    /// Nombre del sistema para los mensajes de debug.
+    /// </summary>
     private const string NOMBRE_SISTEMA = "ControladorMenuPrincipal";
     
+    /// <summary>
+    /// Inicializa el menú principal mostrando el panel principal.
+    /// </summary>
     private void Start()
     {
         // Mostrar panel principal al inicio
@@ -21,7 +47,7 @@ public class ControladorMenuPrincipal: MonoBehaviour
     }
     
     /// <summary>
-    /// Muestra el panel principal y oculta los demás
+    /// Muestra el panel principal y oculta los demás.
     /// </summary>
     public void MostrarPanelPrincipal()
     {
@@ -31,7 +57,7 @@ public class ControladorMenuPrincipal: MonoBehaviour
     }
     
     /// <summary>
-    /// Abre el panel de opciones
+    /// Abre el panel de opciones y actualiza los controles de volumen.
     /// </summary>
     public void MostrarOpciones()
     {
@@ -54,7 +80,7 @@ public class ControladorMenuPrincipal: MonoBehaviour
     }
     
     /// <summary>
-    /// Abre el panel de créditos
+    /// Abre el panel de créditos del juego.
     /// </summary>
     public void MostrarCreditos()
     {
@@ -71,7 +97,7 @@ public class ControladorMenuPrincipal: MonoBehaviour
     }
     
     /// <summary>
-    /// Oculta todos los paneles del menú
+    /// Oculta todos los paneles del menú.
     /// </summary>
     private void OcultarTodosPaneles()
     {
@@ -85,6 +111,12 @@ public class ControladorMenuPrincipal: MonoBehaviour
             panelCreditos.SetActive(false);
     }
     
+    /// <summary>
+    /// Inicia el juego cargando la escena configurada.
+    /// </summary>
+    /// <remarks>
+    /// Prepara la transición de audio y carga la escena del juego.
+    /// </remarks>
     public void BotonIniciar()
     {
         // Verificar si hay un componente MusicaMenuPrincipal para preparar la transición
@@ -105,6 +137,9 @@ public class ControladorMenuPrincipal: MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cierra la aplicación o sale del modo juego en el editor.
+    /// </summary>
     public void BotonSalir()
     {
         Application.Quit();

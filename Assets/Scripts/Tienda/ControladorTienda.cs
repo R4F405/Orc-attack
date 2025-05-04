@@ -4,7 +4,10 @@ using TMPro;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-
+/// <summary>
+/// Controla todas las funcionalidades de la tienda del juego, incluyendo la compra de armas y objetos especiales,
+/// la gestión de la interfaz de usuario y la actualización de inventarios.
+/// </summary>
 public class ControladorTienda : MonoBehaviour
 {
     private InventarioJugador inventarioJugador;
@@ -12,6 +15,10 @@ public class ControladorTienda : MonoBehaviour
     private int monedasJugador = 0;
     private GameObject jugador;
 
+    /// <summary>
+    /// Inicializa la tienda buscando referencias al jugador, actualizando las estadísticas de armas,
+    /// precios de objetos, interfaz de usuario y generando las opciones de compra.
+    /// </summary>
     void Start()
     {
         BuscarInventarioJugador();
@@ -27,6 +34,10 @@ public class ControladorTienda : MonoBehaviour
         ActualizarTextosHabilidades();
     }
 
+    /// <summary>
+    /// Actualiza continuamente el estado de la tienda, incluyendo las monedas del jugador, 
+    /// las referencias a componentes necesarios y la interfaz de usuario.
+    /// </summary>
     void Update()
     {
         if (inventarioJugador == null) 
@@ -52,6 +63,9 @@ public class ControladorTienda : MonoBehaviour
         ActualizarTextosHabilidades();
     }
 
+    /// <summary>
+    /// Busca el objeto del jugador y obtiene su componente InventarioJugador.
+    /// </summary>
     void BuscarInventarioJugador()
     {
         GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
@@ -61,6 +75,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Busca el objeto del jugador y obtiene su componente PosicionarArmasJugador.
+    /// </summary>
     void BuscarPosicionadorArmas()
     {
         GameObject jugador = GameObject.FindGameObjectWithTag("Jugador");
@@ -70,10 +87,16 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Busca y almacena la referencia al GameObject del jugador.
+    /// </summary>
     void BuscarJugador() {
         jugador = GameObject.FindGameObjectWithTag("Jugador");
     }
 
+    /// <summary>
+    /// Clase que define una opción de arma disponible en la tienda, con todos sus atributos y estadísticas.
+    /// </summary>
     [System.Serializable]
     public class OpcionArma
     {
@@ -88,17 +111,23 @@ public class ControladorTienda : MonoBehaviour
         public GameObject prefabArma;  // Referencia al arma que se entregará al comprar
     }
 
+    /// <summary>
+    /// Clase que define un objeto o habilidad disponible para comprar en la tienda.
+    /// </summary>
     [System.Serializable]
     public class OpcionObjeto
     {
-        public int id;
+        public int id;          // ID único para identificar el tipo de habilidad
         public int precio;
         public Sprite imagen;
         public string nombre;
         public string descripcion;
     }
 
+    // Elementos de UI para mostrar la información del jugador
     public TextMeshProUGUI monedasJugadorTexto;
+    
+    // Elementos de UI para armas en venta
     public OpcionArma[] listaArmas; // Todas las armas posibles en la tienda
     public Button[] botonesArmas;  // Los botones que muestran las armas en la UI
     public Image[] imagenesArmas;  // Imagen dentro de cada botón
@@ -112,7 +141,7 @@ public class ControladorTienda : MonoBehaviour
     public Button[] botonesArmasJugador;  // Los 5 botones para mostrar las armas del jugador
     public Image[] imagenesArmasJugador;  // Las imágenes dentro de cada botón
 
-
+    // Elementos de UI para objetos en venta
     public OpcionObjeto[] listaObjetos;
     public Button botonObjeto;
     public Image imagenObjeto;
@@ -122,10 +151,15 @@ public class ControladorTienda : MonoBehaviour
     public Button[] botonesObjetosJugador;  // Los 16 botones para mostrar los objetos del jugador
     public Image[] imagenesObjetosJugador;  // Las imágenes dentro de cada botón
 
+    // Variables para almacenar las opciones actuales
     private OpcionArma[] opcionesArmasActuales;
     private OpcionObjeto opcionObjetoActual;
     private List<OpcionObjeto> objetosComprados = new List<OpcionObjeto>();
 
+    /// <summary>
+    /// Genera las opciones de armas disponibles para comprar en la tienda, 
+    /// seleccionándolas aleatoriamente de la lista completa de armas.
+    /// </summary>
     void GenerarArmas()
     {
         opcionesArmasActuales = new OpcionArma[botonesArmas.Length];
@@ -149,6 +183,11 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Genera un objeto aleatorio para comprar en la tienda.
+    /// Verifica previamente si el jugador ya tiene ciertas habilidades especiales como 
+    /// el multiplicador de calaveras para no ofrecerlas nuevamente.
+    /// </summary>
     void GenerarObjetos()
     {
         // Buscar GestorHabilidades para verificar si ya tiene el multiplicador
@@ -184,6 +223,11 @@ public class ControladorTienda : MonoBehaviour
         descripcionObjeto.text = opcionObjetoActual.descripcion;
     }
 
+    /// <summary>
+    /// Permite al jugador comprar un arma específica a cambio de calaveras.
+    /// Verifica si el jugador tiene suficientes calaveras y no supera el límite de armas.
+    /// </summary>
+    /// <param name="indice">Índice del arma a comprar en la matriz de opciones actuales</param>
     public void ComprarArma(int indice)
     {
         // Validar que no supere el máximo de 5 armas
@@ -225,6 +269,10 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Permite al jugador comprar un objeto o habilidad a cambio de calaveras.
+    /// Verifica si el jugador tiene suficientes calaveras y aplica la habilidad correspondiente.
+    /// </summary>
     public void ComprarObjeto()
     {
         OpcionObjeto objetoSeleccionado = opcionObjetoActual;
@@ -289,6 +337,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la interfaz de usuario que muestra las armas que el jugador actualmente posee.
+    /// </summary>
     void UpdateArmasJugadorUI()
     {
         if (posicionadorArmas == null) return;
@@ -316,6 +367,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la interfaz de usuario que muestra los objetos que el jugador ha comprado.
+    /// </summary>
     void UpdateObjetosJugadorUI()
     {
         List<OpcionObjeto> objetosActuales = objetosComprados;
@@ -336,7 +390,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Actualiza el texto que muestra la cantidad de calaveras que tiene el jugador.
+    /// </summary>
     void ActualizarUI()
     {
         if (inventarioJugador != null && monedasJugadorTexto != null)
@@ -345,6 +401,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Renueva los productos de la tienda a cambio de calaveras (coste de 5 calaveras).
+    /// </summary>
     public void RenovarTiendaConCosto()
     {
         if (inventarioJugador.ObtenerCantidadCalaveras() >= 5) //De momento el precio de renovar siempre es 5
@@ -368,6 +427,9 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Renueva los productos de la tienda sin coste (utilizado al inicio o en eventos especiales).
+    /// </summary>
     public void RenovarTiendaSinCosto()
     {
         ActualizarUI();
@@ -379,7 +441,9 @@ public class ControladorTienda : MonoBehaviour
         GenerarObjetos();
     }
     
-    // Método para actualizar los textos de habilidades
+    /// <summary>
+    /// Actualiza los textos de las habilidades en el GestorHabilidades.
+    /// </summary>
     private void ActualizarTextosHabilidades()
     {
         if (jugador != null)
@@ -392,6 +456,10 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Calcula y actualiza las estadísticas y precios de las armas disponibles en la tienda
+    /// basándose en sus atributos (daño, crítico, recarga, robo de salud).
+    /// </summary>
     void ActualizarEstadisticasArmas()
     {
         foreach (OpcionArma arma in listaArmas)
@@ -476,6 +544,10 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Establece los precios de los objetos/habilidades basándose en su ID y el nivel actual del juego.
+    /// Los precios aumentan ligeramente con cada nivel para mantener el balance.
+    /// </summary>
     void ActualizarPreciosObjetos()
     {
         foreach (OpcionObjeto objeto in listaObjetos)

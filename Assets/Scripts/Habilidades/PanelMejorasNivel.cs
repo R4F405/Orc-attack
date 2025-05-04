@@ -3,39 +3,111 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
+/// <summary>
+/// Gestiona el panel de selección de mejoras al subir de nivel.
+/// </summary>
+/// <remarks>
+/// Esta clase se encarga de mostrar opciones de mejora aleatorias cuando el jugador 
+/// sube de nivel, permitiendo al jugador elegir una o varias mejoras para su personaje.
+/// Controla la visualización del panel, la generación de opciones aleatorias, y la
+/// aplicación de las mejoras seleccionadas a través del GestorHabilidades.
+/// </remarks>
 public class PanelMejorasNivel : MonoBehaviour
 {
+    /// <summary>
+    /// Define una opción de mejora que se puede mostrar en el panel.
+    /// </summary>
     [System.Serializable]
     public class OpcionMejora
     {
+        /// <summary>
+        /// Nombre de la mejora que se mostrará en la interfaz.
+        /// </summary>
         public string nombre;
+        /// <summary>
+        /// Descripción detallada de la mejora que explica su efecto.
+        /// </summary>
         public string descripcion;
+        /// <summary>
+        /// ID único que identifica la mejora para su aplicación.
+        /// </summary>
         public int idHabilidad;
+        /// <summary>
+        /// Icono visual que representa la mejora en la interfaz.
+        /// </summary>
         public Sprite icono;
     }
 
     [Header("Referencias UI")]
+    /// <summary>
+    /// Botones que representan las diferentes opciones de mejora.
+    /// </summary>
     public Button[] botonesOpciones;
+    /// <summary>
+    /// Imágenes donde se mostrarán los iconos de las mejoras.
+    /// </summary>
     public Image[] iconosOpciones;
+    /// <summary>
+    /// Textos que mostrarán los nombres de las mejoras.
+    /// </summary>
     public TextMeshProUGUI[] nombresOpciones;
+    /// <summary>
+    /// Textos que mostrarán las descripciones detalladas de las mejoras.
+    /// </summary>
     public TextMeshProUGUI[] descripcionesOpciones;
+    /// <summary>
+    /// Botón para confirmar y continuar al siguiente nivel después de seleccionar mejoras.
+    /// </summary>
     public Button botonSiguienteNivel;
+    /// <summary>
+    /// Texto que muestra cuántas mejoras puede seleccionar el jugador.
+    /// </summary>
     public TextMeshProUGUI textoMejorasDisponibles;
 
     [Header("Opciones de Mejora")]
+    /// <summary>
+    /// Lista completa de todas las mejoras posibles que pueden aparecer.
+    /// </summary>
     public List<OpcionMejora> todasLasMejoras = new List<OpcionMejora>();
     
     [Header("Configuración")]
+    /// <summary>
+    /// Cantidad de mejoras que el jugador puede seleccionar por nivel de experiencia.
+    /// </summary>
     public int mejorasPorNivel = 1; // Cantidad de mejoras que puede seleccionar por nivel de experiencia
     
+    /// <summary>
+    /// Referencia al gestor de habilidades del jugador.
+    /// </summary>
     private GestorHabilidades gestorHabilidades;
+    /// <summary>
+    /// Referencia al controlador de niveles del juego.
+    /// </summary>
     private ControladorNiveles controladorNiveles;
+    /// <summary>
+    /// Referencia a la barra de experiencia del jugador.
+    /// </summary>
     private BarraExperiencia barraExperiencia;
+    /// <summary>
+    /// Lista de opciones de mejora actualmente mostradas en el panel.
+    /// </summary>
     private List<OpcionMejora> opcionesActuales = new List<OpcionMejora>();
+    /// <summary>
+    /// Número total de mejoras disponibles para seleccionar en esta sesión.
+    /// </summary>
     private int mejorasDisponibles = 0;
+    /// <summary>
+    /// Número de mejoras ya seleccionadas por el jugador.
+    /// </summary>
     private int mejorasSeleccionadas = 0;
+    /// <summary>
+    /// Último nivel de experiencia donde se aplicaron mejoras.
+    /// </summary>
     private int ultimoNivelProcesado = 0; // Último nivel de experiencia donde se aplicaron mejoras
 
+    /// <summary>
+    /// Inicializa los componentes y configura los botones del panel.
+    /// </summary>
     private void Awake()
     {
         // Desactivar el panel al inicio
@@ -56,6 +128,14 @@ public class PanelMejorasNivel : MonoBehaviour
         botonSiguienteNivel.gameObject.SetActive(false); // Ocultar hasta que se elija una mejora
     }
 
+    /// <summary>
+    /// Muestra el panel de mejoras, pausa el juego y genera opciones aleatorias.
+    /// </summary>
+    /// <remarks>
+    /// Este método se llama cuando el jugador sube de nivel y debe seleccionar sus mejoras.
+    /// Calcula cuántas mejoras están disponibles según el nivel alcanzado, configura el panel
+    /// y muestra las opciones generadas aleatoriamente.
+    /// </remarks>
     public void MostrarPanel()
     {
         Debug.Log("PanelMejorasNivel.MostrarPanel() llamado");
@@ -162,6 +242,9 @@ public class PanelMejorasNivel : MonoBehaviour
         ConfigurarOpcionesUI();
     }
 
+    /// <summary>
+    /// Actualiza el texto que muestra cuántas mejoras puede seleccionar el jugador.
+    /// </summary>
     private void ActualizarTextoMejorasDisponibles()
     {
         if (textoMejorasDisponibles != null)
@@ -170,6 +253,13 @@ public class PanelMejorasNivel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Genera un conjunto aleatorio de opciones de mejora para mostrar al jugador.
+    /// </summary>
+    /// <remarks>
+    /// Selecciona aleatoriamente mejoras de la lista completa de todas las mejoras,
+    /// excluyendo ciertas mejoras específicas que no deben aparecer en este panel.
+    /// </remarks>
     private void GenerarOpcionesAleatorias()
     {
         // Limpiar opciones actuales
@@ -209,6 +299,13 @@ public class PanelMejorasNivel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Configura la interfaz de usuario con las opciones de mejora seleccionadas.
+    /// </summary>
+    /// <remarks>
+    /// Asigna las mejoras generadas aleatoriamente a los botones correspondientes,
+    /// configurando textos, iconos y visibilidad de los elementos de la interfaz.
+    /// </remarks>
     private void ConfigurarOpcionesUI()
     {
         // Configurar cada botón con la mejora correspondiente
@@ -240,6 +337,14 @@ public class PanelMejorasNivel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Procesa la selección de una mejora por parte del jugador.
+    /// </summary>
+    /// <param name="indice">Índice del botón seleccionado en el array de botones.</param>
+    /// <remarks>
+    /// Aplica la mejora seleccionada, actualiza el contador de mejoras disponibles,
+    /// y determina si mostrar más opciones o el botón para continuar al siguiente nivel.
+    /// </remarks>
     private void SeleccionarMejora(int indice)
     {
         if (indice >= 0 && indice < opcionesActuales.Count)
@@ -275,6 +380,13 @@ public class PanelMejorasNivel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Continúa al siguiente nivel después de seleccionar todas las mejoras.
+    /// </summary>
+    /// <remarks>
+    /// Guarda el nivel de experiencia actual como el último procesado,
+    /// cierra el panel de mejoras y muestra la tienda a través del controlador de niveles.
+    /// </remarks>
     public void ContinuarASiguienteNivel()
     {
         // Guardar el nivel actual como el último procesado

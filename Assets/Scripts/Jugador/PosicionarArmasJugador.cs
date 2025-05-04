@@ -1,14 +1,43 @@
 using UnityEngine;
 
+/// <summary>
+/// Gestiona la posición y configuración de las armas alrededor del jugador.
+/// </summary>
+/// <remarks>
+/// Esta clase se encarga de instanciar las armas seleccionadas por el jugador
+/// y posicionarlas estratégicamente alrededor del personaje. Soporta diferentes
+/// configuraciones según la cantidad de armas equipadas.
+/// </remarks>
 public class PosicionarArmasJugador : MonoBehaviour
 {
+    /// <summary>
+    /// Array de prefabs de armas que pueden ser equipadas por el jugador.
+    /// </summary>
     public GameObject[] prefabricadosDeArmas; // Array de prefabricados de armas
+    
+    /// <summary>
+    /// Distancia horizontal entre el jugador y sus armas.
+    /// </summary>
     public float distanciaHorizontal = 1.5f; // Distancia horizontal entre las armas
+    
+    /// <summary>
+    /// Distancia vertical entre el jugador y sus armas.
+    /// </summary>
     public float distanciaVertical = 1.5f; // Distancia vertical entre las armas
+    
+    /// <summary>
+    /// Número total de armas que el jugador tiene equipadas.
+    /// </summary>
     public int numeroDeArmas = 1; // Número total de armas que el jugador tiene
 
+    /// <summary>
+    /// Array de referencias a las instancias de armas equipadas actualmente.
+    /// </summary>
     private GameObject[] armasInstanciadas;  // Array de instancias de las armas
 
+    /// <summary>
+    /// Inicializa y posiciona las armas al iniciar el juego.
+    /// </summary>
     private void Start()
     {
         // Inicializar el array de armas instanciadas
@@ -19,6 +48,17 @@ public class PosicionarArmasJugador : MonoBehaviour
         PosicionarArmas();
     }
 
+    /// <summary>
+    /// Crea y posiciona las armas alrededor del jugador según el número de armas configurado.
+    /// </summary>
+    /// <remarks>
+    /// Dependiendo del número de armas, establece diferentes patrones de posicionamiento:
+    /// - 1 arma: A la izquierda del jugador
+    /// - 2 armas: Una a cada lado del jugador
+    /// - 3 armas: Dos a los lados y una arriba
+    /// - 4 armas: En las cuatro direcciones cardinales
+    /// - 5 armas: Cuatro en diagonal y una arriba
+    /// </remarks>
     public void PosicionarArmas()
     {
         // Si no hay prefabricados de armas, no hacer nada
@@ -91,6 +131,9 @@ public class PosicionarArmasJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza continuamente la posición de las armas para seguir al jugador.
+    /// </summary>
     private void Update()
     {
         if (armasInstanciadas == null || armasInstanciadas.Length == 0) return;
@@ -133,6 +176,11 @@ public class PosicionarArmasJugador : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Obtiene la posición actual de un arma específica relativa al jugador.
+    /// </summary>
+    /// <param name="arma">El GameObject del arma cuya posición se quiere obtener.</param>
+    /// <returns>Posición en coordenadas mundiales del arma.</returns>
     public Vector3 ObtenerPosicionActualDelArma(GameObject arma)
     {
         for (int i = 0; i < armasInstanciadas.Length; i++)
@@ -145,6 +193,13 @@ public class PosicionarArmasJugador : MonoBehaviour
         return arma.transform.position; // En caso de error, usa su posición actual
     }
 
+    /// <summary>
+    /// Añade una nueva arma al equipamiento del jugador.
+    /// </summary>
+    /// <param name="nuevaArma">Prefab del arma a añadir.</param>
+    /// <remarks>
+    /// Elimina todas las armas existentes y reconfigura el equipamiento con la nueva arma añadida.
+    /// </remarks>
     public void AgregarArma(GameObject nuevaArma)
     {
         // Eliminar todas las armas previas en la capa "Armas"
@@ -179,6 +234,10 @@ public class PosicionarArmasJugador : MonoBehaviour
         PosicionarArmas();
     }
 
+    /// <summary>
+    /// Devuelve un array con todas las instancias de armas actuales.
+    /// </summary>
+    /// <returns>Array de GameObjects que representan las armas equipadas actualmente.</returns>
     public GameObject[] ObtenerArmasActuales()
     {
         return armasInstanciadas;

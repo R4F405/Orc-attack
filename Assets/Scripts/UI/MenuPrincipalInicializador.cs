@@ -3,16 +3,26 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Este script debe añadirse a un objeto en la escena del Menú Principal.
-/// Se encarga de añadir sonidos a los botones del menú principal.
+/// Se encarga de añadir sonidos a los botones del menú principal para mejorar la experiencia de usuario.
+/// Puede configurarse para aplicar automáticamente los sonidos a todos los botones de la escena o solo a los especificados.
 /// </summary>
 public class MenuPrincipalInicializador : MonoBehaviour
 {
-    // Lista de botones que deben tener sonido
+    /// <summary>
+    /// Lista de botones a los que se les añadirá el sonido de clic.
+    /// Esta lista se utiliza cuando aplicarATodosLosBotones es false.
+    /// </summary>
     public Button[] botonesConSonido;
     
-    // Si está marcado, añadirá sonido a todos los botones encontrados en la escena
+    /// <summary>
+    /// Si está activado, buscará automáticamente todos los botones en la escena y les añadirá el sonido de clic.
+    /// Si está desactivado, solo se aplicará a los botones específicos en el array botonesConSonido.
+    /// </summary>
     public bool aplicarATodosLosBotones = true;
     
+    /// <summary>
+    /// Al iniciar, busca y configura los botones para reproducir sonidos al hacer clic.
+    /// </summary>
     void Start()
     {
         Debug.Log("MenuPrincipalInicializador: Inicializando...");
@@ -40,6 +50,10 @@ public class MenuPrincipalInicializador : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Al destruir este componente, elimina los listeners de los botones para evitar referencias nulas.
+    /// Esto es importante para prevenir errores cuando se cambia de escena.
+    /// </summary>
     void OnDestroy()
     {
         // Limpiar los listeners al destruir el objeto

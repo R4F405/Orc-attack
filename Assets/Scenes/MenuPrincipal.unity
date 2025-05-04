@@ -4156,7 +4156,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1399615835}
-        m_TargetAssemblyTypeName: ControladorEscenas, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControladorMenuPrincipal, Assembly-CSharp
         m_MethodName: BotonIniciar
         m_Mode: 1
         m_Arguments:

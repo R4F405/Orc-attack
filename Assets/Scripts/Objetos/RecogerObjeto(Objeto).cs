@@ -1,16 +1,52 @@
 using UnityEngine;
 
+/// <summary>
+/// Controla la recolección de objetos en el juego.
+/// </summary>
+/// <remarks>
+/// Esta clase gestiona el comportamiento de objetos recolectables como calaveras,
+/// incluyendo su detección, interacción con el jugador y efectos al ser recogidos.
+/// </remarks>
 public class RecogerObjeto : MonoBehaviour
 {
-    public float rangoRecoleccion = 1f; // Rango en el que el jugador puede recogerlo
-    public int cantidad = 1; // Cantidad que suma este objeto
-    public AudioClip sonidoRecoleccion; // Sonido al recoger la calavera
+    /// <summary>
+    /// Distancia máxima a la que el jugador puede recoger este objeto.
+    /// </summary>
+    public float rangoRecoleccion = 1f;
+    
+    /// <summary>
+    /// Cantidad de recursos que suma este objeto al inventario del jugador.
+    /// </summary>
+    public int cantidad = 1;
+    
+    /// <summary>
+    /// Sonido que se reproduce cuando el objeto es recogido.
+    /// </summary>
+    public AudioClip sonidoRecoleccion;
 
-    private Transform jugador; // Referencia al jugador
-    private bool jugadorCerca = false; // Verifica si el jugador está dentro del rango
-    private AudioSource audioSource; // Componente de audio
-    private bool yaRecogido = false; // Evita recoger múltiples veces
+    /// <summary>
+    /// Referencia al transform del jugador.
+    /// </summary>
+    private Transform jugador;
+    
+    /// <summary>
+    /// Indica si el jugador está dentro del rango de recolección.
+    /// </summary>
+    private bool jugadorCerca = false;
+    
+    /// <summary>
+    /// Componente para reproducir efectos de sonido.
+    /// </summary>
+    private AudioSource audioSource;
+    
+    /// <summary>
+    /// Evita que el objeto sea recogido múltiples veces.
+    /// </summary>
+    private bool yaRecogido = false;
 
+    /// <summary>
+    /// Inicializa el componente de audio al iniciar.
+    /// </summary>
     private void Start()
     {
         // Obtener o crear componente AudioSource
@@ -21,6 +57,9 @@ public class RecogerObjeto : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza el estado de proximidad del jugador en cada frame.
+    /// </summary>
     private void Update()
     {
         if (jugador != null && !yaRecogido)
@@ -30,6 +69,13 @@ public class RecogerObjeto : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Intenta recoger el objeto si el jugador está cerca y el objeto no ha sido recogido.
+    /// </summary>
+    /// <remarks>
+    /// Añade la cantidad especificada al inventario del jugador, reproduce sonido
+    /// y marca el objeto para ser destruido.
+    /// </remarks>
     public void IntentarRecoger()
     {
         // Si ya fue recogido o el jugador no está cerca, no hacer nada
@@ -71,6 +117,10 @@ public class RecogerObjeto : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detecta cuando el jugador entra en contacto con el objeto.
+    /// </summary>
+    /// <param name="collision">Collider que ha entrado en contacto con este objeto.</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Jugador") && !yaRecogido)
@@ -81,6 +131,10 @@ public class RecogerObjeto : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detecta cuando el jugador sale del área de contacto del objeto.
+    /// </summary>
+    /// <param name="collision">Collider que ha salido del contacto con este objeto.</param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Jugador") && !yaRecogido)

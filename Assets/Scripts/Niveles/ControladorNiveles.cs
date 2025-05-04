@@ -1,23 +1,83 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Controla el sistema de niveles del juego.
+/// </summary>
+/// <remarks>
+/// Esta clase se encarga de gestionar el progreso entre niveles, incluyendo el temporizador,
+/// la generación de enemigos, la actualización de la interfaz y la transición entre niveles.
+/// </remarks>
 public class ControladorNiveles : MonoBehaviour
 {
+    /// <summary>
+    /// Nivel actual en el que se encuentra el jugador.
+    /// </summary>
     public int nivelActual = 1;
+    
+    /// <summary>
+    /// Tiempo restante del nivel actual en segundos.
+    /// </summary>
     public float tiempoRestante = 40f;
+    
+    /// <summary>
+    /// Panel que contiene la tienda entre niveles.
+    /// </summary>
     public GameObject panelTienda;
+    
+    /// <summary>
+    /// Panel que muestra las mejoras disponibles al subir de nivel.
+    /// </summary>
     public GameObject panelMejorasNivel;
+    
+    /// <summary>
+    /// Texto que muestra el nivel actual en la interfaz.
+    /// </summary>
     public TextMeshProUGUI textoNivel;
+    
+    /// <summary>
+    /// Texto que muestra el tiempo restante en la interfaz.
+    /// </summary>
     public TextMeshProUGUI textoTiempo;
+    
+    /// <summary>
+    /// Generador de enemigos orcos.
+    /// </summary>
     public GameObject GeneradorOrcos;
+    
+    /// <summary>
+    /// Generador de enemigos magos (activo a partir del nivel 3).
+    /// </summary>
     public GameObject GeneradorMagos;
+    
+    /// <summary>
+    /// Generador de cajas destructibles.
+    /// </summary>
     public GameObject GeneradorCajas;
-    public AudioClip sonidoFinNivel; // Sonido al finalizar un nivel
+    
+    /// <summary>
+    /// Sonido que se reproduce al finalizar un nivel.
+    /// </summary>
+    public AudioClip sonidoFinNivel;
 
+    /// <summary>
+    /// Indica si el nivel está actualmente en curso.
+    /// </summary>
     private bool nivelEnCurso = true;
+    
+    /// <summary>
+    /// Referencia al componente que gestiona las mejoras de nivel.
+    /// </summary>
     private PanelMejorasNivel gestorMejorasNivel;
+    
+    /// <summary>
+    /// Componente para reproducir efectos de sonido.
+    /// </summary>
     private AudioSource audioSource;
 
+    /// <summary>
+    /// Inicializa el controlador de niveles y configura el primer nivel.
+    /// </summary>
     void Start()
     {
         // Obtener o crear componente AudioSource
@@ -41,6 +101,9 @@ public class ControladorNiveles : MonoBehaviour
             GeneradorMagos.SetActive(nivelActual >= 3);
     }
 
+    /// <summary>
+    /// Actualiza el temporizador del nivel y verifica si ha terminado.
+    /// </summary>
     void Update()
     {
         if (nivelEnCurso)
@@ -55,6 +118,13 @@ public class ControladorNiveles : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finaliza el nivel actual, desactiva los generadores y muestra las opciones de mejora.
+    /// </summary>
+    /// <remarks>
+    /// Desactiva todos los generadores, elimina enemigos y objetos del nivel,
+    /// reproduce el sonido de fin de nivel y prepara las pantallas de mejora.
+    /// </remarks>
     void FinalizarNivel()
     {
         Debug.Log("Finalizando nivel...");
@@ -89,6 +159,12 @@ public class ControladorNiveles : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Muestra el panel de mejoras disponibles al finalizar un nivel.
+    /// </summary>
+    /// <remarks>
+    /// Si el panel o el gestor no están disponibles, muestra la tienda como alternativa.
+    /// </remarks>
     void MostrarPanelMejorasNivel()
     {
         if (panelMejorasNivel != null && gestorMejorasNivel != null)
@@ -106,6 +182,9 @@ public class ControladorNiveles : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Muestra la tienda entre niveles y pausa el juego.
+    /// </summary>
     public void MostrarTienda()
     {
         // Pausar el juego al mostrar la tienda
@@ -114,6 +193,13 @@ public class ControladorNiveles : MonoBehaviour
         panelTienda.SetActive(true);
     }
 
+    /// <summary>
+    /// Configura e inicia el siguiente nivel del juego.
+    /// </summary>
+    /// <remarks>
+    /// Incrementa el contador de nivel, reinicia el temporizador, activa los generadores
+    /// apropiados según el nivel, y restaura la salud del jugador al máximo.
+    /// </remarks>
     public void IniciarSiguienteNivel()
     {
         // Reanudar el juego al iniciar el siguiente nivel
@@ -146,6 +232,10 @@ public class ControladorNiveles : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Elimina todos los objetos de una capa específica.
+    /// </summary>
+    /// <param name="nombreCapa">Nombre de la capa cuyos objetos se eliminarán.</param>
     void DestruirObjetosPorCapa(string nombreCapa)
     {
         int capa = LayerMask.NameToLayer(nombreCapa);
@@ -160,6 +250,9 @@ public class ControladorNiveles : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza los elementos de la interfaz de usuario con la información del nivel.
+    /// </summary>
     void ActualizarUI()
     {
         textoNivel.text = "Nivel " + nivelActual;

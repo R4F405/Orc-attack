@@ -3,25 +3,64 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Gestor centralizado de sonidos para la interfaz de usuario.
-/// Añadir a un GameObject en la escena que persista durante todo el juego.
 /// </summary>
+/// <remarks>
+/// Este componente debe añadirse a un GameObject que persistirá durante todo el juego
+/// mediante el patrón Singleton. Se encarga de reproducir sonidos comunes de la interfaz
+/// como clics, errores y compras, garantizando una experiencia auditiva consistente en
+/// todas las pantallas y menús del juego.
+/// 
+/// Interactúa con el GestorAudioGlobal para respetar la configuración de volumen del jugador.
+/// </remarks>
 public class GestorSonidosUI : MonoBehaviour
 {
+    /// <summary>
+    /// Referencia estática a la instancia única del gestor de sonidos UI (patrón Singleton).
+    /// </summary>
     public static GestorSonidosUI instancia;
 
-    // Sonidos básicos
+    /// <summary>
+    /// Clip de audio para el sonido de clic en botones y elementos interactivos.
+    /// </summary>
     public AudioClip sonidoClic;
+    
+    /// <summary>
+    /// Volumen base para el sonido de clic (0-1).
+    /// </summary>
     public float volumenClic = 0.5f;
     
+    /// <summary>
+    /// Clip de audio para el sonido de error o acción no permitida.
+    /// </summary>
     public AudioClip sonidoError;
+    
+    /// <summary>
+    /// Volumen base para el sonido de error (0-1).
+    /// </summary>
     public float volumenError = 0.7f;
     
+    /// <summary>
+    /// Clip de audio para el sonido de compra o transacción exitosa.
+    /// </summary>
     public AudioClip sonidoCompra;
+    
+    /// <summary>
+    /// Volumen base para el sonido de compra (0-1).
+    /// </summary>
     public float volumenCompra = 0.6f;
     
+    /// <summary>
+    /// Referencia interna al componente AudioSource utilizado para reproducir los sonidos.
+    /// </summary>
     private AudioSource _audioSource;
     
-    // Propiedad para acceder al AudioSource desde otros scripts
+    /// <summary>
+    /// Propiedad para acceder al AudioSource desde otros scripts, garantizando su existencia.
+    /// </summary>
+    /// <remarks>
+    /// Si el AudioSource no existe, lo crea automáticamente, asegurando que siempre
+    /// haya un componente válido para reproducir sonidos.
+    /// </remarks>
     public AudioSource audioSource 
     {
         get 
@@ -39,6 +78,13 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Inicializa el gestor de sonidos UI, configurando el patrón Singleton.
+    /// </summary>
+    /// <remarks>
+    /// Establece esta instancia como persistente entre escenas y configura
+    /// el AudioSource necesario para reproducir sonidos.
+    /// </remarks>
     private void Awake()
     {
         // Patrón Singleton simple
@@ -67,6 +113,13 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Limpia las referencias y suscripciones cuando se destruye el objeto.
+    /// </summary>
+    /// <remarks>
+    /// Cancela la suscripción al evento de carga de escenas y limpia la referencia
+    /// singleton si esta instancia es la global.
+    /// </remarks>
     private void OnDestroy()
     {
         // Desuscribirse de eventos si este objeto es destruido
@@ -80,7 +133,15 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
     
-    // Este método se llama cada vez que se carga una escena
+    /// <summary>
+    /// Manejador de evento que se ejecuta cada vez que se carga una nueva escena.
+    /// </summary>
+    /// <param name="scene">La escena que se acaba de cargar.</param>
+    /// <param name="mode">El modo en que se cargó la escena.</param>
+    /// <remarks>
+    /// Asegura que el AudioSource esté habilitado después de cargar una nueva escena
+    /// y actualiza el volumen de acuerdo con la configuración global.
+    /// </remarks>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("GestorSonidosUI: Nueva escena cargada - " + scene.name);
@@ -96,13 +157,22 @@ public class GestorSonidosUI : MonoBehaviour
         ActualizarVolumen();
     }
     
+    /// <summary>
+    /// Inicializa el AudioSource y actualiza su volumen según la configuración global.
+    /// </summary>
     private void Start()
     {
         // Actualizar el volumen según la configuración global al inicio
         ActualizarVolumen();
     }
     
-    // Actualiza el volumen según la configuración global
+    /// <summary>
+    /// Actualiza el volumen del AudioSource de acuerdo con la configuración global.
+    /// </summary>
+    /// <remarks>
+    /// Este método sincroniza el volumen del AudioSource con el GestorAudioGlobal,
+    /// aplicando los modificadores de volumen para sonidos de UI.
+    /// </remarks>
     private void ActualizarVolumen()
     {
         if (GestorAudioGlobal.instancia != null)
@@ -112,7 +182,13 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
 
-    // Métodos públicos para reproducir sonidos
+    /// <summary>
+    /// Reproduce el sonido estándar de clic para elementos de interfaz.
+    /// </summary>
+    /// <remarks>
+    /// Se utiliza para proporcionar retroalimentación auditiva cuando el jugador
+    /// interactúa con elementos como botones, toggles, etc.
+    /// </remarks>
     public void ReproducirSonidoClic()
     {
         if (sonidoClic == null)
@@ -131,6 +207,13 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Reproduce el sonido de error para acciones no permitidas.
+    /// </summary>
+    /// <remarks>
+    /// Este sonido debe utilizarse para notificar al jugador cuando una acción
+    /// no se puede realizar, como intentar una compra sin suficientes recursos.
+    /// </remarks>
     public void ReproducirSonidoError()
     {
         if (sonidoError == null)
@@ -149,6 +232,13 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Reproduce el sonido de compra o transacción exitosa.
+    /// </summary>
+    /// <remarks>
+    /// Este sonido debe utilizarse para confirmar transacciones completadas exitosamente,
+    /// como compras de objetos o mejoras en la tienda del juego.
+    /// </remarks>
     public void ReproducirSonidoCompra()
     {
         if (sonidoCompra == null)
@@ -167,7 +257,16 @@ public class GestorSonidosUI : MonoBehaviour
         }
     }
     
-    // Método privado para reproducir cualquier sonido
+    /// <summary>
+    /// Método interno para reproducir un clip de audio con un volumen específico.
+    /// </summary>
+    /// <param name="clip">El clip de audio a reproducir.</param>
+    /// <param name="volumen">El volumen base para la reproducción (0-1).</param>
+    /// <remarks>
+    /// Este método es una implementación de respaldo que se utiliza cuando no está
+    /// disponible el GestorAudioGlobal. Se asegura de que el AudioSource esté disponible
+    /// y habilitado antes de reproducir el sonido.
+    /// </remarks>
     private void ReproducirSonido(AudioClip clip, float volumen)
     {
         // Si no tenemos clip o audiosource, salir

@@ -1,20 +1,68 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Gestiona la salud y la muerte del jugador.
+/// </summary>
+/// <remarks>
+/// Esta clase se encarga de controlar la vida del jugador, incluyendo la recepción de daño,
+/// la recuperación automática de salud, la muerte y sus consecuencias.
+/// </remarks>
 public class VidaJugador : MonoBehaviour
 {
+    /// <summary>
+    /// Cantidad máxima de salud que puede tener el jugador.
+    /// </summary>
     public int saludMaxima = 15;
+    
+    /// <summary>
+    /// Tiempo en segundos entre cada recuperación automática de salud.
+    /// </summary>
     public float tiempoEntreRecuperaciones = 10f; // Intervalo en segundos
+    
+    /// <summary>
+    /// Sonido que se reproduce cuando el jugador recibe daño.
+    /// </summary>
     public AudioClip sonidoDaño; // Sonido cuando el jugador recibe daño
+    
+    /// <summary>
+    /// Sonido que se reproduce cuando el jugador muere.
+    /// </summary>
     public AudioClip sonidoMuerte; // Sonido cuando el jugador muere
 
+    /// <summary>
+    /// Cantidad de salud que se recupera en cada intervalo automático.
+    /// </summary>
     private int cantidadRecuperacion = 1;         // Cantidad de vida que se recupera
+    
+    /// <summary>
+    /// Referencia al componente que controla el movimiento del jugador.
+    /// </summary>
     private MovimientoJugador movimientoJugador; 
+    
+    /// <summary>
+    /// Cantidad actual de salud del jugador.
+    /// </summary>
     private int saludActual;
+    
+    /// <summary>
+    /// Componente para reproducir efectos de sonido.
+    /// </summary>
     private AudioSource audioSource;
+    
+    /// <summary>
+    /// Referencia al controlador del panel que se muestra cuando el jugador es eliminado.
+    /// </summary>
     private PanelEliminadoController panelEliminado;
+    
+    /// <summary>
+    /// Indica si el jugador ya ha muerto para evitar ejecutar la muerte múltiples veces.
+    /// </summary>
     private bool haMuerto = false; // Variable para evitar que se ejecute dos veces
 
+    /// <summary>
+    /// Inicializa los componentes y la salud del jugador.
+    /// </summary>
     private void Start()
     {
         saludActual = saludMaxima; // Inicia con la salud máxima
@@ -39,7 +87,10 @@ public class VidaJugador : MonoBehaviour
         StartCoroutine(RecuperacionVidaAutomatica());
     }
 
-    // Coroutine que maneja la recuperación de vida cada X segundos
+    /// <summary>
+    /// Rutina que maneja la recuperación automática de salud a intervalos regulares.
+    /// </summary>
+    /// <returns>Objeto IEnumerator para la corrutina.</returns>
     private IEnumerator RecuperacionVidaAutomatica()
     {
         while (true)
@@ -49,6 +100,10 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduce el tiempo entre recuperaciones automáticas de salud.
+    /// </summary>
+    /// <param name="cantidad">Segundos a restar del tiempo entre recuperaciones.</param>
     public void DisminuirTiempoEntreRecuperaciones(float cantidad)
     {
         if (tiempoEntreRecuperaciones > cantidad) {
@@ -57,6 +112,10 @@ public class VidaJugador : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Aumenta la salud máxima del jugador.
+    /// </summary>
+    /// <param name="cantidad">Cantidad a aumentar en la salud máxima.</param>
     public void AumentarSaludMaxima(int cantidad)
     {
         saludMaxima += cantidad;
@@ -66,6 +125,10 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restaura salud al jugador sin exceder su salud máxima.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de salud a restaurar.</param>
     public void Curar(int cantidad)
     {
         saludActual += cantidad;
@@ -75,6 +138,10 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduce la salud del jugador y verifica si debe morir.
+    /// </summary>
+    /// <param name="cantidad">Cantidad de daño a aplicar.</param>
     public void RecibirDaño(int cantidad)
     {
         saludActual -= cantidad;
@@ -91,6 +158,9 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Maneja la muerte del jugador, desactivando controles y mostrando la pantalla de fin de juego.
+    /// </summary>
     private void Muerte()
     {
         if (haMuerto) return; // Evita que se ejecute dos veces
@@ -120,6 +190,10 @@ public class VidaJugador : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rutina de emergencia para volver al menú principal cuando no se encuentra el panel de eliminado.
+    /// </summary>
+    /// <returns>Objeto IEnumerator para la corrutina.</returns>
     private System.Collections.IEnumerator VolverAlMenuSinPanel()
     {
         // Esperar 5 segundos en tiempo real (no afectado por Time.timeScale)
@@ -134,11 +208,19 @@ public class VidaJugador : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0); // Asume que el menú principal es la escena 0
     }
 
+    /// <summary>
+    /// Devuelve la cantidad actual de salud del jugador.
+    /// </summary>
+    /// <returns>Salud actual del jugador.</returns>
     public int ObtenerSalud()
     {
         return saludActual;
     }
 
+    /// <summary>
+    /// Devuelve la cantidad máxima de salud del jugador.
+    /// </summary>
+    /// <returns>Salud máxima del jugador.</returns>
     public int ObtenerSaludMaxima()
     {
         return saludMaxima;

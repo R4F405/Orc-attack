@@ -1,17 +1,58 @@
 using UnityEngine;
 
+/// <summary>
+/// Controla el comportamiento avanzado de la cámara con límites de mapa.
+/// </summary>
+/// <remarks>
+/// Esta clase permite que la cámara siga al jugador respetando límites
+/// definidos del mapa. Incluye opciones para activar/desactivar los límites
+/// y herramientas visuales en el editor para facilitar su configuración.
+/// </remarks>
 public class ControladorCamaraBrotato : MonoBehaviour
 {
+    /// <summary>
+    /// Referencia al objeto del jugador que la cámara debe seguir.
+    /// </summary>
     private GameObject jugador;
+    
+    /// <summary>
+    /// Referencia a la cuadrícula de fondo para posicionar correctamente la cámara.
+    /// </summary>
     public Grid background;
     
+    /// <summary>
+    /// Configura los límites del área de juego que restringen el movimiento de la cámara.
+    /// </summary>
     [Header("Límites del mapa")]
+    
+    /// <summary>
+    /// Determina si se aplican los límites al movimiento de la cámara.
+    /// </summary>
     public bool usarLimites = true;
+    
+    /// <summary>
+    /// Límite horizontal izquierdo del área de juego.
+    /// </summary>
     public float limiteIzquierdo = -20f;
+    
+    /// <summary>
+    /// Límite horizontal derecho del área de juego.
+    /// </summary>
     public float limiteDerecho = 20f;
+    
+    /// <summary>
+    /// Límite vertical superior del área de juego.
+    /// </summary>
     public float limiteSuperior = 15f;
+    
+    /// <summary>
+    /// Límite vertical inferior del área de juego.
+    /// </summary>
     public float limiteInferior = -15f;
 
+    /// <summary>
+    /// Inicializa la cámara buscando al jugador y posicionándola correctamente dentro de los límites.
+    /// </summary>
     private void Start()
     {
         BuscarJugador();
@@ -28,6 +69,12 @@ public class ControladorCamaraBrotato : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la posición de la cámara en cada frame para seguir al jugador.
+    /// </summary>
+    /// <remarks>
+    /// Dependiendo de la configuración, puede aplicar límites al movimiento de la cámara.
+    /// </remarks>
     void Update()
     {
         if (jugador == null)
@@ -47,6 +94,9 @@ public class ControladorCamaraBrotato : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la posición de la cámara respetando los límites definidos del mapa.
+    /// </summary>
     void SeguirJugadorConLimites()
     {
         // Obtener posición actual del jugador
@@ -61,6 +111,13 @@ public class ControladorCamaraBrotato : MonoBehaviour
         transform.position = new Vector3(nuevaX, nuevaY, -3f);
     }
 
+    /// <summary>
+    /// Busca al jugador en la escena mediante su etiqueta "Jugador".
+    /// </summary>
+    /// <remarks>
+    /// La advertencia de depuración se muestra después de 1 segundo para evitar falsos
+    /// positivos, ya que la cámara puede inicializarse antes que el jugador.
+    /// </remarks>
     void BuscarJugador()
     {
         jugador = GameObject.FindGameObjectWithTag("Jugador");
@@ -71,7 +128,12 @@ public class ControladorCamaraBrotato : MonoBehaviour
         }
     }
     
-    // Para depuración: dibujar los límites del mapa en el editor
+    /// <summary>
+    /// Dibuja los límites del mapa como líneas en el editor para facilitar su visualización y configuración.
+    /// </summary>
+    /// <remarks>
+    /// Este método solo se ejecuta en el editor de Unity y no afecta al juego en tiempo de ejecución.
+    /// </remarks>
     private void OnDrawGizmos()
     {
         if (!usarLimites) return;
