@@ -188,4 +188,4 @@ For inquiries or potential collaborations, please reach out via the official Git
   - [Emma](https://enma1890.itch.io/throwknight) - throwknight
   - [BDragon1727](https://bdragon1727.itch.io/fire-pixel-bullet-16x16) - fire-pixel-bullet-16x16
 
-- **Sound Effects and Music**: Refer to the [Assets/Credits.txt](Assets/Credits.txt) file for a complete list of attributions.
+- **Sound Effects and Music**: Refer to the [Assets/Credits.txt](Assets/Creditos.txt) file for a complete list of attributions.
