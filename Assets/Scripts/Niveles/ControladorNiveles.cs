@@ -136,6 +136,8 @@ public class ControladorNiveles : MonoBehaviour
         DestruirObjetosPorCapa("Enemigo");
         DestruirObjetosPorCapa("Caja");
         DestruirObjetosPorCapa("Calavera");
+        DestruirObjetosPorCapa("ProyectilesEnemigos");
+        DestruirObjetosPorCapa("Balas");
         
         // Reproducir sonido de fin de nivel
         if (sonidoFinNivel != null && audioSource != null)
