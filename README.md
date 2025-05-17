@@ -22,7 +22,7 @@
 ---
 
 ## 🚀 **Installation**
-1. Download the [OrcAttack.zip](OrcAttack.zip) file from the repository.
+1. Download the [OrcAttack.zip](https://github.com/R4F405/Orc-attack/releases/tag/v1.0) file from the realeses.
 2. Extract the contents of the ZIP file.
 3. Run the included `.exe` file to start the game on Windows.
 
