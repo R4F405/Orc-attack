@@ -2,7 +2,9 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Unity Version](https://img.shields.io/badge/Unity-6000.0.29f-blueviolet.svg?logo=unity)](https://unity.com)
-[![Project Status](https://img.shields.io/badge/Status-In_Development-green.svg)]()
+[![Project Version](https://img.shields.io/badge/Version-1.0-green.svg)]()
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/R4F405/Orc-attack)
+
 
 ## 📖 **Description**
 **Orc Attack** is a survival rogue-like game where you'll face hordes of enemies while collecting skulls to purchase upgrades. With dynamic and challenging gameplay, you'll need to enhance your skills and weapons to overcome increasingly difficult levels.
