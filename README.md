@@ -62,8 +62,8 @@
 
 ## 🖼️ **Screenshots**
 
-### Main Menu
-![Main Menu](Imagenes/Menu.png)
+<!--### Main Menu
+![Main Menu](Imagenes/Menu.png) -->
 
 ### Gameplay
 ![Gameplay](Imagenes/Juego.png)
