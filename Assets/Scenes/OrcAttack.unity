@@ -17768,6 +17768,53 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!1 &1397627884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397627886}
+  - component: {fileID: 1397627885}
+  m_Layer: 0
+  m_Name: InventarioArmas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1397627885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397627884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7846a084ed69a458fd835ca5a5209f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxArmas: 5
+  armasIniciales:
+  - {fileID: 11400000, guid: d1dde0cfea4c7c8479f16a88e1286634, type: 2}
+--- !u!4 &1397627886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397627884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.22388284, y: -0.19385707, z: -0.0038665617}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400144758
 GameObject:
   m_ObjectHideFlags: 0
@@ -21749,142 +21796,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monedasJugadorTexto: {fileID: 1511977446}
-  listaArmas:
-  - precio: 18
-    imagen: {fileID: 8876513399037479450, guid: 1db7fe42bf5fde245af0cba717650a32, type: 3}
-    nombre: Bate de pinchos
-    tipo: Melee
-    danio: 6
-    critico: 10
-    recarga: 1.4
-    roboSalud: 5
-    prefabArma: {fileID: 1754110628231209729, guid: 1f0c63b04219b004587fd2afbfe530d7, type: 3}
-  - precio: 10
-    imagen: {fileID: 25049959445886269, guid: 1f6acadf8351f36419bba0c36b360004, type: 3}
-    nombre: Cuchillo carnicero
-    tipo: Melee
-    danio: 6
-    critico: 25
-    recarga: 1.1
-    roboSalud: 10
-    prefabArma: {fileID: 2469734866425781752, guid: b003e3a3ddfe49e4bbaa6c6a29613ab8, type: 3}
-  - precio: 3
-    imagen: {fileID: 6319883328537209306, guid: 4e83616214050164ea4c14aca22f0a9d, type: 3}
-    nombre: Cuchillo
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 3798194697597539420, guid: dea75c69166a77c45b4b01f96d614344, type: 3}
-  - precio: 4
-    imagen: {fileID: -7303331571075243762, guid: 1955d67f20f26004fa9579cc0c889391, type: 3}
-    nombre: Espada gigante
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
-  - precio: 5
-    imagen: {fileID: -160324788179766757, guid: 853de7f7080d71143babb3cfbe1ffecd, type: 3}
-    nombre: Espada
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 8918653329872954507, guid: b1c49f83f37735a44aa3ff6b8ba7e0da, type: 3}
-  - precio: 6
-    imagen: {fileID: 5081578455740263154, guid: 5d5fab29a1e850041a0edadcfe12ba4c, type: 3}
-    nombre: Hacha
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 2434994715305800693, guid: ddacab3b69907ef4bb44d3868304b26a, type: 3}
-  - precio: 7
-    imagen: {fileID: -1035376832474678582, guid: 2bb6f3f4d3ebd274d937e9e57da4368f, type: 3}
-    nombre: Katana
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 2455059563978672770, guid: 92aa564652859254597a21900f72896d, type: 3}
-  - precio: 8
-    imagen: {fileID: -4726590835043940558, guid: fc4fa53df3acfe84f8d2eda33c3a003d, type: 3}
-    nombre: Lanza
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
-  - precio: 9
-    imagen: {fileID: -4146462697135019530, guid: ea8203af5ab315245a483d9d5ac905a7, type: 3}
-    nombre: Machete
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 8401330653836557154, guid: 167308418b989164a8049dd3bda9be52, type: 3}
-  - precio: 10
-    imagen: {fileID: -4292435494300225123, guid: fcb0db22420969044847aa0677aee55a, type: 3}
-    nombre: Martillo
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 3342311069874076743, guid: c8b9dc343a42ed74ba962ea80544ce61, type: 3}
-  - precio: 11
-    imagen: {fileID: 4897325607650296362, guid: eda3d78c547c8304893baa9533abf4c0, type: 3}
-    nombre: Maza
-    tipo: Melee
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
-  - precio: 12
-    imagen: {fileID: -2937095567311486555, guid: 3490db29a1dd07a4dba1f6924380819c, type: 3}
-    nombre: Baston curacion
-    tipo: Distancia, Curacion
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 9107510053700692656, guid: fe31629b042b3d94fa48b2efe781974b, type: 3}
-  - precio: 13
-    imagen: {fileID: -5616230433370796514, guid: a3b05132c92255b448cf9f98105e174d, type: 3}
-    nombre: Baston fuego
-    tipo: Distancia, Fuego
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 1581885585990029321, guid: bdc67e764b8ef824587a169eb1d206ae, type: 3}
-  - precio: 14
-    imagen: {fileID: 1809359887259773068, guid: e1ddbd47908836f4aa7543d8bf44289c, type: 3}
-    nombre: Baston
-    tipo: Distancia
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 7062189691710445033, guid: 5f62b07996e2e824fac5bb7a31e75c27, type: 3}
-  - precio: 15
-    imagen: {fileID: 1809359887259773068, guid: e1ddbd47908836f4aa7543d8bf44289c, type: 3}
-    nombre: Baston veneno
-    tipo: Distancia, Veneno
-    danio: 5
-    critico: 15
-    recarga: 0.9
-    roboSalud: 12
-    prefabArma: {fileID: 5948458081476484835, guid: acd24041b415fd14b918f041aa4acbfc, type: 3}
+  catalogoArmas:
+  - {fileID: 11400000, guid: 950a3b3b7ad0514419fffcfd415e1320, type: 2}
+  - {fileID: 11400000, guid: a0175c1621a13ea4faac31c87f33eae4, type: 2}
+  - {fileID: 11400000, guid: 29b31066091991544a25a2c0004f3d9a, type: 2}
+  - {fileID: 11400000, guid: 20a6d416f6c98494f9c4e1b9e3e58bfb, type: 2}
+  - {fileID: 11400000, guid: ea60df396c04d3145b999d388dbd2d33, type: 2}
+  - {fileID: 11400000, guid: d1dde0cfea4c7c8479f16a88e1286634, type: 2}
+  - {fileID: 11400000, guid: 6c98ca4e8db08b941866e3a0544f0191, type: 2}
+  - {fileID: 11400000, guid: 7fc0d59898472d448ad7072436f91135, type: 2}
+  - {fileID: 11400000, guid: 7a784ce82e057ea44a69c124f8fa3d06, type: 2}
+  - {fileID: 11400000, guid: d4b378a208b0e854c8d5a207e3e6166d, type: 2}
+  - {fileID: 11400000, guid: d60e0215120740a44be22c523bc4d7c0, type: 2}
+  - {fileID: 11400000, guid: 1ee942401b19ebe4e88306ae6a6d1ea2, type: 2}
+  - {fileID: 11400000, guid: b40ca75363c3d3d44815a1368b7836be, type: 2}
+  - {fileID: 11400000, guid: 749502487a7f60642b7438cfeeff9421, type: 2}
+  - {fileID: 11400000, guid: d649599cffc0a7741afe5eb6992ba2dc, type: 2}
   botonesArmas:
   - {fileID: 542812197}
   - {fileID: 263397954}
@@ -21924,6 +21851,18 @@ MonoBehaviour:
   - {fileID: 797979150}
   - {fileID: 2136244175}
   - {fileID: 1922506181}
+  bordeNivelArmasJugador: []
+  panelDetalleArma: {fileID: 0}
+  imagenDetalleArma: {fileID: 0}
+  nombreDetalleArma: {fileID: 0}
+  nivelDetalleArma: {fileID: 0}
+  danioDetalleArma: {fileID: 0}
+  criticoDetalleArma: {fileID: 0}
+  recargaDetalleArma: {fileID: 0}
+  roboSaludDetalleArma: {fileID: 0}
+  botonEliminarArma: {fileID: 0}
+  botonMejorarArma: {fileID: 0}
+  textoBotonMejorar: {fileID: 0}
   listaObjetos:
   - id: 1
     precio: 1
@@ -44374,3 +44313,4 @@ SceneRoots:
   - {fileID: 696380871}
   - {fileID: 365425905}
   - {fileID: 1351442162}
+  - {fileID: 1397627886}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af591043c00e10045b52471e34687c7d, type: 3}
+  m_Name: Maza
+  m_EditorClassIdentifier: 
+  nombre: Maza
+  icono: {fileID: 4897325607650296362, guid: eda3d78c547c8304893baa9533abf4c0, type: 3}
+  prefab: {fileID: 2816792251274242311, guid: 3193e394ee69ffe4eb45743feb8095b6, type: 3}
+  tipo: 0
+  danioBase: 12
+  recargaBase: 1.5
+  probabilidadCritico: 10
+  probabilidadRobarVida: 5

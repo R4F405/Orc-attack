@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af591043c00e10045b52471e34687c7d, type: 3}
+  m_Name: Martillo
+  m_EditorClassIdentifier: 
+  nombre: Martillo
+  icono: {fileID: -4292435494300225123, guid: fcb0db22420969044847aa0677aee55a, type: 3}
+  prefab: {fileID: 3342311069874076743, guid: c8b9dc343a42ed74ba962ea80544ce61, type: 3}
+  tipo: 0
+  danioBase: 19
+  recargaBase: 2
+  probabilidadCritico: 10
+  probabilidadRobarVida: 5

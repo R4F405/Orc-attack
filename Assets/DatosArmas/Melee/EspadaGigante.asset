@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af591043c00e10045b52471e34687c7d, type: 3}
+  m_Name: EspadaGigante
+  m_EditorClassIdentifier: 
+  nombre: Espada Gigante
+  icono: {fileID: -7303331571075243762, guid: 1955d67f20f26004fa9579cc0c889391, type: 3}
+  prefab: {fileID: 5822253365656401349, guid: a2d0f98eebb29bf4e88409394008f0c3, type: 3}
+  tipo: 0
+  danioBase: 20
+  recargaBase: 2.1
+  probabilidadCritico: 15
+  probabilidadRobarVida: 5

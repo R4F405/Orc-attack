@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af591043c00e10045b52471e34687c7d, type: 3}
+  m_Name: Lanza
+  m_EditorClassIdentifier: 
+  nombre: Lanza
+  icono: {fileID: -4726590835043940558, guid: fc4fa53df3acfe84f8d2eda33c3a003d, type: 3}
+  prefab: {fileID: 3396083887977358244, guid: 065c5e5d47ec83f4babae4c80b404eaf, type: 3}
+  tipo: 0
+  danioBase: 16
+  recargaBase: 1.9
+  probabilidadCritico: 15
+  probabilidadRobarVida: 9
