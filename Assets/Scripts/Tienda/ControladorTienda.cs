@@ -4,23 +4,19 @@ using TMPro;
 using System.Collections.Generic;
 
 /// <summary>
-/// Controla la tienda del juego: compra de armas (con sistema de niveles/rareza),
-/// eliminación de armas del inventario, fusión de armas iguales para subir nivel,
-/// y compra de habilidades/objetos.
+/// Controla la tienda: compra, venta (10% del precio) y fusión de armas (2 iguales = +1 nivel, máx. 5).
+/// Crea y conecta la UI de detalle en runtime si no está asignada en el inspector.
 /// </summary>
 public class ControladorTienda : MonoBehaviour
 {
-    // ==================== REFERENCIAS INTERNAS ====================
     private InventarioJugador inventarioJugador;
     private InventarioArmas inventarioArmas;
-    private int monedasJugador = 0;
+    private int monedasJugador;
     private GameObject jugador;
 
-    // ==================== UI MONEDAS ====================
     [Header("Monedas del Jugador")]
     public TextMeshProUGUI monedasJugadorTexto;
 
-    // ==================== CATÁLOGO Y ARMAS EN VENTA ====================
     [Header("Catálogo de Armas (DatosArma ScriptableObjects)")]
     public DatosArma[] catalogoArmas;
 
@@ -35,14 +31,12 @@ public class ControladorTienda : MonoBehaviour
     public TextMeshProUGUI[] recargasArmas;
     public TextMeshProUGUI[] roboSaludArmas;
 
-    // ==================== INVENTARIO ARMAS JUGADOR ====================
     [Header("Inventario Armas del Jugador - UI")]
     public Button[] botonesArmasJugador;
     public Image[] imagenesArmasJugador;
     public Image[] bordeNivelArmasJugador;
 
-    // ==================== PANEL DETALLE ARMA ====================
-    [Header("Panel Detalle Arma (se abre al hacer clic en arma del inventario)")]
+    [Header("Panel Detalle Arma (opcional — se crea solo si falta)")]
     public GameObject panelDetalleArma;
     public Image imagenDetalleArma;
     public TextMeshProUGUI nombreDetalleArma;
@@ -51,12 +45,12 @@ public class ControladorTienda : MonoBehaviour
     public TextMeshProUGUI criticoDetalleArma;
     public TextMeshProUGUI recargaDetalleArma;
     public TextMeshProUGUI roboSaludDetalleArma;
-    public Button botonEliminarArma;
+    public TextMeshProUGUI textoPrecioVenta;
+    public Button botonVenderArma;
     public Button botonMejorarArma;
     public TextMeshProUGUI textoBotonMejorar;
 
-    // ==================== OBJETOS / HABILIDADES ====================
-    [Header("Objetos en Venta - UI")]
+    [Header("Objetos / Habilidades")]
     public OpcionObjeto[] listaObjetos;
     public Button botonObjeto;
     public Image imagenObjeto;
@@ -76,17 +70,18 @@ public class ControladorTienda : MonoBehaviour
         public string descripcion;
     }
 
-    // ==================== VARIABLES INTERNAS ====================
     private DatosArma[] armasEnVenta;
     private OpcionObjeto opcionObjetoActual;
-    private List<OpcionObjeto> objetosComprados = new List<OpcionObjeto>();
+    private readonly List<OpcionObjeto> objetosComprados = new List<OpcionObjeto>();
     private int indiceArmaSeleccionada = -1;
-
-    // ==================== INICIALIZACIÓN ====================
+    private bool uiInicializada;
 
     void Start()
     {
         BuscarReferencias();
+        AsegurarInventarioArmas();
+        AsegurarPanelDetalle();
+        ConfigurarListenersBotones();
         ActualizarPreciosObjetos();
         ActualizarUI();
         GenerarArmas();
@@ -95,6 +90,8 @@ public class ControladorTienda : MonoBehaviour
 
         if (panelDetalleArma != null)
             panelDetalleArma.SetActive(false);
+
+        uiInicializada = true;
     }
 
     void Update()
@@ -102,14 +99,15 @@ public class ControladorTienda : MonoBehaviour
         BuscarReferencias();
 
         if (inventarioJugador != null)
-        {
             monedasJugador = inventarioJugador.ObtenerCantidadCalaveras();
-        }
 
         ActualizarUI();
         ActualizarArmasJugadorUI();
         ActualizarObjetosJugadorUI();
         ActualizarTextosHabilidades();
+
+        if (panelDetalleArma != null && panelDetalleArma.activeSelf && indiceArmaSeleccionada >= 0)
+            ActualizarPanelDetalle();
     }
 
     void BuscarReferencias()
@@ -122,11 +120,59 @@ public class ControladorTienda : MonoBehaviour
             inventarioArmas = InventarioArmas.instancia;
     }
 
+    void AsegurarInventarioArmas()
+    {
+        if (InventarioArmas.instancia != null) return;
+
+        GameObject obj = new GameObject("InventarioArmas");
+        obj.AddComponent<InventarioArmas>();
+    }
+
+    /// <summary>
+    /// Conecta todos los botones en código para no depender del inspector (referencias rotas a la antigua clase Tienda).
+    /// </summary>
+    void ConfigurarListenersBotones()
+    {
+        if (botonesArmas != null)
+        {
+            for (int i = 0; i < botonesArmas.Length; i++)
+            {
+                if (botonesArmas[i] == null) continue;
+                int indice = i;
+                botonesArmas[i].onClick.RemoveAllListeners();
+                botonesArmas[i].onClick.AddListener(() => ComprarArma(indice));
+            }
+        }
+
+        if (botonesArmasJugador != null)
+        {
+            for (int i = 0; i < botonesArmasJugador.Length; i++)
+            {
+                if (botonesArmasJugador[i] == null) continue;
+                int indice = i;
+                botonesArmasJugador[i].onClick.RemoveAllListeners();
+                botonesArmasJugador[i].onClick.AddListener(() => SeleccionarArmaInventario(indice));
+            }
+        }
+
+        if (botonVenderArma != null)
+        {
+            botonVenderArma.onClick.RemoveAllListeners();
+            botonVenderArma.onClick.AddListener(VenderArmaSeleccionada);
+        }
+
+        if (botonMejorarArma != null)
+        {
+            botonMejorarArma.onClick.RemoveAllListeners();
+            botonMejorarArma.onClick.AddListener(MejorarArmaSeleccionada);
+        }
+    }
+
     // ==================== ARMAS EN VENTA ====================
 
     void GenerarArmas()
     {
-        if (catalogoArmas == null || catalogoArmas.Length == 0) return;
+        if (catalogoArmas == null || catalogoArmas.Length == 0 || botonesArmas == null) return;
 
         armasEnVenta = new DatosArma[botonesArmas.Length];
 
@@ -134,41 +180,55 @@ public class ControladorTienda : MonoBehaviour
         {
             DatosArma datos = catalogoArmas[Random.Range(0, catalogoArmas.Length)];
             armasEnVenta[i] = datos;
-
-            // Mostrar stats de nivel 1 (lo que compras)
-            imagenesArmas[i].sprite = datos.icono;
-            precioArmas[i].text = datos.ObtenerPrecio(1).ToString();
-            nombresArmas[i].text = datos.nombre;
-            tiposArmas[i].text = "Tipo: " + (datos.tipo == TipoArma.Melee ? "Melee" : "Distancia");
-            dañosArmas[i].text = "Daño: " + datos.ObtenerDanio(1);
-            criticosArmas[i].text = "Crítico: X2 (" + datos.ObtenerCritico(1) + "%)";
-            recargasArmas[i].text = "Recarga: " + datos.ObtenerRecarga(1) + "s";
-            roboSaludArmas[i].text = "Robo salud: " + datos.ObtenerRoboVida(1) + "%";
+            MostrarArmaEnVenta(i, datos);
         }
     }
 
-    /// <summary>
-    /// Compra un arma de la tienda. Se añade al inventario como nivel 1 (Gris - Común).
-    /// </summary>
+    void MostrarArmaEnVenta(int i, DatosArma datos)
+    {
+        if (imagenesArmas != null && i < imagenesArmas.Length && imagenesArmas[i] != null)
+            imagenesArmas[i].sprite = datos.icono;
+        if (precioArmas != null && i < precioArmas.Length && precioArmas[i] != null)
+            precioArmas[i].text = datos.ObtenerPrecio(1).ToString();
+        if (nombresArmas != null && i < nombresArmas.Length && nombresArmas[i] != null)
+            nombresArmas[i].text = datos.nombre;
+        if (tiposArmas != null && i < tiposArmas.Length && tiposArmas[i] != null)
+            tiposArmas[i].text = "Tipo: " + (datos.tipo == TipoArma.Melee ? "Melee" : "Distancia");
+        if (dañosArmas != null && i < dañosArmas.Length && dañosArmas[i] != null)
+            dañosArmas[i].text = "Daño: " + datos.ObtenerDanio(1);
+        if (criticosArmas != null && i < criticosArmas.Length && criticosArmas[i] != null)
+            criticosArmas[i].text = "Crítico: X2 (" + datos.ObtenerCritico(1) + "%)";
+        if (recargasArmas != null && i < recargasArmas.Length && recargasArmas[i] != null)
+            recargasArmas[i].text = "Recarga: " + datos.ObtenerRecarga(1) + "s";
+        if (roboSaludArmas != null && i < roboSaludArmas.Length && roboSaludArmas[i] != null)
+            roboSaludArmas[i].text = "Robo salud: " + datos.ObtenerRoboVida(1) + "%";
+    }
+
     public void ComprarArma(int indice)
     {
+        BuscarReferencias();
+        AsegurarInventarioArmas();
+        inventarioArmas = InventarioArmas.instancia;
+
         if (inventarioArmas == null || !inventarioArmas.PuedeAgregarArma())
         {
             SonidosUI.ReproducirSonidoError();
             return;
         }
 
-        if (armasEnVenta == null || indice < 0 || indice >= armasEnVenta.Length) return;
+        if (armasEnVenta == null || indice < 0 || indice >= armasEnVenta.Length || armasEnVenta[indice] == null)
+            return;
 
         DatosArma datos = armasEnVenta[indice];
         int precio = datos.ObtenerPrecio(1);
 
-        if (inventarioJugador.ObtenerCantidadCalaveras() >= precio)
+        if (inventarioJugador != null && inventarioJugador.ObtenerCantidadCalaveras() >= precio)
         {
             SonidosUI.ReproducirSonidoCompra();
             inventarioJugador.RestarCalaveras(precio);
             inventarioArmas.AgregarArma(datos, 1);
-            botonesArmas[indice].gameObject.SetActive(false);
+            if (botonesArmas != null && indice < botonesArmas.Length && botonesArmas[indice] != null)
+                botonesArmas[indice].gameObject.SetActive(false);
             ActualizarUI();
         }
         else
@@ -181,25 +241,24 @@ public class ControladorTienda : MonoBehaviour
 
     void ActualizarArmasJugadorUI()
     {
-        if (inventarioArmas == null) return;
+        if (inventarioArmas == null || botonesArmasJugador == null) return;
 
         List<ArmaInstancia> armas = inventarioArmas.ObtenerArmas();
 
         for (int i = 0; i < botonesArmasJugador.Length; i++)
         {
+            if (botonesArmasJugador[i] == null) continue;
+
             if (i < armas.Count && armas[i] != null)
             {
                 botonesArmasJugador[i].gameObject.SetActive(true);
-                imagenesArmasJugador[i].sprite = armas[i].Icono;
-
-                // Tinte de color del icono según nivel
-                imagenesArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
-
-                // Borde de color según nivel (si hay borde asignado)
-                if (bordeNivelArmasJugador != null && i < bordeNivelArmasJugador.Length && bordeNivelArmasJugador[i] != null)
+                if (imagenesArmasJugador != null && i < imagenesArmasJugador.Length && imagenesArmasJugador[i] != null)
                 {
-                    bordeNivelArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
+                    imagenesArmasJugador[i].sprite = armas[i].Icono;
+                    imagenesArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
                 }
+                if (bordeNivelArmasJugador != null && i < bordeNivelArmasJugador.Length && bordeNivelArmasJugador[i] != null)
+                    bordeNivelArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
             }
             else
             {
@@ -208,28 +267,35 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
-    // ==================== PANEL DETALLE (ELIMINAR / MEJORAR) ====================
+    // ==================== PANEL DETALLE (VENDER / MEJORAR) ====================
 
-    /// <summary>
-    /// Se llama al hacer clic en un botón del inventario de armas.
-    /// Asignar cada botonesArmasJugador[i] con su índice (0, 1, 2, 3, 4) en el inspector.
-    /// </summary>
     public void SeleccionarArmaInventario(int indice)
     {
+        BuscarReferencias();
         if (inventarioArmas == null) return;
 
         ArmaInstancia arma = inventarioArmas.ObtenerArma(indice);
         if (arma == null) return;
 
         indiceArmaSeleccionada = indice;
-        MostrarPanelDetalleArma(arma);
+        AsegurarPanelDetalle();
+        if (panelDetalleArma != null)
+        {
+            panelDetalleArma.SetActive(true);
+            ActualizarPanelDetalle();
+        }
     }
 
-    void MostrarPanelDetalleArma(ArmaInstancia arma)
+    void ActualizarPanelDetalle()
     {
-        if (panelDetalleArma == null) return;
+        if (inventarioArmas == null || indiceArmaSeleccionada < 0) return;
 
-        panelDetalleArma.SetActive(true);
+        ArmaInstancia arma = inventarioArmas.ObtenerArma(indiceArmaSeleccionada);
+        if (arma == null)
+        {
+            CerrarPanelDetalleArma();
+            return;
+        }
 
         if (imagenDetalleArma != null)
         {
@@ -240,7 +306,7 @@ public class ControladorTienda : MonoBehaviour
             nombreDetalleArma.text = arma.Nombre;
         if (nivelDetalleArma != null)
         {
-            nivelDetalleArma.text = "Nv." + arma.nivel + " - " + NivelArma.ObtenerNombreNivel(arma.nivel);
+            nivelDetalleArma.text = "Nv." + arma.nivel + " — " + NivelArma.ObtenerNombreNivel(arma.nivel);
             nivelDetalleArma.color = NivelArma.ObtenerColor(arma.nivel);
         }
         if (danioDetalleArma != null)
@@ -252,43 +318,56 @@ public class ControladorTienda : MonoBehaviour
         if (roboSaludDetalleArma != null)
             roboSaludDetalleArma.text = "Robo salud: " + arma.RoboVida + "%";
 
-        // Configurar botón Mejorar
-        int indicePar = inventarioArmas.BuscarParejaParaMejora(indiceArmaSeleccionada);
-        bool puedeMejorar = indicePar != -1;
+        int precioVenta = InventarioArmas.CalcularPrecioVenta(arma);
+        if (textoPrecioVenta != null)
+            textoPrecioVenta.text = "Vender: +" + precioVenta + " calaveras (10%)";
+
+        int parejas = inventarioArmas.ContarParejas(indiceArmaSeleccionada);
+        bool puedeMejorar = arma.PuedeMejorar && parejas > 0;
 
         if (botonMejorarArma != null)
-        {
             botonMejorarArma.interactable = puedeMejorar;
-        }
         if (textoBotonMejorar != null)
         {
             if (!arma.PuedeMejorar)
-                textoBotonMejorar.text = "Nivel Máximo";
+                textoBotonMejorar.text = "Nivel máximo (Legendario)";
             else if (puedeMejorar)
-                textoBotonMejorar.text = "Mejorar a " + NivelArma.ObtenerNombreNivel(arma.nivel + 1);
+                textoBotonMejorar.text = "Mejorar → " + NivelArma.ObtenerNombreNivel(arma.nivel + 1) + " (2 iguales)";
             else
-                textoBotonMejorar.text = "Sin pareja";
+                textoBotonMejorar.text = "Mejorar (necesitas otra igual Nv." + arma.nivel + ")";
         }
     }
 
     /// <summary>
-    /// Elimina el arma seleccionada del inventario. Conectar al botón "Eliminar".
+    /// Vende el arma seleccionada por el 10% de su precio de compra.
     /// </summary>
-    public void EliminarArmaSeleccionada()
+    public void VenderArmaSeleccionada()
     {
-        if (inventarioArmas == null || indiceArmaSeleccionada < 0) return;
+        BuscarReferencias();
+        if (inventarioArmas == null || inventarioJugador == null || indiceArmaSeleccionada < 0) return;
 
-        SonidosUI.ReproducirSonidoCompra();
-        inventarioArmas.EliminarArma(indiceArmaSeleccionada);
-        CerrarPanelDetalleArma();
+        int reembolso = inventarioArmas.VenderArma(indiceArmaSeleccionada);
+        if (reembolso > 0)
+        {
+            SonidosUI.ReproducirSonidoCompra();
+            inventarioJugador.AgregarCalaverasDirectas(reembolso);
+            CerrarPanelDetalleArma();
+            ActualizarUI();
+        }
+        else
+        {
+            SonidosUI.ReproducirSonidoError();
+        }
     }
 
     /// <summary>
-    /// Fusiona el arma seleccionada con otra igual del mismo nivel para subir de nivel.
-    /// Conectar al botón "Mejorar".
+    /// Compatibilidad con botones antiguos del inspector.
     /// </summary>
+    public void EliminarArmaSeleccionada() => VenderArmaSeleccionada();
+
     public void MejorarArmaSeleccionada()
     {
+        BuscarReferencias();
         if (inventarioArmas == null || indiceArmaSeleccionada < 0) return;
 
         if (inventarioArmas.MejorarArma(indiceArmaSeleccionada))
@@ -302,9 +381,6 @@ public class ControladorTienda : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Cierra el panel de detalle de arma. Conectar al botón "Cerrar" o al fondo.
-    /// </summary>
     public void CerrarPanelDetalleArma()
     {
         indiceArmaSeleccionada = -1;
@@ -312,22 +388,127 @@ public class ControladorTienda : MonoBehaviour
             panelDetalleArma.SetActive(false);
     }
 
+    // ==================== CREACIÓN UI EN RUNTIME ====================
+
+    void AsegurarPanelDetalle()
+    {
+        if (panelDetalleArma != null && botonVenderArma != null) return;
+
+        Transform padre = BuscarCanvasTienda();
+        if (padre == null) return;
+
+        TMP_FontAsset fuente = monedasJugadorTexto != null ? monedasJugadorTexto.font : null;
+
+        panelDetalleArma = CrearPanel(padre, "PanelDetalleArma", new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero);
+        Image fondoOverlay = panelDetalleArma.AddComponent<Image>();
+        fondoOverlay.color = new Color(0, 0, 0, 0.75f);
+        Button cerrarFondo = panelDetalleArma.AddComponent<Button>();
+        cerrarFondo.transition = Selectable.Transition.None;
+        cerrarFondo.onClick.AddListener(CerrarPanelDetalleArma);
+
+        GameObject caja = CrearPanel(panelDetalleArma.transform, "CajaDetalle", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(520, 620));
+        Image fondoCaja = caja.AddComponent<Image>();
+        fondoCaja.color = new Color(0.12f, 0.12f, 0.14f, 0.98f);
+
+        imagenDetalleArma = CrearImagen(caja.transform, "Icono", new Vector2(0, 180), new Vector2(120, 120));
+        nombreDetalleArma = CrearTexto(caja.transform, "Nombre", new Vector2(0, 100), 28, fuente, FontStyles.Bold);
+        nivelDetalleArma = CrearTexto(caja.transform, "Nivel", new Vector2(0, 60), 22, fuente);
+        danioDetalleArma = CrearTexto(caja.transform, "Danio", new Vector2(0, 20), 20, fuente);
+        criticoDetalleArma = CrearTexto(caja.transform, "Critico", new Vector2(0, -15), 20, fuente);
+        recargaDetalleArma = CrearTexto(caja.transform, "Recarga", new Vector2(0, -50), 20, fuente);
+        roboSaludDetalleArma = CrearTexto(caja.transform, "RoboSalud", new Vector2(0, -85), 20, fuente);
+        textoPrecioVenta = CrearTexto(caja.transform, "PrecioVenta", new Vector2(0, -130), 18, fuente);
+        textoPrecioVenta.color = new Color(0.9f, 0.85f, 0.4f);
+
+        botonMejorarArma = CrearBoton(caja.transform, "BtnMejorar", new Vector2(-110, -200), new Vector2(200, 50), "Mejorar", fuente, new Color(0.2f, 0.55f, 0.25f));
+        botonVenderArma = CrearBoton(caja.transform, "BtnVender", new Vector2(110, -200), new Vector2(200, 50), "Vender", fuente, new Color(0.55f, 0.25f, 0.2f));
+        CrearBoton(caja.transform, "BtnCerrar", new Vector2(0, -270), new Vector2(160, 44), "Cerrar", fuente, new Color(0.3f, 0.3f, 0.35f))
+            .onClick.AddListener(CerrarPanelDetalleArma);
+
+        panelDetalleArma.SetActive(false);
+        panelDetalleArma.transform.SetAsLastSibling();
+    }
+
+    Transform BuscarCanvasTienda()
+    {
+        GameObject tienda = GameObject.Find("Tienda");
+        if (tienda != null) return tienda.transform;
+
+        Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (Canvas c in canvases)
+        {
+            if (c.gameObject.name.Contains("Tienda") || c.gameObject.name.Contains("PanelTienda"))
+                return c.transform;
+        }
+        return canvases.Length > 0 ? canvases[0].transform : null;
+    }
+
+    static GameObject CrearPanel(Transform padre, string nombre, Vector2 anchorMin, Vector2 anchorMax, Vector2 pos, Vector2 size)
+    {
+        GameObject go = new GameObject(nombre, typeof(RectTransform));
+        go.transform.SetParent(padre, false);
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = anchorMin;
+        rt.anchorMax = anchorMax;
+        rt.anchoredPosition = pos;
+        rt.sizeDelta = size;
+        rt.localScale = Vector3.one;
+        return go;
+    }
+
+    static Image CrearImagen(Transform padre, string nombre, Vector2 pos, Vector2 size)
+    {
+        GameObject go = CrearPanel(padre, nombre, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, size);
+        Image img = go.AddComponent<Image>();
+        img.preserveAspect = true;
+        return img;
+    }
+
+    static TextMeshProUGUI CrearTexto(Transform padre, string nombre, Vector2 pos, float fontSize, TMP_FontAsset fuente, FontStyles estilo = FontStyles.Normal)
+    {
+        GameObject go = CrearPanel(padre, nombre, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, new Vector2(480, 36));
+        TextMeshProUGUI tmp = go.AddComponent<TextMeshProUGUI>();
+        tmp.fontSize = fontSize;
+        tmp.alignment = TextAlignmentOptions.Center;
+        tmp.color = Color.white;
+        tmp.fontStyle = estilo;
+        if (fuente != null) tmp.font = fuente;
+        return tmp;
+    }
+
+    static Button CrearBoton(Transform padre, string nombre, Vector2 pos, Vector2 size, string texto, TMP_FontAsset fuente, Color colorFondo)
+    {
+        GameObject go = CrearPanel(padre, nombre, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos, size);
+        Image img = go.AddComponent<Image>();
+        img.color = colorFondo;
+        Button btn = go.AddComponent<Button>();
+        btn.targetGraphic = img;
+
+        TextMeshProUGUI tmp = CrearTexto(go.transform, "Texto", Vector2.zero, 18, fuente, FontStyles.Bold);
+        tmp.text = texto;
+        RectTransform rt = tmp.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        return btn;
+    }
+
     // ==================== OBJETOS / HABILIDADES ====================
 
     void GenerarObjetos()
     {
+        if (botonObjeto == null) return;
+
         GestorHabilidades gestorHabilidades = null;
         if (jugador != null)
-        {
             gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
-        }
 
         List<OpcionObjeto> objetosDisponibles = new List<OpcionObjeto>(listaObjetos);
 
         if (gestorHabilidades != null && gestorHabilidades.TieneMultiplicadorCalaveras())
-        {
             objetosDisponibles.RemoveAll(obj => obj.id == 10);
-        }
 
         if (objetosDisponibles.Count == 0)
         {
@@ -344,15 +525,14 @@ public class ControladorTienda : MonoBehaviour
 
     public void ComprarObjeto()
     {
+        if (opcionObjetoActual == null) return;
         OpcionObjeto objetoSeleccionado = opcionObjetoActual;
 
-        if (inventarioJugador.ObtenerCantidadCalaveras() >= objetoSeleccionado.precio)
+        if (inventarioJugador != null && inventarioJugador.ObtenerCantidadCalaveras() >= objetoSeleccionado.precio)
         {
-            // Verificación especial para multiplicador de calaveras
             if (objetoSeleccionado.id == 10)
             {
-                if (jugador == null) BuscarReferencias();
-
+                BuscarReferencias();
                 if (jugador != null)
                 {
                     GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
@@ -369,15 +549,11 @@ public class ControladorTienda : MonoBehaviour
             ActualizarUI();
             botonObjeto.gameObject.SetActive(false);
 
-            if (jugador == null) BuscarReferencias();
-
+            BuscarReferencias();
             if (jugador != null)
             {
                 GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
-                if (gestorHabilidades != null)
-                {
-                    gestorHabilidades.AplicarHabilidadPorID(objetoSeleccionado.id);
-                }
+                gestorHabilidades?.AplicarHabilidadPorID(objetoSeleccionado.id);
             }
 
             objetosComprados.Add(opcionObjetoActual);
@@ -390,8 +566,12 @@ public class ControladorTienda : MonoBehaviour
 
     void ActualizarObjetosJugadorUI()
     {
+        if (botonesObjetosJugador == null) return;
+
         for (int i = 0; i < botonesObjetosJugador.Length; i++)
         {
+            if (botonesObjetosJugador[i] == null) continue;
+
             if (i < objetosComprados.Count && objetosComprados[i] != null)
             {
                 imagenesObjetosJugador[i].sprite = objetosComprados[i].imagen;
@@ -408,17 +588,13 @@ public class ControladorTienda : MonoBehaviour
 
     public void RenovarTiendaConCosto()
     {
-        if (inventarioJugador.ObtenerCantidadCalaveras() >= 5)
+        if (inventarioJugador != null && inventarioJugador.ObtenerCantidadCalaveras() >= 5)
         {
             SonidosUI.ReproducirSonidoCompra();
             inventarioJugador.RestarCalaveras(5);
             ActualizarUI();
             ActualizarPreciosObjetos();
-
-            foreach (Button b in botonesArmas)
-                b.gameObject.SetActive(true);
-            botonObjeto.gameObject.SetActive(true);
-
+            ReactivarSlotsTienda();
             GenerarArmas();
             GenerarObjetos();
         }
@@ -432,13 +608,22 @@ public class ControladorTienda : MonoBehaviour
     {
         ActualizarUI();
         ActualizarPreciosObjetos();
-
-        foreach (Button b in botonesArmas)
-            b.gameObject.SetActive(true);
-        botonObjeto.gameObject.SetActive(true);
-
+        ReactivarSlotsTienda();
         GenerarArmas();
         GenerarObjetos();
+    }
+
+    void ReactivarSlotsTienda()
+    {
+        if (botonesArmas != null)
+        {
+            foreach (Button b in botonesArmas)
+            {
+                if (b != null) b.gameObject.SetActive(true);
+            }
+        }
+        if (botonObjeto != null)
+            botonObjeto.gameObject.SetActive(true);
     }
 
     // ==================== UTILIDADES ====================
@@ -446,25 +631,20 @@ public class ControladorTienda : MonoBehaviour
     void ActualizarUI()
     {
         if (inventarioJugador != null && monedasJugadorTexto != null)
-        {
             monedasJugadorTexto.text = inventarioJugador.ObtenerCantidadCalaveras().ToString();
-        }
     }
 
-    private void ActualizarTextosHabilidades()
+    void ActualizarTextosHabilidades()
     {
-        if (jugador != null)
-        {
-            GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
-            if (gestorHabilidades != null)
-            {
-                gestorHabilidades.ActualizarTextos();
-            }
-        }
+        if (jugador == null) return;
+        GestorHabilidades gestorHabilidades = jugador.GetComponent<GestorHabilidades>();
+        gestorHabilidades?.ActualizarTextos();
     }
 
     void ActualizarPreciosObjetos()
     {
+        if (listaObjetos == null) return;
+
         foreach (OpcionObjeto objeto in listaObjetos)
         {
             switch (objeto.id)
@@ -486,14 +666,10 @@ public class ControladorTienda : MonoBehaviour
             if (controladorNivelesObj != null)
             {
                 ControladorNiveles controladorNiveles = controladorNivelesObj.GetComponent<ControladorNiveles>();
-                if (controladorNiveles != null)
+                if (controladorNiveles != null && controladorNiveles.nivelActual > 1)
                 {
-                    int nivelActual = controladorNiveles.nivelActual;
-                    if (nivelActual > 1)
-                    {
-                        float incrementoPorNivel = 0.05f * (nivelActual - 1);
-                        objeto.precio = Mathf.RoundToInt(objeto.precio * (1 + incrementoPorNivel));
-                    }
+                    float incrementoPorNivel = 0.05f * (controladorNiveles.nivelActual - 1);
+                    objeto.precio = Mathf.RoundToInt(objeto.precio * (1 + incrementoPorNivel));
                 }
             }
         }

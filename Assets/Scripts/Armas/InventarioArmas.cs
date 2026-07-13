@@ -99,6 +99,45 @@ public class InventarioArmas : MonoBehaviour
     }
 
     /// <summary>
+    /// Vende un arma y devuelve el reembolso (10% del precio de compra del nivel actual).
+    /// </summary>
+    public int VenderArma(int indice)
+    {
+        if (indice < 0 || indice >= armas.Count) return 0;
+
+        int reembolso = CalcularPrecioVenta(armas[indice]);
+        armas.RemoveAt(indice);
+        OnInventarioCambiado?.Invoke();
+        return reembolso;
+    }
+
+    /// <summary>
+    /// Precio de venta: 10% del precio de compra del arma en su nivel actual.
+    /// </summary>
+    public static int CalcularPrecioVenta(ArmaInstancia arma)
+    {
+        if (arma == null) return 0;
+        return Mathf.Max(1, Mathf.RoundToInt(arma.Precio * 0.10f));
+    }
+
+    /// <summary>
+    /// Cuenta cuántas armas iguales del mismo nivel hay (excluyendo un índice opcional).
+    /// </summary>
+    public int ContarParejas(int indice)
+    {
+        if (indice < 0 || indice >= armas.Count) return 0;
+
+        ArmaInstancia arma = armas[indice];
+        int count = 0;
+        for (int i = 0; i < armas.Count; i++)
+        {
+            if (i != indice && arma.MismoTipoYNivel(armas[i]))
+                count++;
+        }
+        return count;
+    }
+
+    /// <summary>
     /// Busca una pareja fusionable: misma arma y mismo nivel, distinta al índice dado.
     /// Devuelve el índice de la pareja o -1 si no existe.
     /// </summary>

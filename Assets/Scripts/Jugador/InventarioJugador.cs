@@ -86,4 +86,13 @@ public class InventarioJugador : MonoBehaviour
     {
         calaverasRecolectadas -= cantidad;
     }
+
+    /// <summary>
+    /// Añade calaveras directamente (ventas, recompensas) sin aplicar multiplicador.
+    /// </summary>
+    public void AgregarCalaverasDirectas(int cantidad)
+    {
+        if (cantidad <= 0) return;
+        calaverasRecolectadas += cantidad;
+    }
 }

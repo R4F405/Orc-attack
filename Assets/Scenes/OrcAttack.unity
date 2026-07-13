@@ -4203,7 +4203,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1773990538}
-        m_TargetAssemblyTypeName: Tienda, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControladorTienda, Assembly-CSharp
         m_MethodName: ComprarArma
         m_Mode: 3
         m_Arguments:
@@ -7164,7 +7164,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1773990538}
-        m_TargetAssemblyTypeName: Tienda, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControladorTienda, Assembly-CSharp
         m_MethodName: ComprarArma
         m_Mode: 3
         m_Arguments:
