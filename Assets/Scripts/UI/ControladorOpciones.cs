@@ -2,12 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using System.Collections;
 
 /// <summary>
-/// Controlador para las opciones gráficas y de rendimiento del juego.
-/// Permite ajustar resolución, calidad gráfica, modo de pantalla y limitación de FPS.
-/// También gestiona el guardado y carga de preferencias del usuario.
+/// Controlador de opciones gráficas y de rendimiento.
+/// Aplica resolución, calidad, modo de pantalla, límite de FPS y VSync.
+/// Compatible con Unity 6 (RefreshRate).
 /// </summary>
 public class ControladorOpciones : MonoBehaviour
 {
@@ -27,373 +26,479 @@ public class ControladorOpciones : MonoBehaviour
     [SerializeField] private Button botonAplicar;
     [SerializeField] private Button botonRestaurar;
 
-    // Lista de resoluciones disponibles
-    private Resolution[] resoluciones;
-    // Guarda la configuración para poder restaurarla si se cancela
-    private Resolution resolucionActual;
-    private int calidadActual;
-    private FullScreenMode modoVentanaActual;
-    private int fpsLimiteActual;
-    private bool vSyncActual;
+    // Aplicar al instante al cambiar dropdowns/toggles (no depende de serialización de escena).
+    private const bool AplicarAlCambiar = true;
 
-    // Opciones de limitador de FPS
+    private readonly List<Resolution> resoluciones = new List<Resolution>();
     private readonly int[] opcionesFPS = { -1, 30, 60, 120, 144, 240 };
 
+    private bool inicializado;
+    private bool bloqueandoListeners;
+
     /// <summary>
-    /// Inicializa los controles de UI y carga la configuración actual del sistema.
+    /// Aplica preferencias guardadas al arrancar, aunque el menú de opciones no esté activo.
     /// </summary>
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void AplicarPreferenciasAlInicio()
+    {
+        if (PlayerPrefs.HasKey("NivelCalidad"))
+        {
+            int nivel = PlayerPrefs.GetInt("NivelCalidad");
+            if (nivel >= 0 && nivel < QualitySettings.names.Length)
+            {
+                QualitySettings.SetQualityLevel(nivel, false);
+            }
+        }
+
+        bool vsync = !PlayerPrefs.HasKey("VSync") || PlayerPrefs.GetInt("VSync") == 1;
+        QualitySettings.vSyncCount = vsync ? 1 : 0;
+
+        int fps = -1;
+        if (!vsync && PlayerPrefs.HasKey("LimiteFPS"))
+        {
+            int indice = PlayerPrefs.GetInt("LimiteFPS");
+            int[] opciones = { -1, 30, 60, 120, 144, 240 };
+            if (indice >= 0 && indice < opciones.Length)
+            {
+                fps = opciones[indice];
+            }
+        }
+
+        Application.targetFrameRate = fps;
+
+        if (PlayerPrefs.HasKey("ResolucionWidth") && PlayerPrefs.HasKey("ResolucionHeight"))
+        {
+            int width = PlayerPrefs.GetInt("ResolucionWidth");
+            int height = PlayerPrefs.GetInt("ResolucionHeight");
+            FullScreenMode modo = FullScreenMode.FullScreenWindow;
+
+            if (PlayerPrefs.HasKey("ModoVentana"))
+            {
+                switch (PlayerPrefs.GetInt("ModoVentana"))
+                {
+                    case 0: modo = FullScreenMode.ExclusiveFullScreen; break;
+                    case 1: modo = FullScreenMode.FullScreenWindow; break;
+                    default: modo = FullScreenMode.Windowed; break;
+                }
+            }
+
+            int hz = PlayerPrefs.GetInt("ResolucionHz", 60);
+            var refresh = new RefreshRate
+            {
+                numerator = (uint)Mathf.Max(1, hz),
+                denominator = 1u
+            };
+
+            Screen.SetResolution(width, height, modo, refresh);
+        }
+    }
+
+    private void Awake()
+    {
+        InicializarOpciones();
+        CargarPreferenciasEnUI();
+        AplicarConfiguracion();
+        inicializado = true;
+    }
+
     private void Start()
     {
-        // Inicializar los componentes UI
-        InicializarOpciones();
-
-        // Cargar la configuración actual
-        CargarConfiguracionActual();
-
-        // Configurar listeners para los controles
         ConfigurarListeners();
     }
 
-    /// <summary>
-    /// Inicializa todos los controles de opciones gráficas y de rendimiento.
-    /// </summary>
-    private void InicializarOpciones()
+    private void OnEnable()
     {
-        // Inicializar dropdown de resoluciones
-        InicializarDropdownResolucion();
+        if (!inicializado) return;
 
-        // Inicializar dropdown de calidad
-        InicializarDropdownCalidad();
-
-        // Inicializar dropdown de modo ventana
-        InicializarDropdownModoVentana();
-
-        // Inicializar dropdown de límite de FPS
-        InicializarDropdownFPS();
+        bloqueandoListeners = true;
+        SincronizarUIConEstadoActual();
+        CargarPreferenciasEnUI();
+        bloqueandoListeners = false;
     }
 
-    /// <summary>
-    /// Configura el dropdown de resoluciones con todas las resoluciones soportadas por el sistema.
-    /// </summary>
+    private void InicializarOpciones()
+    {
+        InicializarDropdownResolucion();
+        InicializarDropdownCalidad();
+        InicializarDropdownModoVentana();
+        InicializarDropdownFPS();
+        SincronizarToggleVSync();
+    }
+
     private void InicializarDropdownResolucion()
     {
         if (dropdownResolucion == null) return;
 
-        // Obtener todas las resoluciones disponibles
-        resoluciones = Screen.resolutions;
-        List<string> opcionesResolucion = new List<string>();
-        int resolucionActualIndex = 0;
+        resoluciones.Clear();
+        Resolution[] soportadas = Screen.resolutions;
+        var vistas = new HashSet<string>();
 
-        for (int i = 0; i < resoluciones.Length; i++)
+        for (int i = 0; i < soportadas.Length; i++)
         {
-            string opcion = $"{resoluciones[i].width} x {resoluciones[i].height} @ {resoluciones[i].refreshRate}Hz";
-            opcionesResolucion.Add(opcion);
+            Resolution r = soportadas[i];
+            string clave = $"{r.width}x{r.height}@{ObtenerHz(r)}";
+            if (!vistas.Add(clave)) continue;
+            resoluciones.Add(r);
+        }
 
-            // Encontrar la resolución actual
-            if (resoluciones[i].width == Screen.width && 
-                resoluciones[i].height == Screen.height &&
-                resoluciones[i].refreshRate == Screen.currentResolution.refreshRate)
+        if (resoluciones.Count == 0)
+        {
+            resoluciones.Add(Screen.currentResolution);
+        }
+
+        var opciones = new List<string>(resoluciones.Count);
+        int indiceActual = resoluciones.Count - 1;
+
+        for (int i = 0; i < resoluciones.Count; i++)
+        {
+            Resolution r = resoluciones[i];
+            opciones.Add($"{r.width}x{r.height} @ {ObtenerHz(r)}Hz");
+
+            if (EsMismaResolucion(r, Screen.width, Screen.height, Screen.currentResolution))
             {
-                resolucionActualIndex = i;
+                indiceActual = i;
             }
         }
 
-        // Limpiar opciones actuales y añadir nuevas
         dropdownResolucion.ClearOptions();
-        dropdownResolucion.AddOptions(opcionesResolucion);
-        dropdownResolucion.value = resolucionActualIndex;
+        dropdownResolucion.AddOptions(opciones);
+        dropdownResolucion.SetValueWithoutNotify(indiceActual);
         dropdownResolucion.RefreshShownValue();
     }
 
-    /// <summary>
-    /// Configura el dropdown de calidad con los niveles de calidad predefinidos de Unity.
-    /// </summary>
     private void InicializarDropdownCalidad()
     {
         if (dropdownCalidad == null) return;
 
-        // Obtener niveles de calidad de Unity
-        string[] nombresCalidad = QualitySettings.names;
-        List<string> opcionesCalidad = new List<string>(nombresCalidad);
-
         dropdownCalidad.ClearOptions();
-        dropdownCalidad.AddOptions(opcionesCalidad);
-        dropdownCalidad.value = QualitySettings.GetQualityLevel();
+        dropdownCalidad.AddOptions(new List<string>(QualitySettings.names));
+        dropdownCalidad.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
         dropdownCalidad.RefreshShownValue();
     }
 
-    /// <summary>
-    /// Configura el dropdown con los diferentes modos de ventana disponibles
-    /// (pantalla completa exclusiva, ventana maximizada o ventana normal).
-    /// </summary>
     private void InicializarDropdownModoVentana()
     {
         if (dropdownModoVentana == null) return;
 
-        // Opciones de modo ventana
-        List<string> opcionesModoVentana = new List<string>
+        dropdownModoVentana.ClearOptions();
+        dropdownModoVentana.AddOptions(new List<string>
         {
             "Pantalla Completa",
             "Ventana Maximizada",
             "Ventana Normal"
-        };
+        });
 
-        dropdownModoVentana.ClearOptions();
-        dropdownModoVentana.AddOptions(opcionesModoVentana);
-
-        // Seleccionar la opción basada en el modo actual
-        int modoActual = 0;
-        switch (Screen.fullScreenMode)
-        {
-            case FullScreenMode.ExclusiveFullScreen:
-                modoActual = 0;
-                break;
-            case FullScreenMode.FullScreenWindow:
-                modoActual = 1;
-                break;
-            case FullScreenMode.Windowed:
-                modoActual = 2;
-                break;
-        }
-
-        dropdownModoVentana.value = modoActual;
+        dropdownModoVentana.SetValueWithoutNotify(ObtenerIndiceModoVentana(Screen.fullScreenMode));
         dropdownModoVentana.RefreshShownValue();
     }
 
-    /// <summary>
-    /// Configura el dropdown con las opciones de limitación de FPS y el toggle de VSync.
-    /// </summary>
     private void InicializarDropdownFPS()
     {
         if (dropdownFPS == null) return;
 
-        List<string> opcionesFPSTexto = new List<string>();
+        var opciones = new List<string>(opcionesFPS.Length);
         foreach (int fps in opcionesFPS)
         {
-            opcionesFPSTexto.Add(fps == -1 ? "Sin límite" : fps.ToString() + " FPS");
+            opciones.Add(fps == -1 ? "Sin límite" : fps + " FPS");
         }
 
         dropdownFPS.ClearOptions();
-        dropdownFPS.AddOptions(opcionesFPSTexto);
+        dropdownFPS.AddOptions(opciones);
 
-        // Encontrar el valor más cercano al framerate actual
         int frameRateActual = Application.targetFrameRate;
-        int indiceSeleccionado = 0;
-
+        int indice = 0;
         for (int i = 0; i < opcionesFPS.Length; i++)
         {
-            if (frameRateActual == opcionesFPS[i] || 
-                (i == 0 && frameRateActual == -1))
+            if (frameRateActual == opcionesFPS[i])
             {
-                indiceSeleccionado = i;
+                indice = i;
                 break;
             }
-            // Si no hay coincidencia exacta, usar el primer valor
-            indiceSeleccionado = 0;
         }
 
-        dropdownFPS.value = indiceSeleccionado;
+        dropdownFPS.SetValueWithoutNotify(indice);
         dropdownFPS.RefreshShownValue();
-
-        // Inicializar el toggle de VSync
-        if (toggleVSync != null)
-        {
-            toggleVSync.isOn = QualitySettings.vSyncCount > 0;
-        }
     }
 
-    /// <summary>
-    /// Guarda en memoria la configuración actual para poder restaurarla si es necesario.
-    /// </summary>
-    private void CargarConfiguracionActual()
+    private void SincronizarToggleVSync()
     {
-        // Guardar configuración actual
-        resolucionActual = Screen.currentResolution;
-        calidadActual = QualitySettings.GetQualityLevel();
-        modoVentanaActual = Screen.fullScreenMode;
-        fpsLimiteActual = Application.targetFrameRate;
-        vSyncActual = QualitySettings.vSyncCount > 0;
+        if (toggleVSync == null) return;
+        toggleVSync.SetIsOnWithoutNotify(QualitySettings.vSyncCount > 0);
+    }
 
-        // Actualizar toggles
+    private void SincronizarUIConEstadoActual()
+    {
+        if (dropdownCalidad != null)
+        {
+            dropdownCalidad.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
+            dropdownCalidad.RefreshShownValue();
+        }
+
+        if (dropdownModoVentana != null)
+        {
+            dropdownModoVentana.SetValueWithoutNotify(ObtenerIndiceModoVentana(Screen.fullScreenMode));
+            dropdownModoVentana.RefreshShownValue();
+        }
+
         if (togglePantallaCompleta != null)
         {
-            togglePantallaCompleta.isOn = Screen.fullScreenMode != FullScreenMode.Windowed;
+            togglePantallaCompleta.SetIsOnWithoutNotify(Screen.fullScreenMode != FullScreenMode.Windowed);
+        }
+
+        SincronizarToggleVSync();
+
+        if (dropdownFPS != null)
+        {
+            int frameRateActual = Application.targetFrameRate;
+            int indice = 0;
+            for (int i = 0; i < opcionesFPS.Length; i++)
+            {
+                if (frameRateActual == opcionesFPS[i])
+                {
+                    indice = i;
+                    break;
+                }
+            }
+
+            dropdownFPS.SetValueWithoutNotify(indice);
+            dropdownFPS.RefreshShownValue();
         }
     }
 
-    /// <summary>
-    /// Configura los eventos para los controles de UI (botones, toggles, etc).
-    /// </summary>
     private void ConfigurarListeners()
     {
-        // Añadir listeners a botones
         if (botonAplicar != null)
         {
+            botonAplicar.onClick.RemoveListener(AplicarConfiguracion);
             botonAplicar.onClick.AddListener(AplicarConfiguracion);
         }
 
         if (botonRestaurar != null)
         {
+            botonRestaurar.onClick.RemoveListener(RestaurarValoresPredeterminados);
             botonRestaurar.onClick.AddListener(RestaurarValoresPredeterminados);
         }
 
-        // Toggle pantalla completa
+        if (dropdownResolucion != null)
+        {
+            dropdownResolucion.onValueChanged.RemoveListener(OnCambioOpcion);
+            dropdownResolucion.onValueChanged.AddListener(OnCambioOpcion);
+        }
+
+        if (dropdownCalidad != null)
+        {
+            dropdownCalidad.onValueChanged.RemoveListener(OnCambioOpcion);
+            dropdownCalidad.onValueChanged.AddListener(OnCambioOpcion);
+        }
+
+        if (dropdownModoVentana != null)
+        {
+            dropdownModoVentana.onValueChanged.RemoveListener(OnCambioModoVentana);
+            dropdownModoVentana.onValueChanged.AddListener(OnCambioModoVentana);
+        }
+
+        if (dropdownFPS != null)
+        {
+            dropdownFPS.onValueChanged.RemoveListener(OnCambioFPS);
+            dropdownFPS.onValueChanged.AddListener(OnCambioFPS);
+        }
+
         if (togglePantallaCompleta != null)
         {
+            togglePantallaCompleta.onValueChanged.RemoveListener(CambiarModoVentana);
             togglePantallaCompleta.onValueChanged.AddListener(CambiarModoVentana);
         }
 
-        // Toggle VSync
         if (toggleVSync != null)
         {
-            toggleVSync.onValueChanged.AddListener(CambiarVSync);
+            toggleVSync.onValueChanged.RemoveListener(OnCambioVSync);
+            toggleVSync.onValueChanged.AddListener(OnCambioVSync);
+        }
+    }
+
+    private void OnCambioOpcion(int _)
+    {
+        if (bloqueandoListeners || !AplicarAlCambiar) return;
+        AplicarConfiguracion();
+    }
+
+    private void OnCambioModoVentana(int indice)
+    {
+        if (bloqueandoListeners) return;
+
+        if (togglePantallaCompleta != null)
+        {
+            togglePantallaCompleta.SetIsOnWithoutNotify(indice != 2);
+        }
+
+        if (AplicarAlCambiar)
+        {
+            AplicarConfiguracion();
+        }
+    }
+
+    private void OnCambioFPS(int indice)
+    {
+        if (bloqueandoListeners) return;
+
+        // Un límite concreto de FPS requiere VSync desactivado.
+        if (indice > 0 && toggleVSync != null && toggleVSync.isOn)
+        {
+            toggleVSync.SetIsOnWithoutNotify(false);
+        }
+
+        if (AplicarAlCambiar)
+        {
+            AplicarConfiguracion();
+        }
+    }
+
+    private void OnCambioVSync(bool activar)
+    {
+        if (bloqueandoListeners) return;
+
+        // Con VSync activo el limitador de FPS no tiene efecto.
+        if (activar && dropdownFPS != null && dropdownFPS.value > 0)
+        {
+            dropdownFPS.SetValueWithoutNotify(0);
+            dropdownFPS.RefreshShownValue();
+        }
+
+        if (AplicarAlCambiar)
+        {
+            AplicarConfiguracion();
+        }
+        else
+        {
+            QualitySettings.vSyncCount = activar ? 1 : 0;
+            GuardarPreferencias();
         }
     }
 
     /// <summary>
-    /// Aplica la configuración gráfica y de rendimiento seleccionada en los controles de UI.
-    /// También guarda las preferencias del usuario para futuras sesiones.
+    /// Aplica la configuración gráfica y de rendimiento seleccionada.
     /// </summary>
     public void AplicarConfiguracion()
     {
-        // Aplicar resolución
-        if (dropdownResolucion != null && resoluciones.Length > 0)
-        {
-            Resolution resolucion = resoluciones[dropdownResolucion.value];
-            
-            // Aplicar modo de ventana
-            FullScreenMode modo = FullScreenMode.Windowed;
-            if (dropdownModoVentana != null)
-            {
-                switch (dropdownModoVentana.value)
-                {
-                    case 0:
-                        modo = FullScreenMode.ExclusiveFullScreen;
-                        break;
-                    case 1:
-                        modo = FullScreenMode.FullScreenWindow;
-                        break;
-                    case 2:
-                        modo = FullScreenMode.Windowed;
-                        break;
-                }
-            }
-            else if (togglePantallaCompleta != null)
-            {
-                modo = togglePantallaCompleta.isOn ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
-            }
+        FullScreenMode modo = ObtenerModoVentanaSeleccionado();
 
-            // Aplicar resolución y modo de pantalla
-            Screen.SetResolution(resolucion.width, resolucion.height, modo, resolucion.refreshRate);
+        if (dropdownResolucion != null && resoluciones.Count > 0)
+        {
+            int indice = Mathf.Clamp(dropdownResolucion.value, 0, resoluciones.Count - 1);
+            Resolution resolucion = resoluciones[indice];
+            Screen.SetResolution(resolucion.width, resolucion.height, modo, resolucion.refreshRateRatio);
+        }
+        else
+        {
+            Screen.fullScreenMode = modo;
         }
 
-        // Aplicar calidad
-        if (dropdownCalidad != null)
+        if (dropdownCalidad != null && QualitySettings.names.Length > 0)
         {
-            QualitySettings.SetQualityLevel(dropdownCalidad.value, true);
+            int nivel = Mathf.Clamp(dropdownCalidad.value, 0, QualitySettings.names.Length - 1);
+            // false: no aplicar el vSync del preset; lo controlamos nosotros después.
+            QualitySettings.SetQualityLevel(nivel, false);
         }
 
-        // Aplicar límite de FPS
-        if (dropdownFPS != null && dropdownFPS.value < opcionesFPS.Length)
+        bool vsyncActivo = toggleVSync != null && toggleVSync.isOn;
+        QualitySettings.vSyncCount = vsyncActivo ? 1 : 0;
+
+        if (dropdownFPS != null && dropdownFPS.value >= 0 && dropdownFPS.value < opcionesFPS.Length)
         {
-            Application.targetFrameRate = opcionesFPS[dropdownFPS.value];
+            // Con VSync, Unity ignora targetFrameRate.
+            Application.targetFrameRate = vsyncActivo ? -1 : opcionesFPS[dropdownFPS.value];
         }
 
-        // Guardar preferencias
         GuardarPreferencias();
 
-        Debug.Log("Configuración aplicada correctamente");
+        Debug.Log(
+            $"[Opciones] Aplicado -> {Screen.width}x{Screen.height} | modo={Screen.fullScreenMode} | " +
+            $"calidad={QualitySettings.names[QualitySettings.GetQualityLevel()]} | " +
+            $"fps={Application.targetFrameRate} | vSync={QualitySettings.vSyncCount}");
     }
 
-    /// <summary>
-    /// Actualiza el dropdown de modo ventana cuando se cambia el toggle de pantalla completa.
-    /// </summary>
-    /// <param name="pantallaCompleta">True si está en pantalla completa, false si está en modo ventana</param>
     public void CambiarModoVentana(bool pantallaCompleta)
     {
+        if (bloqueandoListeners) return;
+
         if (dropdownModoVentana != null)
         {
-            // Si hay dropdown de modo ventana, sincronizar con el toggle
-            dropdownModoVentana.value = pantallaCompleta ? 0 : 2;
+            dropdownModoVentana.SetValueWithoutNotify(pantallaCompleta ? 0 : 2);
+            dropdownModoVentana.RefreshShownValue();
+        }
+
+        if (AplicarAlCambiar)
+        {
+            AplicarConfiguracion();
         }
     }
 
-    /// <summary>
-    /// Activa o desactiva la sincronización vertical (VSync).
-    /// </summary>
-    /// <param name="activar">True para activar VSync, false para desactivarlo</param>
     public void CambiarVSync(bool activar)
     {
-        QualitySettings.vSyncCount = activar ? 1 : 0;
+        OnCambioVSync(activar);
     }
 
-    /// <summary>
-    /// Restaura todas las opciones a sus valores predeterminados óptimos:
-    /// - Resolución más alta disponible
-    /// - Calidad gráfica máxima
-    /// - Pantalla completa
-    /// - Sin límite de FPS
-    /// - VSync activado
-    /// </summary>
     public void RestaurarValoresPredeterminados()
     {
-        // Restaurar resolución a la más alta disponible
-        if (dropdownResolucion != null && resoluciones.Length > 0)
+        bloqueandoListeners = true;
+
+        if (dropdownResolucion != null && resoluciones.Count > 0)
         {
-            dropdownResolucion.value = resoluciones.Length - 1;
+            dropdownResolucion.SetValueWithoutNotify(resoluciones.Count - 1);
+            dropdownResolucion.RefreshShownValue();
         }
 
-        // Restaurar calidad a la máxima
-        if (dropdownCalidad != null)
+        if (dropdownCalidad != null && QualitySettings.names.Length > 0)
         {
-            dropdownCalidad.value = QualitySettings.names.Length - 1;
+            dropdownCalidad.SetValueWithoutNotify(QualitySettings.names.Length - 1);
+            dropdownCalidad.RefreshShownValue();
         }
 
-        // Restaurar modo ventana a pantalla completa
         if (dropdownModoVentana != null)
         {
-            dropdownModoVentana.value = 0;
+            dropdownModoVentana.SetValueWithoutNotify(0);
+            dropdownModoVentana.RefreshShownValue();
         }
 
         if (togglePantallaCompleta != null)
         {
-            togglePantallaCompleta.isOn = true;
+            togglePantallaCompleta.SetIsOnWithoutNotify(true);
         }
 
-        // Restaurar FPS a sin límite
         if (dropdownFPS != null)
         {
-            dropdownFPS.value = 0; // Sin límite
+            dropdownFPS.SetValueWithoutNotify(0);
+            dropdownFPS.RefreshShownValue();
         }
 
-        // Activar VSync
         if (toggleVSync != null)
         {
-            toggleVSync.isOn = true;
+            toggleVSync.SetIsOnWithoutNotify(true);
         }
 
-        // Aplicar cambios
+        bloqueandoListeners = false;
         AplicarConfiguracion();
     }
 
-    /// <summary>
-    /// Guarda las preferencias de configuración del usuario en PlayerPrefs para recuperarlas en futuras sesiones.
-    /// </summary>
     private void GuardarPreferencias()
     {
-        // Guardar índice de resolución
         if (dropdownResolucion != null)
         {
             PlayerPrefs.SetInt("ResolucionIndex", dropdownResolucion.value);
+            if (resoluciones.Count > 0)
+            {
+                int i = Mathf.Clamp(dropdownResolucion.value, 0, resoluciones.Count - 1);
+                PlayerPrefs.SetInt("ResolucionWidth", resoluciones[i].width);
+                PlayerPrefs.SetInt("ResolucionHeight", resoluciones[i].height);
+                PlayerPrefs.SetInt("ResolucionHz", ObtenerHz(resoluciones[i]));
+            }
         }
 
-        // Guardar calidad
         if (dropdownCalidad != null)
         {
             PlayerPrefs.SetInt("NivelCalidad", dropdownCalidad.value);
         }
 
-        // Guardar modo ventana
         if (dropdownModoVentana != null)
         {
             PlayerPrefs.SetInt("ModoVentana", dropdownModoVentana.value);
@@ -403,13 +508,11 @@ public class ControladorOpciones : MonoBehaviour
             PlayerPrefs.SetInt("PantallaCompleta", togglePantallaCompleta.isOn ? 1 : 0);
         }
 
-        // Guardar límite de FPS
         if (dropdownFPS != null)
         {
             PlayerPrefs.SetInt("LimiteFPS", dropdownFPS.value);
         }
 
-        // Guardar VSync
         if (toggleVSync != null)
         {
             PlayerPrefs.SetInt("VSync", toggleVSync.isOn ? 1 : 0);
@@ -418,87 +521,147 @@ public class ControladorOpciones : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    /// <summary>
-    /// Carga las preferencias guardadas previamente por el usuario desde PlayerPrefs.
-    /// </summary>
-    private void CargarPreferencias()
+    private void CargarPreferenciasEnUI()
     {
-        // Cargar índice de resolución
-        if (dropdownResolucion != null && PlayerPrefs.HasKey("ResolucionIndex"))
+        bloqueandoListeners = true;
+
+        if (dropdownResolucion != null && resoluciones.Count > 0)
         {
-            int indice = PlayerPrefs.GetInt("ResolucionIndex");
-            if (indice >= 0 && indice < resoluciones.Length)
+            int indice = -1;
+
+            if (PlayerPrefs.HasKey("ResolucionWidth") && PlayerPrefs.HasKey("ResolucionHeight"))
             {
-                dropdownResolucion.value = indice;
+                int w = PlayerPrefs.GetInt("ResolucionWidth");
+                int h = PlayerPrefs.GetInt("ResolucionHeight");
+                int hz = PlayerPrefs.GetInt("ResolucionHz", -1);
+
+                for (int i = 0; i < resoluciones.Count; i++)
+                {
+                    if (resoluciones[i].width == w &&
+                        resoluciones[i].height == h &&
+                        (hz < 0 || ObtenerHz(resoluciones[i]) == hz))
+                    {
+                        indice = i;
+                        break;
+                    }
+                }
+            }
+
+            if (indice < 0 && PlayerPrefs.HasKey("ResolucionIndex"))
+            {
+                indice = PlayerPrefs.GetInt("ResolucionIndex");
+            }
+
+            if (indice >= 0 && indice < resoluciones.Count)
+            {
+                dropdownResolucion.SetValueWithoutNotify(indice);
+                dropdownResolucion.RefreshShownValue();
             }
         }
 
-        // Cargar calidad
         if (dropdownCalidad != null && PlayerPrefs.HasKey("NivelCalidad"))
         {
             int nivel = PlayerPrefs.GetInt("NivelCalidad");
             if (nivel >= 0 && nivel < QualitySettings.names.Length)
             {
-                dropdownCalidad.value = nivel;
+                dropdownCalidad.SetValueWithoutNotify(nivel);
+                dropdownCalidad.RefreshShownValue();
             }
         }
 
-        // Cargar modo ventana
         if (dropdownModoVentana != null && PlayerPrefs.HasKey("ModoVentana"))
         {
             int modo = PlayerPrefs.GetInt("ModoVentana");
             if (modo >= 0 && modo <= 2)
             {
-                dropdownModoVentana.value = modo;
+                dropdownModoVentana.SetValueWithoutNotify(modo);
+                dropdownModoVentana.RefreshShownValue();
             }
         }
         else if (togglePantallaCompleta != null && PlayerPrefs.HasKey("PantallaCompleta"))
         {
-            togglePantallaCompleta.isOn = PlayerPrefs.GetInt("PantallaCompleta") == 1;
+            togglePantallaCompleta.SetIsOnWithoutNotify(PlayerPrefs.GetInt("PantallaCompleta") == 1);
         }
 
-        // Cargar límite de FPS
         if (dropdownFPS != null && PlayerPrefs.HasKey("LimiteFPS"))
         {
             int indice = PlayerPrefs.GetInt("LimiteFPS");
             if (indice >= 0 && indice < opcionesFPS.Length)
             {
-                dropdownFPS.value = indice;
+                dropdownFPS.SetValueWithoutNotify(indice);
+                dropdownFPS.RefreshShownValue();
             }
         }
 
-        // Cargar VSync
         if (toggleVSync != null && PlayerPrefs.HasKey("VSync"))
         {
-            toggleVSync.isOn = PlayerPrefs.GetInt("VSync") == 1;
+            toggleVSync.SetIsOnWithoutNotify(PlayerPrefs.GetInt("VSync") == 1);
+        }
+
+        bloqueandoListeners = false;
+    }
+
+    public void AplicarResolucion(int index)
+    {
+        if (index < 0 || index >= resoluciones.Count) return;
+
+        if (dropdownResolucion != null)
+        {
+            dropdownResolucion.SetValueWithoutNotify(index);
+            dropdownResolucion.RefreshShownValue();
+        }
+
+        AplicarConfiguracion();
+    }
+
+    private FullScreenMode ObtenerModoVentanaSeleccionado()
+    {
+        if (dropdownModoVentana != null)
+        {
+            switch (dropdownModoVentana.value)
+            {
+                case 0: return FullScreenMode.ExclusiveFullScreen;
+                case 1: return FullScreenMode.FullScreenWindow;
+                default: return FullScreenMode.Windowed;
+            }
+        }
+
+        if (togglePantallaCompleta != null)
+        {
+            return togglePantallaCompleta.isOn
+                ? FullScreenMode.FullScreenWindow
+                : FullScreenMode.Windowed;
+        }
+
+        return Screen.fullScreenMode;
+    }
+
+    private static int ObtenerIndiceModoVentana(FullScreenMode modo)
+    {
+        switch (modo)
+        {
+            case FullScreenMode.ExclusiveFullScreen: return 0;
+            case FullScreenMode.FullScreenWindow: return 1;
+            default: return 2;
         }
     }
 
-    /// <summary>
-    /// Carga las preferencias guardadas cuando se activa el panel de opciones.
-    /// </summary>
-    private void OnEnable()
+    private static int ObtenerHz(Resolution resolucion)
     {
-        // Cargar preferencias cuando se active el panel
-        CargarPreferencias();
+        double valor = resolucion.refreshRateRatio.value;
+        if (double.IsNaN(valor) || valor <= 0d)
+        {
+            return 60;
+        }
+
+        return Mathf.RoundToInt((float)valor);
     }
 
-    /// <summary>
-    /// Aplica una resolución específica basada en su índice en la lista de resoluciones disponibles.
-    /// </summary>
-    /// <param name="index">Índice de la resolución en el array de resoluciones</param>
-    public void AplicarResolucion(int index)
+    private static bool EsMismaResolucion(Resolution candidata, int ancho, int alto, Resolution actual)
     {
-        if (resoluciones == null || resoluciones.Length == 0 || index < 0 || index >= resoluciones.Length) return;
-
-        Screen.SetResolution(
-            resoluciones[index].width,
-            resoluciones[index].height,
-            Screen.fullScreen,
-            resoluciones[index].refreshRate
-        );
-
-        PlayerPrefs.SetInt("ResolucionIndex", index);
-        PlayerPrefs.Save();
+        return candidata.width == ancho &&
+               candidata.height == alto &&
+               ObtenerHz(candidata) == ObtenerHz(actual);
     }
-} 
+}
+ 
