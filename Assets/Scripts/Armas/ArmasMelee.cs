@@ -45,12 +45,10 @@ public class ArmasMelee : MonoBehaviour
         probabilidadCritico = instancia.Critico;
         probabilidadRobarVida = instancia.RoboVida;
 
-        // Color de nivel en el sprite
+        // El color de nivel solo se muestra en la UI (tarjeta). El sprite del arma no se tiñe.
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (sr != null)
-        {
-            sr.color = NivelArma.ObtenerColor(instancia.nivel);
-        }
+            sr.color = Color.white;
     }
 
     private void Start()

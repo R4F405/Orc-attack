@@ -160,20 +160,42 @@ public class InventarioArmas : MonoBehaviour
 
     /// <summary>
     /// Fusiona el arma en el índice dado con su pareja del mismo tipo y nivel.
-    /// La arma seleccionada sube de nivel y la pareja se elimina.
+    /// Elimina exactamente esas dos e inserta una del nivel siguiente.
+    /// Devuelve el índice de la arma mejorada, o -1 si no se pudo.
     /// </summary>
-    public bool MejorarArma(int indice)
+    public int MejorarArma(int indice)
     {
+        if (indice < 0 || indice >= armas.Count) return -1;
+
+        ArmaInstancia seleccionada = armas[indice];
+        if (seleccionada == null || !seleccionada.PuedeMejorar) return -1;
+
         int indicePar = BuscarParejaParaMejora(indice);
-        if (indicePar == -1) return false;
+        if (indicePar < 0 || indicePar >= armas.Count || indicePar == indice) return -1;
 
-        // Subir nivel del arma seleccionada
-        armas[indice].nivel++;
+        ArmaInstancia pareja = armas[indicePar];
+        if (pareja == null || !seleccionada.MismoTipoYNivel(pareja)) return -1;
 
-        // Eliminar la pareja
-        armas.RemoveAt(indicePar);
+        DatosArma datos = seleccionada.datos;
+        int nivelOrigen = seleccionada.nivel;
+        int nuevoNivel = nivelOrigen + 1;
+        int insertAt = Mathf.Min(indice, indicePar);
+
+        // Reconstruir la lista sin las dos fusionadas (evita errores de índices al RemoveAt).
+        var resultado = new List<ArmaInstancia>(armas.Count - 1);
+        for (int i = 0; i < armas.Count; i++)
+        {
+            if (i == indice || i == indicePar) continue;
+            resultado.Add(armas[i]);
+        }
+
+        insertAt = Mathf.Clamp(insertAt, 0, resultado.Count);
+        resultado.Insert(insertAt, new ArmaInstancia(datos, nuevoNivel));
+        armas = resultado;
+
+        Debug.Log($"[InventarioArmas] Fusión OK: 2x {datos.nombre} Nv.{nivelOrigen} → 1x Nv.{nuevoNivel}. Total armas: {armas.Count}");
 
         OnInventarioCambiado?.Invoke();
-        return true;
+        return insertAt;
     }
 }

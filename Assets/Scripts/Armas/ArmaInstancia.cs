@@ -29,6 +29,16 @@ public class ArmaInstancia
     /// </summary>
     public bool MismoTipoYNivel(ArmaInstancia otra)
     {
-        return otra != null && datos == otra.datos && nivel == otra.nivel;
+        if (otra == null || nivel != otra.nivel) return false;
+        if (datos == null || otra.datos == null) return false;
+
+        // Misma referencia de ScriptableObject (caso normal).
+        if (datos == otra.datos) return true;
+
+        // Fallback por si hubiera duplicados de asset con el mismo contenido.
+        return datos.nombre == otra.datos.nombre
+               && datos.tipo == otra.datos.tipo
+               && datos.danioBase == otra.datos.danioBase
+               && datos.prefab == otra.datos.prefab;
     }
 }

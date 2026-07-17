@@ -4,7 +4,8 @@ using TMPro;
 using System.Collections.Generic;
 
 /// <summary>
-/// Controla la tienda: compra, venta (10% del precio) y fusión de armas (2 iguales = +1 nivel, máx. 5).
+/// Controla la tienda: compra, venta (10% del precio) y fusión de armas (2 iguales = +1 nivel, máx. 6).
+/// El botón Mejorar solo se muestra cuando hay otra arma del mismo tipo y nivel.
 /// Crea y conecta la UI de detalle en runtime si no está asignada en el inspector.
 /// </summary>
 public class ControladorTienda : MonoBehaviour
@@ -75,6 +76,7 @@ public class ControladorTienda : MonoBehaviour
     private readonly List<OpcionObjeto> objetosComprados = new List<OpcionObjeto>();
     private int indiceArmaSeleccionada = -1;
     private bool uiInicializada;
+    private int ultimoFrameCompraArma = -1;
 
     void Start()
     {
@@ -129,7 +131,9 @@ public class ControladorTienda : MonoBehaviour
     }
 
     /// <summary>
-    /// Conecta todos los botones en código para no depender del inspector (referencias rotas a la antigua clase Tienda).
+    /// Conecta todos los botones en código.
+    /// Importante: hay que limpiar también los listeners persistentes del Inspector;
+    /// RemoveAllListeners() solo quita los añadidos en runtime y si no, ComprarArma se dispara 2 veces.
     /// </summary>
     void ConfigurarListenersBotones()
     {
@@ -139,8 +143,7 @@ public class ControladorTienda : MonoBehaviour
             {
                 if (botonesArmas[i] == null) continue;
                 int indice = i;
-                botonesArmas[i].onClick.RemoveAllListeners();
-                botonesArmas[i].onClick.AddListener(() => ComprarArma(indice));
+                ReemplazarOnClick(botonesArmas[i], () => ComprarArma(indice));
             }
         }
 
@@ -150,22 +153,21 @@ public class ControladorTienda : MonoBehaviour
             {
                 if (botonesArmasJugador[i] == null) continue;
                 int indice = i;
-                botonesArmasJugador[i].onClick.RemoveAllListeners();
-                botonesArmasJugador[i].onClick.AddListener(() => SeleccionarArmaInventario(indice));
+                ReemplazarOnClick(botonesArmasJugador[i], () => SeleccionarArmaInventario(indice));
             }
         }
 
         if (botonVenderArma != null)
-        {
-            botonVenderArma.onClick.RemoveAllListeners();
-            botonVenderArma.onClick.AddListener(VenderArmaSeleccionada);
-        }
+            ReemplazarOnClick(botonVenderArma, VenderArmaSeleccionada);
 
         if (botonMejorarArma != null)
-        {
-            botonMejorarArma.onClick.RemoveAllListeners();
-            botonMejorarArma.onClick.AddListener(MejorarArmaSeleccionada);
-        }
+            ReemplazarOnClick(botonMejorarArma, MejorarArmaSeleccionada);
+    }
+
+    static void ReemplazarOnClick(Button boton, UnityEngine.Events.UnityAction accion)
+    {
+        boton.onClick = new Button.ButtonClickedEvent();
+        boton.onClick.AddListener(accion);
     }
 
     // ==================== ARMAS EN VENTA ====================
@@ -206,6 +208,11 @@ public class ControladorTienda : MonoBehaviour
 
     public void ComprarArma(int indice)
     {
+        // Evita doble compra si el botón aún tiene listener del Inspector + runtime.
+        if (ultimoFrameCompraArma == Time.frameCount)
+            return;
+        ultimoFrameCompraArma = Time.frameCount;
+
         BuscarReferencias();
         AsegurarInventarioArmas();
         inventarioArmas = InventarioArmas.instancia;
@@ -252,18 +259,56 @@ public class ControladorTienda : MonoBehaviour
             if (i < armas.Count && armas[i] != null)
             {
                 botonesArmasJugador[i].gameObject.SetActive(true);
+                AplicarColorTarjetaSlot(botonesArmasJugador[i], armas[i].nivel);
+
+                if (bordeNivelArmasJugador != null && i < bordeNivelArmasJugador.Length && bordeNivelArmasJugador[i] != null)
+                    bordeNivelArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
+
                 if (imagenesArmasJugador != null && i < imagenesArmasJugador.Length && imagenesArmasJugador[i] != null)
                 {
                     imagenesArmasJugador[i].sprite = armas[i].Icono;
-                    imagenesArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
+                    // Icono sin tinte: el color de nivel va solo en la tarjeta de fondo.
+                    imagenesArmasJugador[i].color = Color.white;
                 }
-                if (bordeNivelArmasJugador != null && i < bordeNivelArmasJugador.Length && bordeNivelArmasJugador[i] != null)
-                    bordeNivelArmasJugador[i].color = NivelArma.ObtenerColor(armas[i].nivel);
             }
             else
             {
                 botonesArmasJugador[i].gameObject.SetActive(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// Colorea la tarjeta del slot. Hay que tocar el ColorBlock del Button:
+    /// si no, el ColorTint del botón vuelve a pintar el gris cada frame.
+    /// </summary>
+    static void AplicarColorTarjetaSlot(Button boton, int nivel)
+    {
+        Color colorFondo = NivelArma.ObtenerColorFondo(nivel);
+        colorFondo.a = 0.86f;
+
+        Color resaltado = Color.Lerp(colorFondo, Color.white, 0.18f);
+        resaltado.a = colorFondo.a;
+        Color pulsado = Color.Lerp(colorFondo, Color.black, 0.18f);
+        pulsado.a = colorFondo.a;
+
+        ColorBlock colores = boton.colors;
+        colores.normalColor = colorFondo;
+        colores.highlightedColor = resaltado;
+        colores.selectedColor = colorFondo;
+        colores.pressedColor = pulsado;
+        colores.disabledColor = colorFondo;
+        colores.colorMultiplier = 1f;
+        boton.colors = colores;
+
+        // El Button con ColorTint pinta el targetGraphic; forzamos el color al instante.
+        Graphic grafico = boton.targetGraphic;
+        if (grafico == null)
+            grafico = boton.GetComponent<Graphic>();
+        if (grafico != null)
+        {
+            grafico.color = Color.white;
+            grafico.CrossFadeColor(colorFondo, 0f, true, true);
         }
     }
 
@@ -300,7 +345,18 @@ public class ControladorTienda : MonoBehaviour
         if (imagenDetalleArma != null)
         {
             imagenDetalleArma.sprite = arma.Icono;
-            imagenDetalleArma.color = NivelArma.ObtenerColor(arma.nivel);
+            imagenDetalleArma.color = Color.white;
+
+            if (imagenDetalleArma.transform.parent != null)
+            {
+                Transform tFondo = imagenDetalleArma.transform.parent.Find("FondoNivelIcono");
+                if (tFondo != null)
+                {
+                    Image fondoIcono = tFondo.GetComponent<Image>();
+                    if (fondoIcono != null)
+                        fondoIcono.color = NivelArma.ObtenerColorFondo(arma.nivel);
+                }
+            }
         }
         if (nombreDetalleArma != null)
             nombreDetalleArma.text = arma.Nombre;
@@ -323,18 +379,26 @@ public class ControladorTienda : MonoBehaviour
             textoPrecioVenta.text = "Vender: +" + precioVenta + " calaveras (10%)";
 
         int parejas = inventarioArmas.ContarParejas(indiceArmaSeleccionada);
+        // Solo visible si hay exactamente una pareja fusionable (2 del mismo tipo y nivel).
         bool puedeMejorar = arma.PuedeMejorar && parejas > 0;
 
         if (botonMejorarArma != null)
-            botonMejorarArma.interactable = puedeMejorar;
-        if (textoBotonMejorar != null)
         {
-            if (!arma.PuedeMejorar)
-                textoBotonMejorar.text = "Nivel máximo (Legendario)";
-            else if (puedeMejorar)
-                textoBotonMejorar.text = "Mejorar → " + NivelArma.ObtenerNombreNivel(arma.nivel + 1) + " (2 iguales)";
-            else
-                textoBotonMejorar.text = "Mejorar (necesitas otra igual Nv." + arma.nivel + ")";
+            botonMejorarArma.gameObject.SetActive(puedeMejorar);
+            botonMejorarArma.interactable = puedeMejorar;
+        }
+
+        if (textoBotonMejorar != null && puedeMejorar)
+        {
+            textoBotonMejorar.text = "Mejorar → " + NivelArma.ObtenerNombreNivel(arma.nivel + 1);
+        }
+
+        // Centrar Vender cuando Mejorar no está visible.
+        if (botonVenderArma != null)
+        {
+            RectTransform rtVender = botonVenderArma.GetComponent<RectTransform>();
+            if (rtVender != null)
+                rtVender.anchoredPosition = puedeMejorar ? new Vector2(110f, -200f) : new Vector2(0f, -200f);
         }
     }
 
@@ -370,10 +434,14 @@ public class ControladorTienda : MonoBehaviour
         BuscarReferencias();
         if (inventarioArmas == null || indiceArmaSeleccionada < 0) return;
 
-        if (inventarioArmas.MejorarArma(indiceArmaSeleccionada))
+        int nuevoIndice = inventarioArmas.MejorarArma(indiceArmaSeleccionada);
+        if (nuevoIndice >= 0)
         {
             SonidosUI.ReproducirSonidoCompra();
-            CerrarPanelDetalleArma();
+            indiceArmaSeleccionada = nuevoIndice;
+            // Mantener el panel abierto; Mejorar se oculta si ya no hay otra pareja.
+            ActualizarPanelDetalle();
+            ActualizarArmasJugadorUI();
         }
         else
         {
@@ -410,6 +478,8 @@ public class ControladorTienda : MonoBehaviour
         Image fondoCaja = caja.AddComponent<Image>();
         fondoCaja.color = new Color(0.12f, 0.12f, 0.14f, 0.98f);
 
+        Image fondoNivelIcono = CrearImagen(caja.transform, "FondoNivelIcono", new Vector2(0, 180), new Vector2(140, 140));
+        fondoNivelIcono.color = NivelArma.ObtenerColorFondo(1);
         imagenDetalleArma = CrearImagen(caja.transform, "Icono", new Vector2(0, 180), new Vector2(120, 120));
         nombreDetalleArma = CrearTexto(caja.transform, "Nombre", new Vector2(0, 100), 28, fuente, FontStyles.Bold);
         nivelDetalleArma = CrearTexto(caja.transform, "Nivel", new Vector2(0, 60), 22, fuente);
@@ -421,9 +491,18 @@ public class ControladorTienda : MonoBehaviour
         textoPrecioVenta.color = new Color(0.9f, 0.85f, 0.4f);
 
         botonMejorarArma = CrearBoton(caja.transform, "BtnMejorar", new Vector2(-110, -200), new Vector2(200, 50), "Mejorar", fuente, new Color(0.2f, 0.55f, 0.25f));
-        botonVenderArma = CrearBoton(caja.transform, "BtnVender", new Vector2(110, -200), new Vector2(200, 50), "Vender", fuente, new Color(0.55f, 0.25f, 0.2f));
+        textoBotonMejorar = botonMejorarArma.GetComponentInChildren<TextMeshProUGUI>();
+        botonMejorarArma.gameObject.SetActive(false);
+
+        botonVenderArma = CrearBoton(caja.transform, "BtnVender", new Vector2(0, -200), new Vector2(200, 50), "Vender", fuente, new Color(0.55f, 0.25f, 0.2f));
         CrearBoton(caja.transform, "BtnCerrar", new Vector2(0, -270), new Vector2(160, 44), "Cerrar", fuente, new Color(0.3f, 0.3f, 0.35f))
             .onClick.AddListener(CerrarPanelDetalleArma);
+
+        // Reconectar listeners tras crear los botones en runtime.
+        if (botonMejorarArma != null)
+            ReemplazarOnClick(botonMejorarArma, MejorarArmaSeleccionada);
+        if (botonVenderArma != null)
+            ReemplazarOnClick(botonVenderArma, VenderArmaSeleccionada);
 
         panelDetalleArma.SetActive(false);
         panelDetalleArma.transform.SetAsLastSibling();
